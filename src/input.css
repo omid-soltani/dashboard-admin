@@ -1,12 +1,122 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  /* فونت */
   --font-inter-bold: "Inter Bold", sans-serif;
   --font-inter-semibold: "Inter Semi-Bold", sans-serif;
   --font-inter-regular: "Inter Regular", sans-serif;
   --font-inter-medium: "Inter Medium", sans-serif;
+
+  /* پالت سبز نئونی */
+  --color-neon-50: #effff6;
+  --color-neon-100: #d6ffea;
+  --color-neon-200: #a8ffd1;
+  --color-neon-300: #6fffb0;
+  --color-neon-400: #2cff8a;
+  --color-neon-500: #00e676; /* رنگ پایه */
+  --color-neon-600: #00c765;
+  --color-neon-700: #009e52;
+  --color-neon-800: #007a40;
+  --color-neon-900: #075a33;
+  --color-neon-950: #032e1a;
+
+  /* رنگ متن (ink) */
+  --color-ink-light: #0e1a15;
+  --color-ink-dark: #eafbf2;
+
+  /* رنگ سطح (surface) برای پس‌زمینه‌ها */
+  --color-surface-light: #ffffff;
+  --color-surface-light-2: #f4fbf7;
+  --color-surface-dark: #0e1512;
+  --color-surface-dark-2: #131b17;
+
+  /* سایه‌های نئونی */
+  --shadow-neon: 0 0 24px rgba(0, 230, 118, 0.35);
+  --shadow-neon-sm: 0 0 10px rgba(0, 230, 118, 0.3);
+  --shadow-neon-ring: 0 0 0 3px rgba(0, 230, 118, 0.18);
+
+  /* انیمیشن‌ها */
+  --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
+  --animate-fade-scale: fade-scale 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-fade-in: fade-in 0.12s ease-out;
 }
 
+/* @keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes fade-scale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(-6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+} */
+@layer utilities {
+  .container {
+    @apply mx-auto px-4 max-w-full;
+  }
+
+  .animate-pulse-dot {
+    animation: var(--animate-pulse-dot);
+  }
+  .animate-fade-scale {
+    animation: var(--animate-fade-scale);
+  }
+  .animate-fade-in {
+    animation: var(--animate-fade-in);
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .thin-scroll {
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 230, 118, 0.35);
+      border-radius: 999px;
+    }
+  }
+}
+
+/* @utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+@utility thin-scroll {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 230, 118, 0.35);
+    border-radius: 999px;
+  }
+} */
+
+/* =====================================================
+   BASE — تنظیم فونت پیش‌فرض صفحه
+===================================================== */
 @layer base {
   @font-face {
     font-family: "Inter Bold";
@@ -35,5 +145,8 @@
       local("Inter Medium"),
       url(../fonts/Inter-Medium.woff2) format("woff2");
     font-display: swap;
+  }
+  body {
+    font-family: "Inter Regular", sans-serif;
   }
 }

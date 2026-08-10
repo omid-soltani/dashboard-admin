@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pulse — Admin Dashboard</title>
+  <!-- Compiled by your Tailwind build pipeline (Tailwind CLI / PostCSS / Vite) -->
+  <link rel="stylesheet" href="./src/input.css" />
+</head>
+
+<body
+  class="min-h-screen bg-surface-light-2 font-inter-regular text-ink-light antialiased dark:bg-surface-dark-2 dark:text-ink-dark">
+
+  <!-- =====================================================
+       MOBILE OVERLAY (behind the sidebar on small screens)
+  ====================================================== -->
+  <div id="sidebar-overlay" data-sidebar-close
+    class="fixed inset-0 z-30 hidden bg-ink-light/40 opacity-0 transition-opacity duration-300 motion-reduce:transition-none lg:hidden"
+    aria-hidden="true"></div>
+
+  <!-- =====================================================
+       SIDEBAR
+  ====================================================== -->
+  <aside id="sidebar"
+    class="fixed inset-y-0 start-0 z-40 flex h-full w-64 -translate-x-full flex-col bg-surface-light font-inter-regular text-ink-light shadow-2xl transition-transform duration-300 ease-out motion-reduce:transition-none dark:bg-surface-dark dark:text-ink-dark lg:translate-x-0 lg:shadow-none lg:border-e lg:border-ink-light/10 dark:lg:border-ink-dark/10"
+    aria-label="Main navigation">
+    <!-- Brand -->
+    <div class="flex items-center gap-3 px-6 py-6">
+      <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-neon-500 shadow-neon-sm">
+        <svg viewBox="0 0 24 24" class="h-5 w-5 text-surface-dark" fill="currentColor">
+          <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z" />
+        </svg>
+      </div>
+      <div class="font-inter-bold text-lg tracking-tight">
+        Pulse<span class="text-neon-500">.</span>
+      </div>
+
+      <!-- Close button (mobile only) -->
+      <button type="button" data-sidebar-close
+        class="ms-auto flex h-8 w-8 items-center justify-center rounded-lg text-ink-light/50 transition-colors duration-150 hover:bg-neon-500/10 hover:text-ink-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-500/50 dark:text-ink-dark/50 dark:hover:text-ink-dark lg:hidden"
+        aria-label="Close menu">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round">
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Scrollable nav area -->
+    <nav class="thin-scroll flex-1 overflow-y-auto px-3 pb-4">
+
+      <!-- Group: Menu -->
+      <p
+        class="px-3 pb-2 pt-2 font-inter-medium text-[11px] uppercase tracking-widest text-ink-light/40 dark:text-ink-dark/40">
+        Menu
+      </p>
+      <ul class="space-y-1">
+
+        <li>
+          <a href="#" data-nav-link aria-current="page"
+            class="group relative flex items-center gap-3 rounded-xl px-4 py-2.5 font-inter-medium text-sm text-neon-700 transition-colors duration-150 motion-reduce:transition-none bg-neon-500/10 shadow-neon-ring dark:text-neon-300 dark:bg-neon-400/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-500/50">
+            <span
+              class="absolute inset-y-1.5 start-0 w-1 rounded-full bg-neon-500 shadow-neon-sm opacity-0 transition-opacity duration-150 group-aria-[current=page]:opacity-100"></span>
+            <svg viewBox="0 0 24 24" class="h-[18px] w-[18px] shrink-0" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7" rx="1.5" />
+              <rect x="14" y="3" width="7" height="7" rx="1.5" />
+              <rect x="3" y="14" width="7" height="7" rx="1.5" />
+              <rect x="14" y="14" width="7" height="7" rx="1.5" />
+            </svg>
+            Dashboard
+          </a>
+        </li>
+
+        <li>
+          <a href="#" data-nav-link
+            class="group relative flex items-center gap-3 rounded-xl px-4 py-2.5 font-inter-medium text-sm text-ink-light/65 transition-colors duration-150 motion-reduce:transition-none hover:bg-neon-500/8 hover:text-ink-light dark:text-ink-dark/60 dark:hover:bg-neon-400/10 dark:hover:text-ink-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-500/50 aria-[current=page]:bg-neon-500/10 aria-[current=page]:text-neon-700 aria-[current=page]:shadow-neon-ring dark:aria-[current=page]:text-neon-300 dark:aria-[current=page]:bg-neon-400/10">
+            <span
+              class="absolute inset-y-1.5 start-0 w-1 rounded-full bg-neon-500 shadow-neon-sm opacity-0 transition-opacity duration-150 group-aria-[current=page]:opacity-100"></span>
+            <svg viewBox="0 0 24 24" class="h-[18px] w-[18px] shrink-0" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 20V10M12 20V4M20 20v-7" />
+            </svg>
+            Analytics
+          </a>
+        </li>
+
+        <li>
+          <a href="#" data-nav-link
+            class="group relative flex items-center gap-3 rounded-xl px-4 py-2.5 font-inter-medium text-sm text-ink-light/65 transition-colors duration-150 motion-reduce:transition-none hover:bg-neon-500/8 hover:text-ink-light dark:text-ink-dark/60 dark:hover:bg-neon-400/10 dark:hover:text-ink-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-500/50 aria-[current=page]:bg-neon-500/10 aria-[current=page]:text-neon-700 aria-[current=page]:shadow-neon-ring dark:aria-[current=page]:text-neon-300 dark:aria-[current=page]:bg-neon-400/10">
+            <span
+              class="absolute inset-y-1.5 start-0 w-1 rounded-full bg-neon-500 shadow-neon-sm opacity-0 transition-opacity duration-150 group-aria-[current=page]:opacity-100"></span>
+            <svg viewBox="0 0 24 24" class="h-[18px] w-[18px] shrink-0" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+              <path d="M3 6h18M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            Orders
+          </a>
+        </li>
+
+        <li>
+          <a href="#" data-nav-link
+            class="group relative flex items-center gap-3 rounded-xl px-4 py-2.5 font-inter-medium text-sm text-ink-light/65 transition-colors duration-150 motion-reduce:transition-none hover:bg-neon-500/8 hover:text-ink-light dark:text-ink-dark/60 dark:hover:bg-neon-400/10 dark:hover:text-ink-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-500/50 aria-[current=page]:bg-neon-500/10 aria-[current=page]:text-neon-700 aria-[current=page]:shadow-neon-ring dark:aria-[current=page]:text-neon-300 dark:aria-[current=page]:bg-neon-400/10">
+            <span
+              class="absolute inset-y-1.5 start-0 w-1 rounded-full bg-neon-500 shadow-neon-sm opacity-0 transition-opacity duration-150 group-aria-[current=page]:opacity-100"></span>
+            <svg viewBox="0 0 24 24" class="h-[18px] w-[18px] shrink-0" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            Customers
+          </a>
+        </li>
+
+        <li>
+          <a href="#" data-nav-link
+            class="group relative flex items-center gap-3 rounded-xl px-4 py-2.5 font-inter-medium text-sm text-ink-light/65 transition-colors duration-150 motion-reduce:transition-none hover:bg-neon-500/8 hover:text-ink-light dark:text-ink-dark/60 dark:hover:bg-neon-400/10 dark:hover:text-ink-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-500/50 aria-[current=page]:bg-neon-500/10 aria-[current=page]:text-neon-700 aria-[current=page]:shadow-neon-ring dark:aria-[current=page]:text-neon-300 dark:aria-[current=page]:bg-neon-400/10">
+            <span
+              class="absolute inset-y-1.5 start-0 w-1 rounded-full bg-neon-500 shadow-neon-sm opacity-0 transition-opacity duration-150 group-aria-[current=page]:opacity-100"></span>
+            <svg viewBox="0 0 24 24" class="h-[18px] w-[18px] shrink-0" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m2 7 10 6 10-6" />
+            </svg>
+            Messages
+            <span
+              class="relative ms-auto flex h-5 min-w-5 items-center justify-center rounded-full bg-neon-500 px-1.5 font-inter-medium text-[11px] tabular text-surface-dark">
+              3
+              <span
+                class="absolute -top-0.5 -end-0.5 h-2 w-2 animate-pulse-dot rounded-full bg-neon-300 motion-reduce:animate-none"></span>
+            </span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Group: General -->
+      <p
+        class="px-3 pb-2 pt-6 font-inter-medium text-[11px] uppercase tracking-widest text-ink-light/40 dark:text-ink-dark/40">
+        General
+      </p>
+      <ul class="space-y-1">
+        <li>
+          <a href="#" data-nav-link
+            class="group relative flex items-center gap-3 rounded-xl px-4 py-2.5 font-inter-medium text-sm text-ink-light/65 transition-colors duration-150 motion-reduce:transition-none hover:bg-neon-500/8 hover:text-ink-light dark:text-ink-dark/60 dark:hover:bg-neon-400/10 dark:hover:text-ink-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-500/50 aria-[current=page]:bg-neon-500/10 aria-[current=page]:text-neon-700 aria-[current=page]:shadow-neon-ring dark:aria-[current=page]:text-neon-300 dark:aria-[current=page]:bg-neon-400/10">
+            <span
+              class="absolute inset-y-1.5 start-0 w-1 rounded-full bg-neon-500 shadow-neon-sm opacity-0 transition-opacity duration-150 group-aria-[current=page]:opacity-100"></span>
+            <svg viewBox="0 0 24 24" class="h-[18px] w-[18px] shrink-0" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" />
+            </svg>
+            Settings
+          </a>
+        </li>
+        <li>
+          <a href="#" data-nav-link
+            class="group relative flex items-center gap-3 rounded-xl px-4 py-2.5 font-inter-medium text-sm text-ink-light/65 transition-colors duration-150 motion-reduce:transition-none hover:bg-neon-500/8 hover:text-ink-light dark:text-ink-dark/60 dark:hover:bg-neon-400/10 dark:hover:text-ink-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-500/50 aria-[current=page]:bg-neon-500/10 aria-[current=page]:text-neon-700 aria-[current=page]:shadow-neon-ring dark:aria-[current=page]:text-neon-300 dark:aria-[current=page]:bg-neon-400/10">
+            <span
+              class="absolute inset-y-1.5 start-0 w-1 rounded-full bg-neon-500 shadow-neon-sm opacity-0 transition-opacity duration-150 group-aria-[current=page]:opacity-100"></span>
+            <svg viewBox="0 0 24 24" class="h-[18px] w-[18px] shrink-0" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 2-3 4M12 17h.01" />
+            </svg>
+            Help Center
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Footer: theme toggle + user profile -->
+    <div class="border-t border-ink-light/10 p-4 dark:border-ink-dark/10">
+      <!-- Theme toggle -->
+      <button type="button" id="theme-toggle"
+        class="mb-3 flex w-full items-center justify-between rounded-xl px-3 py-2 font-inter-medium text-sm text-ink-light/70 transition-colors duration-150 motion-reduce:transition-none hover:bg-neon-500/8 dark:text-ink-dark/60 dark:hover:bg-neon-400/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-500/50"
+        aria-label="Toggle dark mode">
+        <span class="flex items-center gap-2">
+          <svg viewBox="0 0 24 24" class="hidden h-[18px] w-[18px] dark:block" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+          </svg>
+          <svg viewBox="0 0 24 24" class="block h-[18px] w-[18px] dark:hidden" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+          </svg>
+          <span class="dark:hidden">Light mode</span>
+          <span class="hidden dark:inline">Dark mode</span>
+        </span>
+        <span
+          class="relative inline-flex h-5 w-9 shrink-0 items-center rounded-full bg-ink-light/15 transition-colors duration-200 motion-reduce:transition-none dark:bg-neon-500">
+          <span
+            class="inline-block h-3.5 w-3.5 translate-x-1 rounded-full bg-surface-light shadow-neon-sm transition-transform duration-200 motion-reduce:transition-none dark:translate-x-4.5"></span>
+        </span>
+      </button>
+
+      <!-- User profile -->
+      <div class="flex items-center gap-3 rounded-xl px-2 py-1.5">
+        <div
+          class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-neon-500/15 font-inter-semibold text-xs text-neon-700 dark:text-neon-300">
+          AR
+        </div>
+        <div class="min-w-0 flex-1">
+          <p class="truncate font-inter-medium text-sm text-ink-light dark:text-ink-dark">Amelia Rhodes</p>
+          <p class="truncate text-xs text-ink-light/50 dark:text-ink-dark/50">Product Admin</p>
+        </div>
+        <button type="button"
+          class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-ink-light/50 transition-colors duration-150 hover:bg-neon-500/10 hover:text-ink-light dark:text-ink-dark/50 dark:hover:text-ink-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-500/50"
+          aria-label="Log out">
+          <svg viewBox="0 0 24 24" class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- =====================================================
+       CONTENT COLUMN (offset by the sidebar width on desktop)
+  ====================================================== -->
+  <div class="min-h-screen lg:ps-64">
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+    <header
+      class="sticky top-0 z-20 flex items-center gap-3 border-b border-ink-light/10 bg-surface-light/80 px-4 py-3 backdrop-blur-md dark:border-ink-dark/10 dark:bg-surface-dark/80 sm:gap-4 sm:px-6">
+
+      <!-- Hamburger (mobile only) -->
+      <button type="button" data-sidebar-open
+        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-ink-light/70 transition-colors duration-150 hover:bg-neon-500/8 hover:text-ink-light dark:text-ink-dark/60 dark:hover:bg-neon-400/10 dark:hover:text-ink-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-500/50 lg:hidden"
+        aria-label="Open menu">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Search -->
+      <div class="relative w-full max-w-md">
+        <svg viewBox="0 0 24 24"
+          class="pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-light/40 dark:text-ink-dark/40"
+          fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+        <input type="search" placeholder="Search anything..."
+          class="w-full rounded-xl border border-transparent bg-surface-light-2 py-2.5 ps-10 pe-4 font-inter-regular text-sm text-ink-light placeholder:text-ink-light/40 transition-all duration-150 motion-reduce:transition-none focus:border-neon-500/40 focus:bg-surface-light focus:shadow-neon-ring focus:outline-none dark:bg-surface-dark-2 dark:text-ink-dark dark:placeholder:text-ink-dark/40 dark:focus:bg-surface-dark" />
+      </div>
+
+      <!-- Right cluster: notifications + profile -->
+      <div class="ms-auto flex items-center gap-1.5 sm:gap-2">
+
+        <!-- Notifications -->
+        <div class="relative">
+          <button type="button" data-dropdown-toggle="notif-panel"
+            class="relative flex h-10 w-10 items-center justify-center rounded-xl text-ink-light/70 transition-colors duration-150 hover:bg-neon-500/8 hover:text-ink-light dark:text-ink-dark/60 dark:hover:bg-neon-400/10 dark:hover:text-ink-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-500/50"
+            aria-haspopup="true" aria-expanded="false" aria-label="Notifications">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 8a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6" />
+              <path d="M10.3 21a2 2 0 0 0 3.4 0" />
+            </svg>
+            <span
+              class="absolute end-2 top-2 h-2 w-2 animate-pulse-dot rounded-full bg-neon-500 motion-reduce:animate-none"></span>
+          </button>
+
+          <div id="notif-panel" data-dropdown-panel
+            class="hidden absolute end-0 top-full z-30 mt-2 w-80 origin-top-right animate-fade-scale rounded-2xl border border-ink-light/10 bg-surface-light p-2 shadow-neon dark:border-ink-dark/10 dark:bg-surface-dark">
+            <div class="flex items-center justify-between px-3 py-2">
+              <p class="font-inter-semibold text-sm text-ink-light dark:text-ink-dark">Notifications</p>
+              <button type="button"
+                class="font-inter-medium text-xs text-neon-600 transition-colors duration-150 hover:text-neon-500 dark:text-neon-400">
+                Mark all read
+              </button>
+            </div>
+
+            <ul class="thin-scroll max-h-72 overflow-y-auto">
+              <li>
+                <a href="#"
+                  class="flex gap-3 rounded-xl px-3 py-2.5 transition-colors duration-150 hover:bg-neon-500/8 dark:hover:bg-neon-400/10">
+                  <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-neon-500 shadow-neon-sm"></span>
+                  <span class="min-w-0">
+                    <span class="block font-inter-medium text-sm text-ink-light dark:text-ink-dark">New order
+                      received</span>
+                    <span class="block text-xs text-ink-light/50 dark:text-ink-dark/50">Order #4821 · 2 min ago</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="#"
+                  class="flex gap-3 rounded-xl px-3 py-2.5 transition-colors duration-150 hover:bg-neon-500/8 dark:hover:bg-neon-400/10">
+                  <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-neon-500 shadow-neon-sm"></span>
+                  <span class="min-w-0">
+                    <span class="block font-inter-medium text-sm text-ink-light dark:text-ink-dark">Server response time
+                      up</span>
+                    <span class="block text-xs text-ink-light/50 dark:text-ink-dark/50">API monitor · 1 hour ago</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="#"
+                  class="flex gap-3 rounded-xl px-3 py-2.5 transition-colors duration-150 hover:bg-neon-500/8 dark:hover:bg-neon-400/10">
+                  <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-ink-light/20 dark:bg-ink-dark/20"></span>
+                  <span class="min-w-0">
+                    <span class="block font-inter-medium text-sm text-ink-light dark:text-ink-dark">Weekly report is
+                      ready</span>
+                    <span class="block text-xs text-ink-light/50 dark:text-ink-dark/50">Yesterday</span>
+                  </span>
+                </a>
+              </li>
+            </ul>
+
+            <a href="#"
+              class="mt-1 block rounded-xl px-3 py-2 text-center font-inter-medium text-sm text-neon-600 transition-colors duration-150 hover:bg-neon-500/8 dark:text-neon-400 dark:hover:bg-neon-400/10">
+              View all notifications
+            </a>
+          </div>
+        </div>
+
+        <div class="mx-1 hidden h-6 w-px bg-ink-light/10 dark:bg-ink-dark/10 sm:block"></div>
+
+        <!-- Profile -->
+        <div class="relative">
+          <button type="button" data-dropdown-toggle="profile-panel"
+            class="flex items-center gap-2 rounded-xl px-1.5 py-1.5 transition-colors duration-150 hover:bg-neon-500/8 dark:hover:bg-neon-400/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-500/50 sm:pe-3"
+            aria-haspopup="true" aria-expanded="false" aria-label="Account menu">
+            <span
+              class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-neon-500/15 font-inter-semibold text-xs text-neon-700 dark:text-neon-300">
+              AR
+            </span>
+            <span class="hidden text-start sm:block">
+              <span class="block font-inter-medium text-sm leading-tight text-ink-light dark:text-ink-dark">Amelia
+                Rhodes</span>
+              <span class="block text-xs leading-tight text-ink-light/50 dark:text-ink-dark/50">Product Admin</span>
+            </span>
+            <svg viewBox="0 0 24 24" class="hidden h-4 w-4 shrink-0 text-ink-light/40 dark:text-ink-dark/40 sm:block"
+              fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+
+          <div id="profile-panel" data-dropdown-panel
+            class="hidden absolute end-0 top-full z-30 mt-2 w-52 origin-top-right animate-fade-scale rounded-2xl border border-ink-light/10 bg-surface-light p-1.5 shadow-neon dark:border-ink-dark/10 dark:bg-surface-dark">
+            <a href="#"
+              class="flex items-center gap-2.5 rounded-xl px-3 py-2 font-inter-medium text-sm text-ink-light/80 transition-colors duration-150 hover:bg-neon-500/8 hover:text-ink-light dark:text-ink-dark/70 dark:hover:bg-neon-400/10 dark:hover:text-ink-dark">
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 20c0-4 3.6-6 8-6s8 2 8 6" />
+              </svg>
+              My profile
+            </a>
+            <a href="#"
+              class="flex items-center gap-2.5 rounded-xl px-3 py-2 font-inter-medium text-sm text-ink-light/80 transition-colors duration-150 hover:bg-neon-500/8 hover:text-ink-light dark:text-ink-dark/70 dark:hover:bg-neon-400/10 dark:hover:text-ink-dark">
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3" />
+                <path
+                  d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" />
+              </svg>
+              Settings
+            </a>
+            <div class="my-1.5 h-px bg-ink-light/10 dark:bg-ink-dark/10"></div>
+            <a href="#"
+              class="flex items-center gap-2.5 rounded-xl px-3 py-2 font-inter-medium text-sm text-neon-700 transition-colors duration-150 hover:bg-neon-500/10 dark:text-neon-300 dark:hover:bg-neon-400/10">
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
+              </svg>
+              Log out
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- =====================================================
+         MAIN CONTENT — reserved for the next section
+    ====================================================== -->
+    <main class="min-h-screen">
+      <!-- Intentionally empty: build the Content section in a later step -->
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
