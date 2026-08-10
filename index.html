@@ -229,6 +229,7 @@
     </header>
 
     <main class="container mt-6 mb-10">
+        <!-- chart and best sellers -->
         <div class="flex flex-col lg:flex-row gap-5 ">
 
             <!-- Sales chart card —width on large screens -->
@@ -444,6 +445,223 @@
             </aside>
 
         </div>
+
+        <!-- Recent Registrations & Latest Comments (Two Equal Columns) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
+
+            <!-- Section 1: Recent Registrations (جدیدترین ثبت‌نامی‌ها) -->
+            <section class="rounded-2xl border border-neon-500/10 dark:border-neon-400/10
+                            bg-white dark:bg-surface-dark-2 shadow-lg shadow-neon-500/5
+                            p-5 sm:p-6 flex flex-col justify-between transition-colors duration-500 animate-fade-in">
+                <div>
+                    <!-- Header -->
+                    <div
+                        class="flex items-center justify-between pb-4 border-b border-neon-500/10 dark:border-neon-400/10">
+                        <div>
+                            <h3 class="font-inter-semibold text-base text-ink-light dark:text-ink-dark">
+                                Recent Registrations
+                            </h3>
+                            <p class="font-inter-regular text-xs text-ink-light/45 dark:text-ink-dark/45 mt-0.5">
+                                Newly registered users
+                            </p>
+                        </div>
+                        <span class="p-2 rounded-xl bg-neon-500/10 text-neon-600 dark:text-neon-400">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <line x1="19" y1="8" x2="19" y2="14" />
+                                <line x1="22" y1="11" x2="16" y2="11" />
+                            </svg>
+                        </span>
+                    </div>
+
+                    <!-- User List -->
+                    <ul class="mt-4 divide-y divide-neon-500/5 dark:divide-neon-400/5">
+                        <li class="py-3 flex items-center justify-between gap-3 group cursor-pointer">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <div class="relative w-10 h-10 rounded-full shrink-0">
+                                    <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Ali"
+                                        class="w-10 h-10 rounded-full ring-2 ring-neon-500/20" alt="Avatar" />
+                                    <span
+                                        class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-neon-500 ring-2 ring-white dark:ring-surface-dark-2"></span>
+                                </div>
+                                <div class="min-w-0">
+                                    <p
+                                        class="font-inter-medium text-sm text-ink-light dark:text-ink-dark truncate group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
+                                        Ali Rezaei
+                                    </p>
+                                    <p
+                                        class="font-inter-regular text-xs text-ink-light/45 dark:text-ink-dark/45 truncate">
+                                        ali.rezaei@example.com
+                                    </p>
+                                </div>
+                            </div>
+                            <span
+                                class="font-inter-regular text-xs text-ink-light/45 dark:text-ink-dark/45 shrink-0 tabular">
+                                2 min ago
+                            </span>
+                        </li>
+
+                        <li class="py-3 flex items-center justify-between gap-3 group cursor-pointer">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <div class="relative w-10 h-10 rounded-full shrink-0">
+                                    <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Mina"
+                                        class="w-10 h-10 rounded-full ring-2 ring-neon-500/20" alt="Avatar" />
+                                    <span
+                                        class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-neon-500 ring-2 ring-white dark:ring-surface-dark-2"></span>
+                                </div>
+                                <div class="min-w-0">
+                                    <p
+                                        class="font-inter-medium text-sm text-ink-light dark:text-ink-dark truncate group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
+                                        Mina Mohammadi
+                                    </p>
+                                    <p
+                                        class="font-inter-regular text-xs text-ink-light/45 dark:text-ink-dark/45 truncate">
+                                        m.mohammadi@example.com
+                                    </p>
+                                </div>
+                            </div>
+                            <span
+                                class="font-inter-regular text-xs text-ink-light/45 dark:text-ink-dark/45 shrink-0 tabular">
+                                15 min ago
+                            </span>
+                        </li>
+
+                        <li class="py-3 flex items-center justify-between gap-3 group cursor-pointer">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <div class="relative w-10 h-10 rounded-full shrink-0">
+                                    <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Kaveh"
+                                        class="w-10 h-10 rounded-full ring-2 ring-neon-500/20" alt="Avatar" />
+                                    <span
+                                        class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-ink-light/20 dark:bg-ink-dark/20 ring-2 ring-white dark:ring-surface-dark-2"></span>
+                                </div>
+                                <div class="min-w-0">
+                                    <p
+                                        class="font-inter-medium text-sm text-ink-light dark:text-ink-dark truncate group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
+                                        Kaveh Tehrani
+                                    </p>
+                                    <p
+                                        class="font-inter-regular text-xs text-ink-light/45 dark:text-ink-dark/45 truncate">
+                                        kaveh.t@example.com
+                                    </p>
+                                </div>
+                            </div>
+                            <span
+                                class="font-inter-regular text-xs text-ink-light/45 dark:text-ink-dark/45 shrink-0 tabular">
+                                1 hour ago
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Footer Action -->
+                <a href="#"
+                    class="mt-4 w-full py-2.5 text-center font-inter-medium text-xs rounded-xl bg-neon-500/10 hover:bg-neon-500 text-neon-600 dark:text-neon-400 hover:text-white dark:hover:text-white transition-all duration-300">
+                    View All Users
+                </a>
+            </section>
+
+            <!-- Section 2: Latest Comments (آخرین کامنت‌ها) -->
+            <section class="rounded-2xl border border-neon-500/10 dark:border-neon-400/10
+                            bg-white dark:bg-surface-dark-2 shadow-lg shadow-neon-500/5
+                            p-5 sm:p-6 flex flex-col justify-between transition-colors duration-500 animate-fade-in">
+                <div>
+                    <!-- Header -->
+                    <div
+                        class="flex items-center justify-between pb-4 border-b border-neon-500/10 dark:border-neon-400/10">
+                        <div>
+                            <h3 class="font-inter-semibold text-base text-ink-light dark:text-ink-dark">
+                                Latest Comments
+                            </h3>
+                            <p class="font-inter-regular text-xs text-ink-light/45 dark:text-ink-dark/45 mt-0.5">
+                                User feedback & reviews
+                            </p>
+                        </div>
+                        <span class="p-2 rounded-xl bg-neon-500/10 text-neon-600 dark:text-neon-400">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                            </svg>
+                        </span>
+                    </div>
+
+                    <!-- Comment List -->
+                    <ul class="mt-4 divide-y divide-neon-500/5 dark:divide-neon-400/5">
+                        <li class="py-3 group cursor-pointer">
+                            <div class="flex items-center justify-between gap-2 mb-1">
+                                <div class="flex items-center gap-2">
+                                    <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Neda"
+                                        class="w-7 h-7 rounded-full ring-1 ring-neon-500/20" alt="Avatar" />
+                                    <span
+                                        class="font-inter-medium text-xs text-ink-light dark:text-ink-dark group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
+                                        Neda Karimi
+                                    </span>
+                                </div>
+                                <span
+                                    class="font-inter-regular text-[11px] text-ink-light/45 dark:text-ink-dark/45 tabular">
+                                    10 min ago
+                                </span>
+                            </div>
+                            <p
+                                class="font-inter-regular text-xs text-ink-light/70 dark:text-ink-dark/70 line-clamp-2 pl-9">
+                                Great quality on the Nike sneakers! The delivery was very fast as well.
+                            </p>
+                        </li>
+
+                        <li class="py-3 group cursor-pointer">
+                            <div class="flex items-center justify-between gap-2 mb-1">
+                                <div class="flex items-center gap-2">
+                                    <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Reza"
+                                        class="w-7 h-7 rounded-full ring-1 ring-neon-500/20" alt="Avatar" />
+                                    <span
+                                        class="font-inter-medium text-xs text-ink-light dark:text-ink-dark group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
+                                        Reza Nouri
+                                    </span>
+                                </div>
+                                <span
+                                    class="font-inter-regular text-[11px] text-ink-light/45 dark:text-ink-dark/45 tabular">
+                                    42 min ago
+                                </span>
+                            </div>
+                            <p
+                                class="font-inter-regular text-xs text-ink-light/70 dark:text-ink-dark/70 line-clamp-2 pl-9">
+                                Is the Molten soccer ball available in size 4?
+                            </p>
+                        </li>
+
+                        <li class="py-3 group cursor-pointer">
+                            <div class="flex items-center justify-between gap-2 mb-1">
+                                <div class="flex items-center gap-2">
+                                    <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Sahar"
+                                        class="w-7 h-7 rounded-full ring-1 ring-neon-500/20" alt="Avatar" />
+                                    <span
+                                        class="font-inter-medium text-xs text-ink-light dark:text-ink-dark group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
+                                        Sahar Hassani
+                                    </span>
+                                </div>
+                                <span
+                                    class="font-inter-regular text-[11px] text-ink-light/45 dark:text-ink-dark/45 tabular">
+                                    2 hours ago
+                                </span>
+                            </div>
+                            <p
+                                class="font-inter-regular text-xs text-ink-light/70 dark:text-ink-dark/70 line-clamp-2 pl-9">
+                                Amazing sports collection, love the new dark neon design theme!
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Footer Action -->
+                <a href="#"
+                    class="mt-4 w-full py-2.5 text-center font-inter-medium text-xs rounded-xl bg-neon-500/10 hover:bg-neon-500 text-neon-600 dark:text-neon-400 hover:text-white dark:hover:text-white transition-all duration-300">
+                    View All Comments
+                </a>
+            </section>
+
+        </div>
+
     </main>
 
 
