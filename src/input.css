@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  --font-inter-bold: "Inter Bold", sans-serif;
+  --font-inter-semibold: "Inter Semi-Bold", sans-serif;
+  --font-inter-regular: "Inter Regular", sans-serif;
+  --font-inter-medium: "Inter Medium", sans-serif;
+}
+
+@layer base {
+  @font-face {
+    font-family: "Inter Bold";
+    src:
+      local("Inter Bold"),
+      url(../fonts/Inter-Bold.woff2) format("woff2");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Inter Semi-Bold";
+    src:
+      local("Inter Semi-Bold"),
+      url(../fonts/Inter-Semi-Bold.woff2) format("woff2");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Inter Regular";
+    src:
+      local("Inter Regular"),
+      url(../fonts/Inter-Regular.woff2) format("woff2");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Inter Medium";
+    src:
+      local("Inter Medium"),
+      url(../fonts/Inter-Medium.woff2) format("woff2");
+    font-display: swap;
+  }
+}
