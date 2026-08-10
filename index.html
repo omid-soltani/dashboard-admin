@@ -24,11 +24,6 @@
 
 <body class="bg-surface-light-2 dark:bg-surface-dark transition-colors duration-500 min-h-screen">
 
-    <!-- ============================================================
-       SECTION: HEADER — shared component, reusable across pages
-       Copy this block together with the script at the bottom of
-       the page into every dashboard page.
-  ============================================================= -->
     <header id="app-header" class="sticky top-0 z-50 border-b border-neon-500/10 dark:border-neon-400/10
            bg-white/75 dark:bg-surface-dark-2/75 backdrop-blur-xl
            transition-colors duration-500">
@@ -55,7 +50,8 @@
                             <path d="M13 2 3 14h7l-1 8 11-14h-7z" />
                         </svg>
                     </div>
-                    <span class="hidden sm:block font-semibold text-[15px] text-ink-light dark:text-ink-dark truncate">
+                    <span
+                        class="hidden sm:block font-inter-bold text-[15px] text-ink-light dark:text-ink-dark truncate">
                         Admin Panel
                     </span>
                 </div>
@@ -65,8 +61,9 @@
             <div id="datetime-box" class="hidden md:flex items-center gap-2 px-3.5 py-2 rounded-xl
                bg-neon-500/5 dark:bg-neon-400/5 border border-neon-500/10 dark:border-neon-400/10
                text-ink-light/80 dark:text-ink-dark/80">
-                <svg class="w-4 h-4 text-neon-600 dark:text-neon-400" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="hover:rotate-360 duration-500 transition-transform w-5 h-5 text-neon-600 dark:text-neon-400"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <circle cx="12" cy="12" r="9" />
                     <path d="M12 7v5l3 3" />
                 </svg>
@@ -79,18 +76,19 @@
             <div class="flex items-center gap-1.5 sm:gap-2">
 
                 <!-- Theme toggle -->
-                <button id="theme-toggle" class="relative w-11 h-11 grid place-items-center rounded-xl
+                <button id="theme-toggle" class="group relative w-11 h-11 grid place-items-center rounded-xl
                  text-ink-light/70 dark:text-ink-dark/70
                  hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
                  transition-all duration-300 active:scale-90" aria-label="Toggle light and dark mode">
-                    <svg id="icon-sun" class="w-5 h-5 transition-all duration-300" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg id="icon-sun" class="group-hover:rotate-180 w-5 h-5  transition-all duration-300"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <circle cx="12" cy="12" r="4" />
                         <path
                             d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
                     </svg>
-                    <svg id="icon-moon" class="hidden w-5 h-5 transition-all duration-300" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    <svg id="icon-moon" class="group-hover:rotate-360 hidden w-5 h-5 transition-all duration-300"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                     </svg>
@@ -98,12 +96,12 @@
 
                 <!-- Notifications -->
                 <div class="relative">
-                    <button id="notif-btn" class="relative w-11 h-11 grid place-items-center rounded-xl
+                    <button id="notif-btn" class="group relative w-11 h-11 grid place-items-center rounded-xl
                    text-ink-light/70 dark:text-ink-dark/70
                    hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
                    transition-all duration-300 active:scale-90" aria-label="Notifications">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="w-5 h-5 group-hover:animate-shake" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
                             <path d="M13.73 21a2 2 0 0 1-3.46 0" />
                         </svg>
@@ -192,9 +190,10 @@
                         </div>
                         <nav class="py-1.5">
                             <a href="#"
-                                class="flex items-center gap-2.5 px-4 py-2 text-sm text-ink-light/80 dark:text-ink-dark/80 hover:bg-neon-500/5 hover:text-neon-600 dark:hover:text-neon-400 transition-colors duration-200">
-                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                class="group flex items-center gap-2.5 px-4 py-2 text-sm text-ink-light/80 dark:text-ink-dark/80 hover:bg-neon-500/5 hover:text-neon-600 dark:hover:text-neon-400 transition-colors duration-200">
+                                <svg class="group-hover:rotate-180 w-4 h-4 transition-transform" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
                                     <circle cx="12" cy="8" r="4" />
                                     <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
                                 </svg>
@@ -228,7 +227,8 @@
             </div>
         </div>
     </header>
-    <main class="container py-6 sm:py-8">
+
+    <main class="container mt-6 mb-10">
         <div class="flex flex-col lg:flex-row gap-5">
 
             <!-- Sales chart card — 3/4 width on large screens -->
@@ -239,10 +239,10 @@
                 <div class="flex items-center justify-between gap-3 px-5 sm:px-6 pt-5 sm:pt-6">
                     <div class="min-w-0">
                         <h2 class="text-[15px] sm:text-base font-semibold text-ink-light dark:text-ink-dark">
-                            فروش کالاها
+                            Selling products
                         </h2>
-                        <p class="text-xs text-ink-light/45 dark:text-ink-dark/45 mt-0.5">
-                            مقایسه فروش ماهانه بر اساس دسته‌بندی کالا
+                        <p class="text-xs sm:text-sm text-ink-light/45 dark:text-ink-dark/45 mt-0.5">
+                            Comparing monthly sales
                         </p>
                     </div>
 
@@ -251,11 +251,11 @@
                         bg-neon-500/5 dark:bg-neon-400/5 border border-neon-500/10 dark:border-neon-400/10 shrink-0">
                         <button type="button" data-range="6" class="chart-range-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200
                                bg-neon-500 text-white shadow-neon-sm">
-                            6 ماه
+                            6/month
                         </button>
                         <button type="button" data-range="12" class="chart-range-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200
                                text-ink-light/60 dark:text-ink-dark/60 hover:text-neon-600 dark:hover:text-neon-400">
-                            12 ماه
+                            12/month
                         </button>
                     </div>
                 </div>
@@ -264,12 +264,9 @@
                 <div class="flex items-center gap-4 px-5 sm:px-6 pt-4">
                     <span class="flex items-center gap-1.5 text-xs text-ink-light/60 dark:text-ink-dark/60">
                         <span class="w-2.5 h-2.5 rounded-full bg-neon-500"></span>
-                        فروش کالای دیجیتال
+                        Selling products
                     </span>
-                    <span class="flex items-center gap-1.5 text-xs text-ink-light/60 dark:text-ink-dark/60">
-                        <span class="w-2.5 h-2.5 rounded-full bg-neon-300"></span>
-                        فروش کالای فیزیکی
-                    </span>
+
                 </div>
 
                 <div class="px-3 sm:px-5 pb-5 sm:pb-6 pt-3">
@@ -290,8 +287,13 @@
     </main>
 
 
+
+
+    <script src="./js/shared.js/header.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/shared.js"></script>
+    <script src="./js/chart/chart.js"></script>
+
+
 
 </body>
 

@@ -1,3 +1,4 @@
+let now = null;
 const initHeader = function () {
   /* =====================================================
                1) THEME TOGGLE — dark/light with persisted preference
@@ -20,6 +21,7 @@ const initHeader = function () {
   }
 
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  console.log(prefersDark);
   const savedTheme =
     typeof Storage !== "undefined"
       ? localStorage.getItem("dashboard-theme")
@@ -41,7 +43,7 @@ const initHeader = function () {
   const clockDateEl = document.getElementById("clock-date");
 
   function updateClock() {
-    const now = new Date();
+    now = new Date();
     clockTimeEl.textContent = now.toLocaleTimeString("en-US", {
       hour: "2-digit",
       minute: "2-digit",

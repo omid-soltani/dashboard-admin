@@ -37,42 +37,64 @@
   --shadow-neon-ring: 0 0 0 3px rgba(0, 230, 118, 0.18);
 
   /* انیمیشن‌ها */
+
   --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
   --animate-fade-scale: fade-scale 0.16s cubic-bezier(0.16, 1, 0.3, 1);
   --animate-fade-in: fade-in 0.12s ease-out;
+  --animate-shake: shake 0.4s ease-in-out;
+
+  @keyframes shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+
+    25% {
+      transform: translateX(-6px);
+    }
+
+    50% {
+      transform: translateX(6px);
+    }
+
+    75% {
+      transform: translateX(-6px);
+    }
+  }
+
+  @keyframes pulse-dot {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.55;
+      transform: scale(1.15);
+    }
+  }
+
+  @keyframes fade-scale {
+    0% {
+      opacity: 0;
+      transform: scale(0.95) translateY(-6px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 }
 
-/* @keyframes pulse-dot {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.55;
-    transform: scale(1.15);
-  }
-}
-
-@keyframes fade-scale {
-  0% {
-    opacity: 0;
-    transform: scale(0.95) translateY(-6px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-} */
 @layer utilities {
   .container {
     @apply mx-auto px-4 max-w-full;
@@ -149,4 +171,6 @@
   body {
     font-family: "Inter Regular", sans-serif;
   }
+}
+@theme {
 }
