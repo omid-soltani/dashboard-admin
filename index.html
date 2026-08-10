@@ -58,10 +58,10 @@
             </div>
 
             <!-- Live date & time -->
-            <div id="datetime-box" class="hidden md:flex items-center gap-2 px-3.5 py-2 rounded-xl
+            <div id="datetime-box" class="group hidden md:flex items-center gap-2 px-3.5 py-2 rounded-xl
                bg-neon-500/5 dark:bg-neon-400/5 border border-neon-500/10 dark:border-neon-400/10
                text-ink-light/80 dark:text-ink-dark/80">
-                <svg class="hover:rotate-360 duration-500 transition-transform w-5 h-5 text-neon-600 dark:text-neon-400"
+                <svg class="group-hover:rotate-360 duration-500 transition-transform w-5 h-5 text-neon-600 dark:text-neon-400"
                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
                     <circle cx="12" cy="12" r="9" />
@@ -229,9 +229,9 @@
     </header>
 
     <main class="container mt-6 mb-10">
-        <div class="flex flex-col lg:flex-row gap-5">
+        <div class="flex flex-col lg:flex-row gap-5 ">
 
-            <!-- Sales chart card — 3/4 width on large screens -->
+            <!-- Sales chart card —width on large screens -->
             <section id="sales-chart-card" class="w-full lg:w-3/4 rounded-2xl border border-neon-500/10 dark:border-neon-400/10
                     bg-white dark:bg-surface-dark-2 shadow-lg shadow-neon-500/5
                     transition-colors duration-500 animate-fade-in">
@@ -276,11 +276,171 @@
                 </div>
             </section>
 
-            <!-- Placeholder — reserved for the next section (1/4 width) -->
-            <aside class="w-full lg:w-1/4 rounded-2xl border border-dashed border-neon-500/20 dark:border-neon-400/20
-                   grid place-items-center min-h-[16rem] lg:min-h-0
-                   text-ink-light/30 dark:text-ink-dark/30 text-xs">
-                بخش بعدی اینجا اضافه می‌شود
+            <!-- Top Selling Products -->
+            <aside class="h-136 overflow-auto w-full lg:w-1/4 rounded-2xl border border-neon-500/10 dark:border-neon-400/10
+              bg-white dark:bg-surface-dark-2 shadow-lg shadow-neon-500/5
+              flex flex-col justify-between p-5 sm:p-6 transition-colors duration-500 animate-fade-in">
+
+                <div>
+                    <!-- Header Section -->
+                    <div
+                        class="flex items-center justify-between pb-4 border-b border-neon-500/10 dark:border-neon-400/10">
+                        <div>
+                            <h3 class="font-inter-semibold text-base text-ink-light dark:text-ink-dark">
+                                Best Sellers
+                            </h3>
+                            <p class="font-inter-regular text-xs text-ink-light/45 dark:text-ink-dark/45 mt-0.5">
+                                Top items this month
+                            </p>
+                        </div>
+                        <span class="p-2 rounded-xl bg-neon-500/10 text-neon-600 dark:text-neon-400">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                                <path d="M3 6h18" />
+                                <path d="M16 10a4 4 0 0 1-8 0" />
+                            </svg>
+                        </span>
+                    </div>
+
+                    <!-- Product List -->
+                    <ul class="mt-4 space-y-4">
+
+
+
+                        <li class="flex items-center justify-between gap-3 group cursor-pointer">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <div
+                                    class="w-11 h-11 rounded-xl bg-neon-500/10 dark:bg-neon-400/10 flex items-center justify-center shrink-0 border border-neon-500/20 group-hover:scale-105 transition-transform duration-200">
+                                    <svg class="w-5 h-5 text-neon-700 dark:text-neon-400"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path
+                                            d="M8 42c5-1 10-4 14-10l6-10 7 7c3 3 6 5 10 7l9 4c3 1 5 4 5 7v2H8c-2 0-3-2-3-4s1-3 3-3Z" />
+                                        <path d="M22 32c4 2 9 4 14 4h13" />
+                                        <path d="M28 22l-4 8" />
+                                        <path d="M33 27l-4 7" />
+                                        <path d="M39 31l-3 5" />
+                                        <path d="M8 52h51" />
+                                    </svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <p
+                                        class="font-inter-medium text-sm text-ink-light dark:text-ink-dark truncate group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
+                                        Nike sneakers
+                                    </p>
+                                    <p
+                                        class="font-inter-regular text-xs text-ink-light/45 dark:text-ink-dark/45 tabular">
+                                        800 sales
+                                    </p>
+                                </div>
+                            </div>
+                            <span class="font-inter-bold text-xs text-neon-600 dark:text-neon-400 tabular shrink-0">
+                                $90.00
+                            </span>
+                        </li>
+                        <li class="flex items-center justify-between gap-3 group cursor-pointer">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <div
+                                    class="w-11 h-11 rounded-xl bg-neon-500/10 dark:bg-neon-400/10 flex items-center justify-center shrink-0 border border-neon-500/20 group-hover:scale-105 transition-transform duration-200">
+                                    <svg class="w-5 h-5 text-neon-700 dark:text-neon-400"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M23 8l9 6 9-6 12 7 6 13-9 5-4-8v31H18V25l-4 8-9-5 6-13 12-7Z" />
+                                        <path d="M23 8c0 5 4 9 9 9s9-4 9-9" />
+                                        <path d="M18 25l-5 8" />
+                                        <path d="M46 25l5 8" />
+                                    </svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <p
+                                        class="font-inter-medium text-sm text-ink-light dark:text-ink-dark truncate group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
+                                        Nike sneakers
+                                    </p>
+                                    <p
+                                        class="font-inter-regular text-xs text-ink-light/45 dark:text-ink-dark/45 tabular">
+                                        1200 sales
+                                    </p>
+                                </div>
+                            </div>
+                            <span class="font-inter-bold text-xs text-neon-600 dark:text-neon-400 tabular shrink-0">
+                                $100.00
+                            </span>
+                        </li>
+                        <li class="flex items-center justify-between gap-3 group cursor-pointer">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <div
+                                    class="w-11 h-11 rounded-xl bg-neon-500/10 dark:bg-neon-400/10 flex items-center justify-center shrink-0 border border-neon-500/20 group-hover:scale-105 transition-transform duration-200">
+                                    <svg class="w-5 h-5 text-neon-700 dark:text-neon-400"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="32" cy="32" r="24" />
+                                        <path d="M32 8l7 9-3 11h-8l-3-11 7-9Z" />
+                                        <path d="M15 15l11 2" />
+                                        <path d="M49 15l-11 2" />
+                                        <path d="M56 32l-17 4-7-6" />
+                                        <path d="M8 32l17 4 7-6" />
+                                        <path d="M18 53l7-17" />
+                                        <path d="M46 53l-7-17" />
+                                    </svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <p
+                                        class="font-inter-medium text-sm text-ink-light dark:text-ink-dark truncate group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
+                                        Molten soccer ball
+                                    </p>
+                                    <p
+                                        class="font-inter-regular text-xs text-ink-light/45 dark:text-ink-dark/45 tabular">
+                                        999 sales
+                                    </p>
+                                </div>
+                            </div>
+                            <span class="font-inter-bold text-xs text-neon-600 dark:text-neon-400 tabular shrink-0">
+                                $69.00
+                            </span>
+                        </li>
+                        <li class="flex items-center justify-between gap-3 group cursor-pointer">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <div
+                                    class="w-11 h-11 rounded-xl bg-neon-500/10 dark:bg-neon-400/10 flex items-center justify-center shrink-0 border border-neon-500/20 group-hover:scale-105 transition-transform duration-200">
+                                    <svg class="w-5 h-5 text-neon-700 dark:text-neon-400"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path
+                                            d="M22 7h16v25c0 4 3 7 7 8l8 2c5 1 7 7 3 10-2 2-5 3-8 3H18c-7 0-11-8-7-13l8-9c2-2 3-5 3-8V7Z" />
+                                        <path d="M22 14h16" />
+                                        <path d="M19 26c5 2 11 2 19 0" />
+                                        <path d="M13 46c7 2 15 2 23-1" />
+                                    </svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <p
+                                        class="font-inter-medium text-sm text-ink-light dark:text-ink-dark truncate group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
+                                        Sports long grass
+                                    </p>
+                                    <p
+                                        class="font-inter-regular text-xs text-ink-light/45 dark:text-ink-dark/45 tabular">
+                                        400 sales
+                                    </p>
+                                </div>
+                            </div>
+                            <span class="font-inter-bold text-xs text-neon-600 dark:text-neon-400 tabular shrink-0">
+                                $20.00
+                            </span>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <!-- Footer Action Link -->
+                <a href="#"
+                    class="mt-6 w-full py-2.5 text-center font-inter-medium text-xs rounded-xl bg-neon-500/10 hover:bg-neon-500 text-neon-600 dark:text-neon-400 hover:text-white dark:hover:text-white transition-all duration-300">
+                    View All Products
+                </a>
             </aside>
 
         </div>
