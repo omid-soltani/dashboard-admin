@@ -52,69 +52,135 @@ function makeGradient(ctx, area, from, to) {
 function buildChart(range) {
   const colors = chartColors();
   const data = salesData[range];
-  const ctx = chartCanvas.getContext("2d");
 
-  if (salesChart) salesChart.destroy();
+  if (!salesChart) {
+    const ctx = chartCanvas.getContext("2d");
 
-  salesChart = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: data.labels,
-      datasets: [
-        {
-          label: "products sales ",
-          data: data.products,
-          backgroundColor: function (c) {
-            if (!c.chart.chartArea) return "rgba(0,230,118,0.6)";
-            return makeGradient(
-              c.chart.ctx,
-              c.chart.chartArea,
-              "rgba(0,230,118,0.95)",
-              "rgba(0,230,118,0.25)",
-            );
+    salesChart = new Chart(ctx, {
+      type: "bar",
+
+      data: {
+        labels: data.labels,
+        datasets: [
+          {
+            label: "products sales",
+            data: data.products,
+
+            backgroundColor: function (c) {
+              if (!c.chart.chartArea) {
+                return "rgba(0,230,118,0.6)";
+              }
+
+              return makeGradient(
+                c.chart.ctx,
+                c.chart.chartArea,
+                "rgba(0,230,118,0.95)",
+                "rgba(0,230,118,0.25)",
+              );
+            },
+
+            borderRadius: 8,
+            borderSkipped: false,
+            maxBarThickness: 26,
           },
-          borderRadius: 8,
-          borderSkipped: false,
-          maxBarThickness: 26,
+        ],
+      },
+
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+
+        animation: {
+          duration: 1500,
+          easing: "easeOutQuart",
         },
-      ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: { duration: 650, easing: "easeOutQuart" },
-      interaction: { mode: "index", intersect: false },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: colors.tooltipBg,
-          titleColor: colors.tooltipText,
-          bodyColor: colors.tooltipText,
-          borderColor: colors.tooltipBorder,
-          borderWidth: 1,
-          padding: 10,
-          cornerRadius: 10,
-          displayColors: true,
-          boxPadding: 4,
+        transitions: {
+          active: {
+            animation: {
+              duration: 0,
+            },
+          },
+        },
+
+        interaction: {
+          mode: "index",
+          intersect: false,
+        },
+
+        plugins: {
+          legend: {
+            display: false,
+          },
+
+          tooltip: {
+            backgroundColor: colors.tooltipBg,
+            titleColor: colors.tooltipText,
+            bodyColor: colors.tooltipText,
+            borderColor: colors.tooltipBorder,
+            borderWidth: 1,
+            padding: 10,
+            cornerRadius: 10,
+            displayColors: true,
+            boxPadding: 4,
+          },
+        },
+
+        scales: {
+          x: {
+            grid: {
+              display: false,
+            },
+            ticks: {
+              color: colors.tick,
+              font: {
+                size: 11,
+              },
+            },
+          },
+
+          y: {
+            grid: {
+              color: colors.grid,
+            },
+
+            ticks: {
+              color: colors.tick,
+              font: {
+                size: 11,
+              },
+
+              callback: (v) => v + "M",
+            },
+
+            border: {
+              display: false,
+            },
+          },
         },
       },
-      scales: {
-        x: {
-          grid: { display: false },
-          ticks: { color: colors.tick, font: { size: 11 } },
-        },
-        y: {
-          grid: { color: colors.grid },
-          ticks: {
-            color: colors.tick,
-            font: { size: 11 },
-            callback: (v) => v + "M",
-          },
-          border: { display: false },
-        },
-      },
-    },
-  });
+    });
+
+    return;
+  }
+
+  salesChart.data.labels = data.labels;
+  salesChart.data.datasets[0].data = data.products;
+
+  salesChart.options.plugins.tooltip.backgroundColor = colors.tooltipBg;
+
+  salesChart.options.plugins.tooltip.titleColor = colors.tooltipText;
+
+  salesChart.options.plugins.tooltip.bodyColor = colors.tooltipText;
+
+  salesChart.options.plugins.tooltip.borderColor = colors.tooltipBorder;
+
+  salesChart.options.scales.x.ticks.color = colors.tick;
+
+  salesChart.options.scales.y.ticks.color = colors.tick;
+
+  salesChart.options.scales.y.grid.color = colors.grid;
+
+  salesChart.update();
 }
 
 let currentRange = 6;
