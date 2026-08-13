@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Page</title>
+    <link rel="stylesheet" href="./src/output.css" />
+</head>
+
+<body class="bg-surface-light-2 dark:bg-surface-dark transition-colors duration-500 min-h-screen">
+    <header id="app-header" class="sticky top-0 z-50 border-b border-neon-500/10 dark:border-neon-400/10
+           bg-white/75 dark:bg-surface-dark-2/75 backdrop-blur-xl
+           transition-colors duration-500">
+        <div class="mx-auto max-w-[1600px] px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+
+            <div class="flex items-center gap-3 min-w-0">
+                <button id="mobile-menu-btn" class="lg:hidden shrink-0 grid place-items-center w-10 h-10 rounded-xl
+                 text-ink-light/70 dark:text-ink-dark/70
+                 hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+                 transition-colors duration-200" aria-label="Open menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+
+                <div class="flex items-center gap-2.5 min-w-0">
+                    <div class="relative shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-neon-400 to-neon-700
+                      shadow-neon-sm grid place-items-center">
+                        <span class="absolute inset-0 rounded-xl bg-neon-500/30 blur-md"></span>
+                        <svg class="relative w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M13 2 3 14h7l-1 8 11-14h-7z" />
+                        </svg>
+                    </div>
+                    <span
+                        class="hidden sm:block font-inter-bold text-[15px] text-ink-light dark:text-ink-dark truncate">
+                        Admin Panel
+                    </span>
+                </div>
+            </div>
+
+            <div id="datetime-box" class="group hidden md:flex items-center gap-2 px-3.5 py-2 rounded-xl
+               bg-neon-500/5 dark:bg-neon-400/5 border border-neon-500/10 dark:border-neon-400/10
+               text-ink-light/80 dark:text-ink-dark/80">
+                <svg class="group-hover:rotate-360 duration-500 transition-transform w-5 h-5 text-neon-600 dark:text-neon-400"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 7v5l3 3" />
+                </svg>
+                <span id="clock-time" class="tabular text-sm font-medium"></span>
+                <span class="w-1 h-1 rounded-full bg-neon-500/40"></span>
+                <span id="clock-date" class="text-xs text-ink-light/50 dark:text-ink-dark/50"></span>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2">
+
+                <button id="theme-toggle" class="group relative w-11 h-11 grid place-items-center rounded-xl
+                 text-ink-light/70 dark:text-ink-dark/70
+                 hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+                 transition-all duration-300 active:scale-90" aria-label="Toggle light and dark mode">
+                    <svg id="icon-sun" class="group-hover:rotate-180 w-5 h-5  transition-all duration-300"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4" />
+                        <path
+                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                    </svg>
+                    <svg id="icon-moon" class="group-hover:rotate-360 hidden w-5 h-5 transition-all duration-300"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                </button>
+
+                <div class="relative">
+                    <button id="notif-btn" class="group relative w-11 h-11 grid place-items-center rounded-xl
+                   text-ink-light/70 dark:text-ink-dark/70
+                   hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+                   transition-all duration-300 active:scale-90" aria-label="Notifications">
+                        <svg class="w-5 h-5 group-hover:animate-shake" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                        </svg>
+                        <span
+                            class="absolute top-2 right-2 w-2 h-2 rounded-full bg-neon-500 shadow-neon-sm animate-pulse-dot"></span>
+                    </button>
+
+                    <div id="notif-menu" class="hidden absolute right-0 mt-2 w-80 max-w-[85vw] rounded-2xl overflow-hidden
+                   bg-white dark:bg-surface-dark-2 border border-neon-500/10 dark:border-neon-400/10
+                   shadow-2xl shadow-neon-500/5 origin-top-right animate-fade-scale">
+                        <div
+                            class="px-4 py-3 flex items-center justify-between border-b border-neon-500/10 dark:border-neon-400/10">
+                            <span class="text-sm font-semibold text-ink-light dark:text-ink-dark">Notifications</span>
+                            <span
+                                class="text-xs px-2 py-0.5 rounded-full bg-neon-500/10 text-neon-600 dark:text-neon-400">3
+                                new</span>
+                        </div>
+                        <ul
+                            class="thin-scroll max-h-72 overflow-y-auto divide-y divide-neon-500/5 dark:divide-neon-400/5">
+                            <li
+                                class="px-4 py-3 flex gap-3 hover:bg-neon-500/5 transition-colors duration-200 cursor-pointer">
+                                <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-neon-500 shrink-0"></span>
+                                <div class="min-w-0">
+                                    <p class="text-sm text-ink-light dark:text-ink-dark">Monthly sales report is ready
+                                    </p>
+                                    <p class="text-xs text-ink-light/45 dark:text-ink-dark/45 mt-0.5">5 minutes ago</p>
+                                </div>
+                            </li>
+                            <li
+                                class="px-4 py-3 flex gap-3 hover:bg-neon-500/5 transition-colors duration-200 cursor-pointer">
+                                <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-neon-500 shrink-0"></span>
+                                <div class="min-w-0">
+                                    <p class="text-sm text-ink-light dark:text-ink-dark">A new user just signed up</p>
+                                    <p class="text-xs text-ink-light/45 dark:text-ink-dark/45 mt-0.5">22 minutes ago</p>
+                                </div>
+                            </li>
+                            <li
+                                class="px-4 py-3 flex gap-3 hover:bg-neon-500/5 transition-colors duration-200 cursor-pointer">
+                                <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-neon-500 shrink-0"></span>
+                                <div class="min-w-0">
+                                    <p class="text-sm text-ink-light dark:text-ink-dark">System update completed
+                                        successfully</p>
+                                    <p class="text-xs text-ink-light/45 dark:text-ink-dark/45 mt-0.5">1 hour ago</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <button
+                            class="w-full py-2.5 text-xs font-medium text-neon-600 dark:text-neon-400 hover:bg-neon-500/5 transition-colors duration-200">
+                            View all notifications
+                        </button>
+                    </div>
+                </div>
+
+                <span class="w-px h-6 bg-neon-500/10 dark:bg-neon-400/10 mx-1 hidden sm:block"></span>
+
+                <div class="relative">
+                    <button id="profile-btn" class="flex items-center gap-2 pr-2 pl-1.5 py-1.5 rounded-xl
+                   hover:bg-neon-500/10 transition-all duration-300">
+                        <div class="relative w-8 h-8 rounded-full shrink-0">
+                            <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Sara&backgroundColor=b6e3f4"
+                                class="w-8 h-8 rounded-full ring-2 ring-white dark:ring-surface-dark-2"
+                                alt="User avatar" />
+                            <span
+                                class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-neon-500 ring-2 ring-white dark:ring-surface-dark-2"></span>
+                        </div>
+                        <div class="hidden lg:block text-left leading-tight">
+                            <p class="text-sm font-medium text-ink-light dark:text-ink-dark">Sara Ahmadi</p>
+                            <p class="text-xs text-ink-light/45 dark:text-ink-dark/45">System Admin</p>
+                        </div>
+                        <svg id="profile-chevron"
+                            class="hidden lg:block w-4 h-4 text-ink-light/40 dark:text-ink-dark/40 transition-transform duration-300"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </button>
+
+                    <div id="profile-menu" class="hidden absolute right-0 mt-2 w-56 rounded-2xl overflow-hidden
+                   bg-white dark:bg-surface-dark-2 border border-neon-500/10 dark:border-neon-400/10
+                   shadow-2xl shadow-neon-500/5 origin-top-right animate-fade-scale">
+                        <div class="px-4 py-3 border-b border-neon-500/10 dark:border-neon-400/10">
+                            <p class="text-sm font-medium text-ink-light dark:text-ink-dark">Sara Ahmadi</p>
+                            <p class="text-xs text-ink-light/45 dark:text-ink-dark/45 truncate">sara.ahmadi@example.com
+                            </p>
+                        </div>
+                        <nav class="py-1.5">
+                            <a href="#"
+                                class="group flex items-center gap-2.5 px-4 py-2 text-sm text-ink-light/80 dark:text-ink-dark/80 hover:bg-neon-500/5 hover:text-neon-600 dark:hover:text-neon-400 transition-colors duration-200">
+                                <svg class="group-hover:rotate-180 w-4 h-4 transition-transform" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="8" r="4" />
+                                    <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
+                                </svg>
+                                My Profile
+                            </a>
+                            <a href="#"
+                                class="flex items-center gap-2.5 px-4 py-2 text-sm text-ink-light/80 dark:text-ink-dark/80 hover:bg-neon-500/5 hover:text-neon-600 dark:hover:text-neon-400 transition-colors duration-200">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                    <path
+                                        d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.04 1.56V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 9 19.37a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.63 15a1.7 1.7 0 0 0-1.56-1.04H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.63 9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.63a1.7 1.7 0 0 0 1.04-1.56V3a2 2 0 1 1 4 0v.09A1.7 1.7 0 0 0 15 4.63a1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.37 9a1.7 1.7 0 0 0 1.56 1.04H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.51 1z" />
+                                </svg>
+                                Settings
+                            </a>
+                        </nav>
+                        <div class="py-1.5 border-t border-neon-500/10 dark:border-neon-400/10">
+                            <a href="#"
+                                class="flex items-center gap-2.5 px-4 py-2 text-sm text-red-500 hover:bg-red-500/5 transition-colors duration-200">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                    <path d="M16 17l5-5-5-5" />
+                                    <path d="M21 12H9" />
+                                </svg>
+                                Log out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+       SECTION: PRODUCT PAGE — FULL LAYOUT
+       Mirrors user.html structure: page title, top section
+       (Create New Product + Product Insights), Stats Cards,
+       Top Sellers/Low Stock Alerts (Newest/Oldest equivalent),
+       All Products table, mobile details modal.
+  ============================================================= -->
+    <main class="max-w-[1600px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
+
+        <!-- Page title -->
+        <section class="mb-6 animate-fade-in">
+            <h1 class="font-inter-semibold text-xl text-ink-light dark:text-ink-dark">Products</h1>
+            <p class="text-sm text-ink-light/45 dark:text-ink-dark/45 mt-1">Manage your catalog and keep track of
+                what's moving</p>
+        </section>
+
+        <!-- ============================================
+           STATS CARDS
+      ============================================= -->
+        <section class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 mt-5 xl:mt-20">
+
+            <div class="rounded-2xl bg-white dark:bg-surface-dark-2 border border-neon-500/10 dark:border-neon-400/10
+              shadow-lg shadow-neon-500/5 p-4 sm:p-5 animate-fade-in">
+                <div class="flex items-center justify-between mb-2 sm:mb-3">
+                    <span class="p-2 rounded-xl bg-neon-500/10 text-neon-600 dark:text-neon-400">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="7" width="18" height="13" rx="2" />
+                            <path d="M8 7V5a4 4 0 0 1 8 0v2" />
+                        </svg>
+                    </span>
+                    <span
+                        class="text-[10px] sm:text-xs font-medium text-neon-600 dark:text-neon-400 bg-neon-500/10 px-2 py-0.5 rounded-full">+8%</span>
+                </div>
+                <p class="font-inter-bold text-xl sm:text-2xl text-ink-light dark:text-ink-dark tabular">124</p>
+                <p class="text-xs sm:text-sm text-ink-light/45 dark:text-ink-dark/45 mt-0.5">Total Products</p>
+            </div>
+
+            <div class="rounded-2xl bg-white dark:bg-surface-dark-2 border border-neon-500/10 dark:border-neon-400/10
+              shadow-lg shadow-neon-500/5 p-4 sm:p-5 animate-fade-in">
+                <div class="flex items-center justify-between mb-2 sm:mb-3">
+                    <span class="p-2 rounded-xl bg-neon-500/10 text-neon-600 dark:text-neon-400">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                            <path d="M22 4 12 14.01l-3-3" />
+                        </svg>
+                    </span>
+                    <span
+                        class="text-[10px] sm:text-xs font-medium text-neon-600 dark:text-neon-400 bg-neon-500/10 px-2 py-0.5 rounded-full">+3%</span>
+                </div>
+                <p class="font-inter-bold text-xl sm:text-2xl text-ink-light dark:text-ink-dark tabular">98</p>
+                <p class="text-xs sm:text-sm text-ink-light/45 dark:text-ink-dark/45 mt-0.5">In Stock</p>
+            </div>
+
+            <div class="rounded-2xl bg-white dark:bg-surface-dark-2 border border-neon-500/10 dark:border-neon-400/10
+              shadow-lg shadow-neon-500/5 p-4 sm:p-5 animate-fade-in">
+                <div class="flex items-center justify-between mb-2 sm:mb-3">
+                    <span class="p-2 rounded-xl bg-amber-500/10 text-amber-500">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                            <line x1="12" y1="9" x2="12" y2="13" />
+                            <line x1="12" y1="17" x2="12.01" y2="17" />
+                        </svg>
+                    </span>
+                    <span
+                        class="text-[10px] sm:text-xs font-medium text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded-full">+2</span>
+                </div>
+                <p class="font-inter-bold text-xl sm:text-2xl text-ink-light dark:text-ink-dark tabular">19</p>
+                <p class="text-xs sm:text-sm text-ink-light/45 dark:text-ink-dark/45 mt-0.5">Low Stock</p>
+            </div>
+
+            <div class="rounded-2xl bg-white dark:bg-surface-dark-2 border border-neon-500/10 dark:border-neon-400/10
+              shadow-lg shadow-neon-500/5 p-4 sm:p-5 animate-fade-in">
+                <div class="flex items-center justify-between mb-2 sm:mb-3">
+                    <span class="p-2 rounded-xl bg-red-500/10 text-red-500">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="4.9" y1="4.9" x2="19.1" y2="19.1" />
+                        </svg>
+                    </span>
+                    <span
+                        class="text-[10px] sm:text-xs font-medium text-red-500 bg-red-500/10 px-2 py-0.5 rounded-full">+1</span>
+                </div>
+                <p class="font-inter-bold text-xl sm:text-2xl text-ink-light dark:text-ink-dark tabular">7</p>
+                <p class="text-xs sm:text-sm text-ink-light/45 dark:text-ink-dark/45 mt-0.5">Out of Stock</p>
+            </div>
+
+        </section>
+
+        <!-- ============================================
+           ALL PRODUCTS TABLE
+      ============================================= -->
+        <section id="products-table-section" class="mt-5 rounded-2xl bg-white dark:bg-surface-dark-2
+        border border-neon-500/10 dark:border-neon-400/10
+        shadow-xl shadow-neon-500/5 animate-fade-in">
+
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 pb-4">
+                <div class="flex items-center gap-2.5">
+                    <h2 class="font-inter-semibold text-[15px] text-ink-light dark:text-ink-dark">All Products</h2>
+                    <span
+                        class="text-xs font-medium text-neon-600 dark:text-neon-400 bg-neon-500/10 px-2 py-0.5 rounded-full tabular">124</span>
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-2.5">
+                    <div class="flex items-center gap-2.5">
+                        <div class="relative">
+                            <svg class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/35 dark:text-ink-dark/35"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="7"></circle>
+                                <path d="m21 21-4.3-4.3"></path>
+                            </svg>
+                            <input id="product-search" type="text" placeholder="Search products…" class="h-10 w-full sm:w-56 pl-9 pr-3.5 rounded-xl text-sm
+             bg-surface-light-2 dark:bg-surface-dark
+             border border-neon-500/10 dark:border-neon-400/10
+             text-ink-light dark:text-ink-dark placeholder:text-ink-light/35 dark:placeholder:text-ink-dark/35
+             outline-none focus:border-neon-500/40 dark:focus:border-neon-400/40 focus:shadow-neon-ring
+             transition-all duration-200">
+                        </div>
+                        <div class="relative shrink-0">
+                            <select id="category-filter" class="h-10 pl-3.5 pr-9 rounded-xl text-sm appearance-none
+             bg-surface-light-2 dark:bg-surface-dark
+             border border-neon-500/10 dark:border-neon-400/10
+             text-ink-light dark:text-ink-dark
+             outline-none focus:border-neon-500/40 dark:focus:border-neon-400/40 focus:shadow-neon-ring
+             transition-all duration-200">
+                                <option value="">All categories</option>
+                                <option>Electronics</option>
+                                <option>Accessories</option>
+                                <option>Home &amp; Living</option>
+                                <option>Apparel</option>
+                            </select>
+                            <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/40 dark:text-ink-dark/40"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <button type="button" id="open-new-product-modal" class="inline-flex items-center justify-center gap-2 h-10 px-4 rounded-xl text-sm font-medium text-white
+             bg-gradient-to-br from-neon-500 to-neon-700 shadow-neon-sm
+             hover:shadow-neon active:scale-[0.98] transition-all duration-200 shrink-0">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 5v14M5 12h14"></path>
+                        </svg>
+                        New Product
+                    </button>
+                </div>
+            </div>
+
+            <div class="thin-scroll overflow-x-auto border-t border-neon-500/10 dark:border-neon-400/10">
+                <table class="w-full sm:min-w-[760px] border-collapse">
+                    <thead>
+                        <tr class="border-b border-neon-500/10 dark:border-neon-400/10">
+                            <th
+                                class="text-left text-xs font-medium text-ink-light/40 dark:text-ink-dark/40 uppercase tracking-wide px-4 sm:px-5 py-3">
+                                Product</th>
+                            <th
+                                class="hidden sm:table-cell text-left text-xs font-medium text-ink-light/40 dark:text-ink-dark/40 uppercase tracking-wide px-5 py-3">
+                                Category</th>
+                            <th
+                                class="text-left text-xs font-medium text-ink-light/40 dark:text-ink-dark/40 uppercase tracking-wide px-4 sm:px-5 py-3">
+                                Price</th>
+                            <th
+                                class="hidden sm:table-cell text-left text-xs font-medium text-ink-light/40 dark:text-ink-dark/40 uppercase tracking-wide px-5 py-3">
+                                Stock</th>
+                            <th
+                                class="hidden sm:table-cell text-left text-xs font-medium text-ink-light/40 dark:text-ink-dark/40 uppercase tracking-wide px-5 py-3">
+                                Status</th>
+                            <th
+                                class="text-right text-xs font-medium text-ink-light/40 dark:text-ink-dark/40 uppercase tracking-wide px-4 sm:px-5 py-3">
+                                Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="products-tbody" class="divide-y divide-neon-500/5 dark:divide-neon-400/5">
+
+                        <!-- Row 1 -->
+                        <tr class="product-row transition-all duration-300 hover:bg-neon-500/5">
+                            <td class="px-4 sm:px-5 py-3 md:py-3.5" data-cell="name">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-linear-to-br from-neon-400/20 to-neon-700/20 dark:from-neon-400/10 dark:to-neon-700/10 grid place-items-center shrink-0">
+                                        <svg class="size-3.5 md:size-4.5 text-neon-600 dark:text-neon-400"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="7" width="18" height="13" rx="2" />
+                                            <path d="M8 7V5a4 4 0 0 1 8 0v2" />
+                                        </svg>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <p
+                                            class="text-xs md:text-sm font-inter-medium text-ink-light dark:text-ink-dark truncate">
+                                            Wireless Mouse Pro</p>
+                                        <p class="text-[10px] md:text-xs text-ink-light/45 dark:text-ink-dark/45"
+                                            data-cell="sku">
+                                            SKU-1042</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="hidden sm:table-cell px-5 py-3.5 text-sm text-ink-light/70 dark:text-ink-dark/70"
+                                data-cell="category">Electronics</td>
+                            <td class="px-3 sm:px-5 py-3 md:py-3.5 text-[11px] md:text-sm font-inter-medium text-ink-light dark:text-ink-dark tabular"
+                                data-cell="price">$49.00</td>
+                            <td class="hidden sm:table-cell px-5 py-3.5 text-sm text-ink-light/70 dark:text-ink-dark/70 tabular"
+                                data-cell="stock">128</td>
+                            <td class="hidden sm:table-cell px-5 py-3.5" data-cell="status">
+                                <span
+                                    class="inline-flex items-center gap-1.5 text-xs font-medium text-neon-600 dark:text-neon-400 bg-neon-500/10 px-2.5 py-1 rounded-full">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-neon-500"></span>
+                                    In Stock
+                                </span>
+                            </td>
+                            <td class="px-3 sm:px-5 py-3 md:py-3.5">
+                                <div class="flex items-center justify-end">
+                                    <div class="actions-default flex items-center gap-1">
+                                        <button type="button" data-action="view-details" title="Product details" class="sm:hidden w-9 h-9 grid place-items-center rounded-lg
+                     text-ink-light/60 dark:text-ink-dark/60
+                     hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+                     transition-all duration-200 active:scale-90">
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                                                <circle cx="12" cy="12" r="3" />
+                                            </svg>
+                                        </button>
+                                        <button type="button" data-action="edit" title="Edit product" class="w-9 h-9 grid place-items-center rounded-lg
+                     text-ink-light/60 dark:text-ink-dark/60
+                     hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+                     transition-all duration-200 active:scale-90">
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                                <path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                            </svg>
+                                        </button>
+                                        <button type="button" data-action="request-delete" title="Delete product" class="w-9 h-9 grid place-items-center rounded-lg
+                     text-ink-light/60 dark:text-ink-dark/60
+                     hover:bg-red-500/10 hover:text-red-500
+                     transition-all duration-200 active:scale-90">
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M3 6h18" />
+                                                <path
+                                                    d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6" />
+                                                <path d="M10 11v6M14 11v6" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div
+                                        class="actions-confirm hidden items-center gap-2 opacity-0 transition-opacity duration-200">
+                                        <span class="text-xs text-ink-light/55 dark:text-ink-dark/55">Delete
+                                            item?</span>
+                                        <button type="button" data-action="cancel-delete" class="h-8 px-3 rounded-lg text-xs font-medium
+                     text-ink-light/70 dark:text-ink-dark/70
+                     border border-neon-500/10 dark:border-neon-400/10
+                     hover:bg-neon-500/5 transition-colors duration-200">
+                                            Cancel
+                                        </button>
+                                        <button type="button" data-action="confirm-delete" class="h-8 px-3 rounded-lg text-xs font-medium text-white
+                     bg-red-500 hover:bg-red-600
+                     transition-colors duration-200">
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Row 2 -->
+                        <tr class="product-row transition-all duration-300 hover:bg-neon-500/5">
+                            <td class="px-4 sm:px-5 py-3 md:py-3.5" data-cell="name">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-linear-to-br from-neon-400/20 to-neon-700/20 dark:from-neon-400/10 dark:to-neon-700/10 grid place-items-center shrink-0">
+                                        <svg class="size-3.5 md:size-4.5 text-neon-600 dark:text-neon-400"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="4" y="4" width="16" height="16" rx="3" />
+                                            <circle cx="9" cy="9" r="1.5" />
+                                            <path d="m5 17 4-4 3 3 5-6 3 4" />
+                                        </svg>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <p
+                                            class="text-xs md:text-sm font-inter-medium text-ink-light dark:text-ink-dark truncate">
+                                            Ceramic Desk Lamp</p>
+                                        <p class="text-[10px] md:text-xs text-ink-light/45 dark:text-ink-dark/45"
+                                            data-cell="sku">
+                                            SKU-0917</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="hidden sm:table-cell px-5 py-3.5 text-sm text-ink-light/70 dark:text-ink-dark/70"
+                                data-cell="category">Home &amp; Living</td>
+                            <td class="px-3 sm:px-5 py-3 md:py-3.5 text-[11px] md:text-sm font-inter-medium text-ink-light dark:text-ink-dark tabular"
+                                data-cell="price">$76.00</td>
+                            <td class="hidden sm:table-cell px-5 py-3.5 text-sm text-ink-light/70 dark:text-ink-dark/70 tabular"
+                                data-cell="stock">312</td>
+                            <td class="hidden sm:table-cell px-5 py-3.5" data-cell="status">
+                                <span
+                                    class="inline-flex items-center gap-1.5 text-xs font-medium text-neon-600 dark:text-neon-400 bg-neon-500/10 px-2.5 py-1 rounded-full">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-neon-500"></span>
+                                    In Stock
+                                </span>
+                            </td>
+                            <td class="px-3 sm:px-5 py-3 md:py-3.5">
+                                <div class="flex items-center justify-end">
+                                    <div class="actions-default flex items-center gap-1">
+                                        <button type="button" data-action="view-details" title="Product details" class="sm:hidden w-9 h-9 grid place-items-center rounded-lg
+                     text-ink-light/60 dark:text-ink-dark/60
+                     hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+                     transition-all duration-200 active:scale-90">
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                                                <circle cx="12" cy="12" r="3" />
+                                            </svg>
+                                        </button>
+                                        <button type="button" data-action="edit" title="Edit product" class="w-9 h-9 grid place-items-center rounded-lg
+                     text-ink-light/60 dark:text-ink-dark/60
+                     hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+                     transition-all duration-200 active:scale-90">
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                                <path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                            </svg>
+                                        </button>
+                                        <button type="button" data-action="request-delete" title="Delete product" class="w-9 h-9 grid place-items-center rounded-lg
+                     text-ink-light/60 dark:text-ink-dark/60
+                     hover:bg-red-500/10 hover:text-red-500
+                     transition-all duration-200 active:scale-90">
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M3 6h18" />
+                                                <path
+                                                    d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6" />
+                                                <path d="M10 11v6M14 11v6" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div
+                                        class="actions-confirm hidden items-center gap-2 opacity-0 transition-opacity duration-200">
+                                        <span class="text-xs text-ink-light/55 dark:text-ink-dark/55">Delete
+                                            item?</span>
+                                        <button type="button" data-action="cancel-delete" class="h-8 px-3 rounded-lg text-xs font-medium
+                     text-ink-light/70 dark:text-ink-dark/70
+                     border border-neon-500/10 dark:border-neon-400/10
+                     hover:bg-neon-500/5 transition-colors duration-200">
+                                            Cancel
+                                        </button>
+                                        <button type="button" data-action="confirm-delete" class="h-8 px-3 rounded-lg text-xs font-medium text-white
+                     bg-red-500 hover:bg-red-600
+                     transition-colors duration-200">
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Row 3 -->
+                        <tr class="product-row transition-all duration-300 hover:bg-neon-500/5">
+                            <td class="px-4 sm:px-5 py-3 md:py-3.5" data-cell="name">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-linear-to-br from-neon-400/20 to-neon-700/20 dark:from-neon-400/10 dark:to-neon-700/10 grid place-items-center shrink-0">
+                                        <svg class="size-3.5 md:size-4.5 text-neon-600 dark:text-neon-400"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M20.4 14.5 16 10 4 20" />
+                                            <circle cx="8.5" cy="8.5" r="1.5" />
+                                            <path
+                                                d="M20 4 4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z" />
+                                        </svg>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <p
+                                            class="text-xs md:text-sm font-inter-medium text-ink-light dark:text-ink-dark truncate">
+                                            Canvas Tote Bag</p>
+                                        <p class="text-[10px] md:text-xs text-ink-light/45 dark:text-ink-dark/45"
+                                            data-cell="sku">
+                                            SKU-0755</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="hidden sm:table-cell px-5 py-3.5 text-sm text-ink-light/70 dark:text-ink-dark/70"
+                                data-cell="category">Apparel</td>
+                            <td class="px-3 sm:px-5 py-3 md:py-3.5 text-[11px] md:text-sm font-inter-medium text-ink-light dark:text-ink-dark tabular"
+                                data-cell="price">$22.00</td>
+                            <td class="hidden sm:table-cell px-5 py-3.5 text-sm text-ink-light/70 dark:text-ink-dark/70 tabular"
+                                data-cell="stock">18</td>
+                            <td class="hidden sm:table-cell px-5 py-3.5" data-cell="status">
+                                <span
+                                    class="inline-flex items-center gap-1.5 text-xs font-medium text-amber-500 bg-amber-500/10 px-2.5 py-1 rounded-full">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                                    Low Stock
+                                </span>
+                            </td>
+                            <td class="px-3 sm:px-5 py-3 md:py-3.5">
+                                <div class="flex items-center justify-end">
+                                    <div class="actions-default flex items-center gap-1">
+                                        <button type="button" data-action="view-details" title="Product details" class="sm:hidden w-9 h-9 grid place-items-center rounded-lg
+                     text-ink-light/60 dark:text-ink-dark/60
+                     hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+                     transition-all duration-200 active:scale-90">
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                                                <circle cx="12" cy="12" r="3" />
+                                            </svg>
+                                        </button>
+                                        <button type="button" data-action="edit" title="Edit product" class="w-9 h-9 grid place-items-center rounded-lg
+                     text-ink-light/60 dark:text-ink-dark/60
+                     hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+                     transition-all duration-200 active:scale-90">
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                                <path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                            </svg>
+                                        </button>
+                                        <button type="button" data-action="request-delete" title="Delete product" class="w-9 h-9 grid place-items-center rounded-lg
+                     text-ink-light/60 dark:text-ink-dark/60
+                     hover:bg-red-500/10 hover:text-red-500
+                     transition-all duration-200 active:scale-90">
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M3 6h18" />
+                                                <path
+                                                    d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6" />
+                                                <path d="M10 11v6M14 11v6" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div
+                                        class="actions-confirm hidden items-center gap-2 opacity-0 transition-opacity duration-200">
+                                        <span class="text-xs text-ink-light/55 dark:text-ink-dark/55">Delete
+                                            item?</span>
+                                        <button type="button" data-action="cancel-delete" class="h-8 px-3 rounded-lg text-xs font-medium
+                     text-ink-light/70 dark:text-ink-dark/70
+                     border border-neon-500/10 dark:border-neon-400/10
+                     hover:bg-neon-500/5 transition-colors duration-200">
+                                            Cancel
+                                        </button>
+                                        <button type="button" data-action="confirm-delete" class="h-8 px-3 rounded-lg text-xs font-medium text-white
+                     bg-red-500 hover:bg-red-600
+                     transition-colors duration-200">
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Row 4 -->
+                        <tr class="product-row transition-all duration-300 hover:bg-neon-500/5">
+                            <td class="px-4 sm:px-5 py-3 md:py-3.5" data-cell="name">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-linear-to-br from-neon-400/20 to-neon-700/20 dark:from-neon-400/10 dark:to-neon-700/10 grid place-items-center shrink-0">
+                                        <svg class="size-3.5 md:size-4.5 text-neon-600 dark:text-neon-400"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M6 9V2h12v7" />
+                                            <path d="M6 18v4h12v-4" />
+                                            <rect x="4" y="9" width="16" height="9" rx="1" />
+                                        </svg>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <p
+                                            class="text-xs md:text-sm font-inter-medium text-ink-light dark:text-ink-dark truncate">
+                                            Matte Phone Case</p>
+                                        <p class="text-[10px] md:text-xs text-ink-light/45 dark:text-ink-dark/45"
+                                            data-cell="sku">
+                                            SKU-0631</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="hidden sm:table-cell px-5 py-3.5 text-sm text-ink-light/70 dark:text-ink-dark/70"
+                                data-cell="category">Accessories</td>
+                            <td class="px-3 sm:px-5 py-3 md:py-3.5 text-[11px] md:text-sm font-inter-medium text-ink-light dark:text-ink-dark tabular"
+                                data-cell="price">$14.00</td>
+                            <td class="hidden sm:table-cell px-5 py-3.5 text-sm text-ink-light/70 dark:text-ink-dark/70 tabular"
+                                data-cell="stock">0</td>
+                            <td class="hidden sm:table-cell px-5 py-3.5" data-cell="status">
+                                <span
+                                    class="inline-flex items-center gap-1.5 text-xs font-medium text-red-500 bg-red-500/10 px-2.5 py-1 rounded-full">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                                    Out of Stock
+                                </span>
+                            </td>
+                            <td class="px-3 sm:px-5 py-3 md:py-3.5">
+                                <div class="flex items-center justify-end">
+                                    <div class="actions-default flex items-center gap-1">
+                                        <button type="button" data-action="view-details" title="Product details" class="sm:hidden w-9 h-9 grid place-items-center rounded-lg
+                     text-ink-light/60 dark:text-ink-dark/60
+                     hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+                     transition-all duration-200 active:scale-90">
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                                                <circle cx="12" cy="12" r="3" />
+                                            </svg>
+                                        </button>
+                                        <button type="button" data-action="edit" title="Edit product" class="w-9 h-9 grid place-items-center rounded-lg
+                     text-ink-light/60 dark:text-ink-dark/60
+                     hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+                     transition-all duration-200 active:scale-90">
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                                <path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                            </svg>
+                                        </button>
+                                        <button type="button" data-action="request-delete" title="Delete product" class="w-9 h-9 grid place-items-center rounded-lg
+                     text-ink-light/60 dark:text-ink-dark/60
+                     hover:bg-red-500/10 hover:text-red-500
+                     transition-all duration-200 active:scale-90">
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M3 6h18" />
+                                                <path
+                                                    d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6" />
+                                                <path d="M10 11v6M14 11v6" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div
+                                        class="actions-confirm hidden items-center gap-2 opacity-0 transition-opacity duration-200">
+                                        <span class="text-xs text-ink-light/55 dark:text-ink-dark/55">Delete
+                                            item?</span>
+                                        <button type="button" data-action="cancel-delete" class="h-8 px-3 rounded-lg text-xs font-medium
+                     text-ink-light/70 dark:text-ink-dark/70
+                     border border-neon-500/10 dark:border-neon-400/10
+                     hover:bg-neon-500/5 transition-colors duration-200">
+                                            Cancel
+                                        </button>
+                                        <button type="button" data-action="confirm-delete" class="h-8 px-3 rounded-lg text-xs font-medium text-white
+                     bg-red-500 hover:bg-red-600
+                     transition-colors duration-200">
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Row 5 -->
+                        <tr class="product-row transition-all duration-300 hover:bg-neon-500/5">
+                            <td class="px-4 sm:px-5 py-3 md:py-3.5" data-cell="name">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-linear-to-br from-neon-400/20 to-neon-700/20 dark:from-neon-400/10 dark:to-neon-700/10 grid place-items-center shrink-0">
+                                        <svg class="size-3.5 md:size-4.5 text-neon-600 dark:text-neon-400"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M12 2 2 7l10 5 10-5-10-5z" />
+                                            <path d="m2 17 10 5 10-5M2 12l10 5 10-5" />
+                                        </svg>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <p
+                                            class="text-xs md:text-sm font-inter-medium text-ink-light dark:text-ink-dark truncate">
+                                            Mechanical Keyboard 65%</p>
+                                        <p class="text-[10px] md:text-xs text-ink-light/45 dark:text-ink-dark/45"
+                                            data-cell="sku">
+                                            SKU-1101</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="hidden sm:table-cell px-5 py-3.5 text-sm text-ink-light/70 dark:text-ink-dark/70"
+                                data-cell="category">Electronics</td>
+                            <td class="px-3 sm:px-5 py-3 md:py-3.5 text-[11px] md:text-sm font-inter-medium text-ink-light dark:text-ink-dark tabular"
+                                data-cell="price">$119.00</td>
+                            <td class="hidden sm:table-cell px-5 py-3.5 text-sm text-ink-light/70 dark:text-ink-dark/70 tabular"
+                                data-cell="stock">64</td>
+                            <td class="hidden sm:table-cell px-5 py-3.5" data-cell="status">
+                                <span
+                                    class="inline-flex items-center gap-1.5 text-xs font-medium text-neon-600 dark:text-neon-400 bg-neon-500/10 px-2.5 py-1 rounded-full">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-neon-500"></span>
+                                    In Stock
+                                </span>
+                            </td>
+                            <td class="px-3 sm:px-5 py-3 md:py-3.5">
+                                <div class="flex items-center justify-end">
+                                    <div class="actions-default flex items-center gap-1">
+                                        <button type="button" data-action="view-details" title="Product details" class="sm:hidden w-9 h-9 grid place-items-center rounded-lg
+                     text-ink-light/60 dark:text-ink-dark/60
+                     hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+                     transition-all duration-200 active:scale-90">
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                                                <circle cx="12" cy="12" r="3" />
+                                            </svg>
+                                        </button>
+                                        <button type="button" data-action="edit" title="Edit product" class="w-9 h-9 grid place-items-center rounded-lg
+                     text-ink-light/60 dark:text-ink-dark/60
+                     hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+                     transition-all duration-200 active:scale-90">
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                                <path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                            </svg>
+                                        </button>
+                                        <button type="button" data-action="request-delete" title="Delete product" class="w-9 h-9 grid place-items-center rounded-lg
+                     text-ink-light/60 dark:text-ink-dark/60
+                     hover:bg-red-500/10 hover:text-red-500
+                     transition-all duration-200 active:scale-90">
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M3 6h18" />
+                                                <path
+                                                    d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6" />
+                                                <path d="M10 11v6M14 11v6" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div
+                                        class="actions-confirm hidden items-center gap-2 opacity-0 transition-opacity duration-200">
+                                        <span class="text-xs text-ink-light/55 dark:text-ink-dark/55">Delete
+                                            item?</span>
+                                        <button type="button" data-action="cancel-delete" class="h-8 px-3 rounded-lg text-xs font-medium
+                     text-ink-light/70 dark:text-ink-dark/70
+                     border border-neon-500/10 dark:border-neon-400/10
+                     hover:bg-neon-500/5 transition-colors duration-200">
+                                            Cancel
+                                        </button>
+                                        <button type="button" data-action="confirm-delete" class="h-8 px-3 rounded-lg text-xs font-medium text-white
+                     bg-red-500 hover:bg-red-600
+                     transition-colors duration-200">
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div
+                class="flex flex-col sm:flex-row items-center justify-between gap-3 px-5 py-4 border-t border-neon-500/10 dark:border-neon-400/10">
+                <p class="text-xs text-ink-light/45 dark:text-ink-dark/45 tabular">Showing 1–5 of 124 products</p>
+                <div class="flex items-center gap-1.5">
+                    <button type="button" class="w-9 h-9 grid place-items-center rounded-lg text-ink-light/50 dark:text-ink-dark/50
+           hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+           transition-all duration-200 disabled:opacity-30 disabled:pointer-events-none" disabled>
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m15 18-6-6 6-6" />
+                        </svg>
+                    </button>
+                    <button type="button"
+                        class="w-9 h-9 grid place-items-center rounded-lg text-sm font-medium text-white bg-gradient-to-br from-neon-500 to-neon-700 shadow-neon-sm">1</button>
+                    <button type="button"
+                        class="w-9 h-9 grid place-items-center rounded-lg text-sm font-medium text-ink-light/60 dark:text-ink-dark/60 hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400 transition-all duration-200">2</button>
+                    <button type="button"
+                        class="w-9 h-9 grid place-items-center rounded-lg text-sm font-medium text-ink-light/60 dark:text-ink-dark/60 hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400 transition-all duration-200">3</button>
+                    <span class="px-1 text-ink-light/30 dark:text-ink-dark/30">…</span>
+                    <button type="button"
+                        class="w-9 h-9 grid place-items-center rounded-lg text-sm font-medium text-ink-light/60 dark:text-ink-dark/60 hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400 transition-all duration-200">25</button>
+                    <button type="button" class="w-9 h-9 grid place-items-center rounded-lg text-ink-light/50 dark:text-ink-dark/50
+           hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+           transition-all duration-200">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m9 18 6-6-6-6" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ============================================
+           TOP SELLERS & LOW STOCK ALERTS
+      ============================================= -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 mt-5">
+
+            <!-- Top Sellers -->
+            <div class="rounded-2xl border border-neon-500/10 dark:border-neon-400/10
+              bg-white dark:bg-surface-dark-2 shadow-lg shadow-neon-500/5
+              p-4 sm:p-5 lg:p-6 flex flex-col justify-between
+              transition-colors duration-500 animate-fade-in">
+                <div>
+                    <div
+                        class="flex items-center justify-between pb-3 sm:pb-4 border-b border-neon-500/10 dark:border-neon-400/10">
+                        <div class="min-w-0">
+                            <h3 class="font-inter-semibold text-sm sm:text-base text-ink-light dark:text-ink-dark">
+                                Top Sellers
+                            </h3>
+                            <p
+                                class="font-inter-regular text-[11px] sm:text-xs text-ink-light/45 dark:text-ink-dark/45 mt-0.5">
+                                Best performing products
+                            </p>
+                        </div>
+                        <span class="p-1.5 sm:p-2 rounded-xl bg-neon-500/10 text-neon-600 dark:text-neon-400 shrink-0">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                                <path d="M3 6h18" />
+                                <path d="M16 10a4 4 0 0 1-8 0" />
+                            </svg>
+                        </span>
+                    </div>
+
+                    <ul class="mt-3 sm:mt-4 divide-y divide-neon-500/5 dark:divide-neon-400/5">
+                        <li class="py-2.5 sm:py-3 flex items-center justify-between gap-3 group cursor-pointer">
+                            <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                                <div
+                                    class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-neon-500/10 dark:bg-neon-400/10 flex items-center justify-center shrink-0 border border-neon-500/20 group-hover:scale-105 transition-transform duration-200">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-neon-600 dark:text-neon-400"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="4" y="4" width="16" height="16" rx="3" />
+                                        <circle cx="9" cy="9" r="1.5" />
+                                        <path d="m5 17 4-4 3 3 5-6 3 4" />
+                                    </svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <p
+                                        class="font-inter-medium text-xs sm:text-sm text-ink-light dark:text-ink-dark truncate group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
+                                        Ceramic Desk Lamp
+                                    </p>
+                                    <p
+                                        class="font-inter-regular text-[11px] sm:text-xs text-ink-light/45 dark:text-ink-dark/45 tabular">
+                                        312 sold
+                                    </p>
+                                </div>
+                            </div>
+                            <span
+                                class="font-inter-bold text-[11px] sm:text-xs text-neon-600 dark:text-neon-400 tabular shrink-0">
+                                $76.00
+                            </span>
+                        </li>
+
+                        <li class="py-2.5 sm:py-3 flex items-center justify-between gap-3 group cursor-pointer">
+                            <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                                <div
+                                    class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-neon-500/10 dark:bg-neon-400/10 flex items-center justify-center shrink-0 border border-neon-500/20 group-hover:scale-105 transition-transform duration-200">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-neon-600 dark:text-neon-400"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="7" width="18" height="13" rx="2" />
+                                        <path d="M8 7V5a4 4 0 0 1 8 0v2" />
+                                    </svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <p
+                                        class="font-inter-medium text-xs sm:text-sm text-ink-light dark:text-ink-dark truncate group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
+                                        Wireless Mouse Pro
+                                    </p>
+                                    <p
+                                        class="font-inter-regular text-[11px] sm:text-xs text-ink-light/45 dark:text-ink-dark/45 tabular">
+                                        128 sold
+                                    </p>
+                                </div>
+                            </div>
+                            <span
+                                class="font-inter-bold text-[11px] sm:text-xs text-neon-600 dark:text-neon-400 tabular shrink-0">
+                                $49.00
+                            </span>
+                        </li>
+
+                        <li class="py-2.5 sm:py-3 flex items-center justify-between gap-3 group cursor-pointer">
+                            <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                                <div
+                                    class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-neon-500/10 dark:bg-neon-400/10 flex items-center justify-center shrink-0 border border-neon-500/20 group-hover:scale-105 transition-transform duration-200">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-neon-600 dark:text-neon-400"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 2 2 7l10 5 10-5-10-5z" />
+                                        <path d="m2 17 10 5 10-5M2 12l10 5 10-5" />
+                                    </svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <p
+                                        class="font-inter-medium text-xs sm:text-sm text-ink-light dark:text-ink-dark truncate group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
+                                        Mechanical Keyboard 65%
+                                    </p>
+                                    <p
+                                        class="font-inter-regular text-[11px] sm:text-xs text-ink-light/45 dark:text-ink-dark/45 tabular">
+                                        64 sold
+                                    </p>
+                                </div>
+                            </div>
+                            <span
+                                class="font-inter-bold text-[11px] sm:text-xs text-neon-600 dark:text-neon-400 tabular shrink-0">
+                                $119.00
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="#"
+                    class="mt-4 sm:mt-6 w-full py-2 sm:py-2.5 text-center font-inter-medium text-[11px] sm:text-xs rounded-xl bg-neon-500/10 hover:bg-neon-500 text-neon-600 dark:text-neon-400 hover:text-white dark:hover:text-white transition-all duration-300">
+                    View All Products
+                </a>
+            </div>
+
+            <!-- Low Stock Alerts -->
+            <div class="rounded-2xl border border-neon-500/10 dark:border-neon-400/10
+              bg-white dark:bg-surface-dark-2 shadow-lg shadow-neon-500/5
+              p-4 sm:p-5 lg:p-6 flex flex-col justify-between
+              transition-colors duration-500 animate-fade-in">
+                <div>
+                    <div
+                        class="flex items-center justify-between pb-3 sm:pb-4 border-b border-neon-500/10 dark:border-neon-400/10">
+                        <div class="min-w-0">
+                            <h3 class="font-inter-semibold text-sm sm:text-base text-ink-light dark:text-ink-dark">
+                                Low Stock Alerts
+                            </h3>
+                            <p
+                                class="font-inter-regular text-[11px] sm:text-xs text-ink-light/45 dark:text-ink-dark/45 mt-0.5">
+                                Needs restocking soon
+                            </p>
+                        </div>
+                        <span class="p-1.5 sm:p-2 rounded-xl bg-amber-500/10 text-amber-500 shrink-0">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                                <line x1="12" y1="9" x2="12" y2="13" />
+                                <line x1="12" y1="17" x2="12.01" y2="17" />
+                            </svg>
+                        </span>
+                    </div>
+
+                    <ul class="mt-3 sm:mt-4 divide-y divide-neon-500/5 dark:divide-neon-400/5">
+                        <li class="py-2.5 sm:py-3 flex items-center justify-between gap-3 group cursor-pointer">
+                            <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                                <div
+                                    class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-500/10 flex items-center justify-center shrink-0 border border-amber-500/20 group-hover:scale-105 transition-transform duration-200">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M20.4 14.5 16 10 4 20" />
+                                        <circle cx="8.5" cy="8.5" r="1.5" />
+                                        <path
+                                            d="M20 4 4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z" />
+                                    </svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <p
+                                        class="font-inter-medium text-xs sm:text-sm text-ink-light dark:text-ink-dark truncate group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
+                                        Canvas Tote Bag
+                                    </p>
+                                    <p
+                                        class="font-inter-regular text-[11px] sm:text-xs text-ink-light/45 dark:text-ink-dark/45 tabular">
+                                        Apparel · SKU-0755
+                                    </p>
+                                </div>
+                            </div>
+                            <span
+                                class="font-inter-bold text-[11px] sm:text-xs text-amber-500 tabular shrink-0 bg-amber-500/10 px-2 py-0.5 rounded-full">
+                                18 left
+                            </span>
+                        </li>
+
+                        <li class="py-2.5 sm:py-3 flex items-center justify-between gap-3 group cursor-pointer">
+                            <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                                <div
+                                    class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-red-500/10 flex items-center justify-center shrink-0 border border-red-500/20 group-hover:scale-105 transition-transform duration-200">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-red-500" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M6 9V2h12v7" />
+                                        <path d="M6 18v4h12v-4" />
+                                        <rect x="4" y="9" width="16" height="9" rx="1" />
+                                    </svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <p
+                                        class="font-inter-medium text-xs sm:text-sm text-ink-light dark:text-ink-dark truncate group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
+                                        Matte Phone Case
+                                    </p>
+                                    <p
+                                        class="font-inter-regular text-[11px] sm:text-xs text-ink-light/45 dark:text-ink-dark/45 tabular">
+                                        Accessories · SKU-0631
+                                    </p>
+                                </div>
+                            </div>
+                            <span
+                                class="font-inter-bold text-[11px] sm:text-xs text-red-500 tabular shrink-0 bg-red-500/10 px-2 py-0.5 rounded-full">
+                                0 left
+                            </span>
+                        </li>
+
+                        <li class="py-2.5 sm:py-3 flex items-center justify-between gap-3 group cursor-pointer">
+                            <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                                <div
+                                    class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-500/10 flex items-center justify-center shrink-0 border border-amber-500/20 group-hover:scale-105 transition-transform duration-200">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path
+                                            d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+                                    </svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <p
+                                        class="font-inter-medium text-xs sm:text-sm text-ink-light dark:text-ink-dark truncate group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
+                                        Running Shoes Air
+                                    </p>
+                                    <p
+                                        class="font-inter-regular text-[11px] sm:text-xs text-ink-light/45 dark:text-ink-dark/45 tabular">
+                                        Apparel · SKU-0511
+                                    </p>
+                                </div>
+                            </div>
+                            <span
+                                class="font-inter-bold text-[11px] sm:text-xs text-amber-500 tabular shrink-0 bg-amber-500/10 px-2 py-0.5 rounded-full">
+                                9 left
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="#"
+                    class="mt-4 sm:mt-6 w-full py-2 sm:py-2.5 text-center font-inter-medium text-[11px] sm:text-xs rounded-xl bg-neon-500/10 hover:bg-neon-500 text-neon-600 dark:text-neon-400 hover:text-white dark:hover:text-white transition-all duration-300">
+                    View All Products
+                </a>
+            </div>
+
+        </section>
+
+
+
+
+    </main>
+    <footer class="mt-8 border-t border-neon-500/10 dark:border-neon-400/10 
+                       bg-white/50 dark:bg-surface-dark-2/50 backdrop-blur-md 
+                       transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+
+                <div class="flex items-center gap-2 text-center sm:text-left">
+                    <span class="font-inter-semibold text-sm text-ink-light dark:text-ink-dark">
+                        SportsStore
+                    </span>
+                    <span class="text-ink-light/20 dark:text-ink-dark/20">•</span>
+                    <p class="font-inter-regular text-xs text-ink-light/45 dark:text-ink-dark/45">
+                        © 2026 All rights reserved. Built with Tailwind CSS.
+                    </p>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <a href="#" aria-label="Instagram" class="hover:scale-110 hover:-translate-y-1 p-2 rounded-xl text-ink-light/60 dark:text-ink-dark/60 
+                                  hover:text-neon-600 dark:hover:text-neon-400 
+                                  hover:bg-neon-500/10 
+                                  border border-transparent hover:border-neon-500/20 
+                                  transition-all duration-300">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" viewBox="0 0 24 24">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Twitter" class="hover:scale-110 hover:-translate-y-1 p-2 rounded-xl text-ink-light/60 dark:text-ink-dark/60 
+                                  hover:text-neon-600 dark:hover:text-neon-400 
+                                  hover:bg-neon-500/10 
+                                  border border-transparent hover:border-neon-500/20 
+                                  transition-all duration-300">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" viewBox="0 0 24 24">
+                            <path
+                                d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Telegram" class="hover:scale-110 hover:-translate-y-1 p-2 rounded-xl text-ink-light/60 dark:text-ink-dark/60 
+                                  hover:text-neon-600 dark:hover:text-neon-400 
+                                  hover:bg-neon-500/10 
+                                  border border-transparent hover:border-neon-500/20 
+                                  transition-all duration-300">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" viewBox="0 0 24 24">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="GitHub" class="hover:scale-110 hover:-translate-y-1 p-2 rounded-xl text-ink-light/60 dark:text-ink-dark/60 
+                                  hover:text-neon-600 dark:hover:text-neon-400 
+                                  hover:bg-neon-500/10 
+                                  border border-transparent hover:border-neon-500/20 
+                                  transition-all duration-300">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" viewBox="0 0 24 24">
+                            <path
+                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script src="./js/shared.js/header.js"></script>
+</body>
+<!-- ============================================================
+   SECTION: NEW PRODUCT MODAL
+============================================================= -->
+<div id="new-product-modal" class="hidden justify-center items-center fixed inset-0 z-60  p-4">
+    <div id="new-product-backdrop" class="absolute inset-0 bg-ink-light/40 dark:bg-black/60 backdrop-blur-sm"></div>
+
+    <div class="relative w-full max-w-md max-h-[90vh] overflow-y-auto thin-scroll rounded-2xl
+        bg-white dark:bg-surface-dark-2 border border-neon-500/10 dark:border-neon-400/10
+        shadow-2xl shadow-neon-500/10 animate-fade-scale">
+
+        <!-- Header -->
+        <div
+            class="flex items-center justify-between gap-3 px-5 py-4 border-b border-neon-500/10 dark:border-neon-400/10">
+            <div class="flex items-center gap-3 min-w-0">
+                <div class="relative shrink-0 w-9 h-9 rounded-xl bg-linear-to-br from-neon-400 to-neon-700
+                  shadow-neon-sm grid place-items-center">
+                    <span class="absolute inset-0 rounded-xl bg-neon-500/30 blur-md"></span>
+                    <svg class="relative w-4.5 h-4.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 7 12 3 4 7v10l8 4 8-4V7z" />
+                        <path d="M12 12 4 7M12 12v9M12 12l8-5" />
+                    </svg>
+                </div>
+                <h3 class="font-inter-semibold text-[15px] text-ink-light dark:text-ink-dark">New Product</h3>
+            </div>
+            <button type="button" id="new-product-close" class="w-9 h-9 grid place-items-center rounded-lg
+                text-ink-light/60 dark:text-ink-dark/60 hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+                transition-all duration-200 active:scale-90" aria-label="Close">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Form -->
+        <form id="new-product-form" class="p-5 space-y-4">
+
+            <!-- Image dropzone -->
+            <div>
+                <label class="block text-xs font-medium text-ink-light/60 dark:text-ink-dark/60 mb-1.5">
+                    Product image
+                </label>
+                <button type="button" id="np-dropzone" class="w-full rounded-xl border-2 border-dashed border-neon-500/20 dark:border-neon-400/20
+                 hover:border-neon-500/50 dark:hover:border-neon-400/50 hover:bg-neon-500/5
+                 transition-all duration-200 py-5 flex flex-col items-center justify-center gap-2 group">
+                    <img id="np-dropzone-preview" class="hidden w-14 h-14 rounded-lg object-cover" alt="" />
+                    <svg id="np-dropzone-icon"
+                        class="w-6 h-6 text-ink-light/30 dark:text-ink-dark/30 group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors duration-200"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M12 16V4M12 4 7 9M12 4l5 5" />
+                        <path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" />
+                    </svg>
+                    <span id="np-dropzone-label" class="text-xs text-ink-light/45 dark:text-ink-dark/45">
+                        Click to upload, or drag and drop
+                    </span>
+                </button>
+                <input type="file" id="np-dropzone-input" accept="image/*" class="hidden" />
+            </div>
+
+            <!-- Product name -->
+            <div>
+                <label for="np-name" class="block text-xs font-medium text-ink-light/60 dark:text-ink-dark/60 mb-1.5">
+                    Product name
+                </label>
+                <input id="np-name" name="np-name" type="text" placeholder="e.g. Wireless Mouse" class="w-full h-11 px-3.5 rounded-xl text-sm
+                 bg-surface-light-2 dark:bg-surface-dark
+                 border border-neon-500/10 dark:border-neon-400/10
+                 text-ink-light dark:text-ink-dark placeholder:text-ink-light/35 dark:placeholder:text-ink-dark/35
+                 outline-none focus:border-neon-500/40 dark:focus:border-neon-400/40 focus:shadow-neon-ring
+                 transition-all duration-200" />
+            </div>
+
+            <!-- Category + Price -->
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label for="np-category"
+                        class="block text-xs font-medium text-ink-light/60 dark:text-ink-dark/60 mb-1.5">
+                        Category
+                    </label>
+                    <div class="relative">
+                        <select id="np-category" name="np-category" class="w-full h-11 pl-3.5 pr-9 rounded-xl text-sm appearance-none
+                     bg-surface-light-2 dark:bg-surface-dark
+                     border border-neon-500/10 dark:border-neon-400/10
+                     text-ink-light dark:text-ink-dark
+                     outline-none focus:border-neon-500/40 dark:focus:border-neon-400/40 focus:shadow-neon-ring
+                     transition-all duration-200">
+                            <option>Electronics</option>
+                            <option>Accessories</option>
+                            <option>Home &amp; Living</option>
+                            <option>Apparel</option>
+                        </select>
+                        <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/40 dark:text-ink-dark/40"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </div>
+                </div>
+                <div>
+                    <label for="np-price"
+                        class="block text-xs font-medium text-ink-light/60 dark:text-ink-dark/60 mb-1.5">
+                        Price
+                    </label>
+                    <div class="relative">
+                        <span
+                            class="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-ink-light/40 dark:text-ink-dark/40">$</span>
+                        <input id="np-price" name="np-price" type="number" min="0" step="0.01" placeholder="0.00" class="w-full h-11 pl-7 pr-3.5 rounded-xl text-sm tabular
+                     bg-surface-light-2 dark:bg-surface-dark
+                     border border-neon-500/10 dark:border-neon-400/10
+                     text-ink-light dark:text-ink-dark placeholder:text-ink-light/35 dark:placeholder:text-ink-dark/35
+                     outline-none focus:border-neon-500/40 dark:focus:border-neon-400/40 focus:shadow-neon-ring
+                     transition-all duration-200" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stock quantity -->
+            <div>
+                <label for="np-stock" class="block text-xs font-medium text-ink-light/60 dark:text-ink-dark/60 mb-1.5">
+                    Stock quantity
+                </label>
+                <input id="np-stock" name="np-stock" type="number" min="0" placeholder="0" class="w-full h-11 px-3.5 rounded-xl text-sm tabular
+                 bg-surface-light-2 dark:bg-surface-dark
+                 border border-neon-500/10 dark:border-neon-400/10
+                 text-ink-light dark:text-ink-dark placeholder:text-ink-light/35 dark:placeholder:text-ink-dark/35
+                 outline-none focus:border-neon-500/40 dark:focus:border-neon-400/40 focus:shadow-neon-ring
+                 transition-all duration-200" />
+            </div>
+        </form>
+
+        <!-- Footer actions -->
+        <div class="flex items-center gap-3 px-5 py-4 border-t border-neon-500/10 dark:border-neon-400/10">
+            <button type="submit" form="new-product-form" class="flex-1 h-11 rounded-xl text-sm font-medium text-white
+                bg-linear-to-br from-neon-500 to-neon-700 shadow-neon-sm
+                hover:shadow-neon active:scale-[0.98] transition-all duration-200">
+                Add Product
+            </button>
+            <button type="button" id="new-product-cancel" class="h-11 px-4 rounded-xl text-sm font-medium
+                text-ink-light/70 dark:text-ink-dark/70
+                border border-neon-500/10 dark:border-neon-400/10
+                hover:bg-neon-500/5 transition-colors duration-200">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Mobile-only: shared product details modal -->
+<div id="product-details-modal" class="hidden fixed inset-0 z-60 items-center justify-center">
+    <div id="product-details-backdrop" class="absolute inset-0 bg-ink-light/40 dark:bg-black/60 backdrop-blur-sm">
+    </div>
+
+    <div class="relative w-full m-4 sm:max-w-sm rounded-2xl overflow-hidden
+        bg-white dark:bg-surface-dark-2 border border-neon-500/10 dark:border-neon-400/10
+        shadow-2xl shadow-neon-500/10 animate-fade-scale">
+
+        <div
+            class="flex items-center justify-between gap-3 px-5 py-4 border-b border-neon-500/10 dark:border-neon-400/10">
+            <h3 class="font-inter-semibold text-[15px] text-ink-light dark:text-ink-dark">Product Details</h3>
+            <button type="button" id="product-details-close" class="w-9 h-9 grid place-items-center rounded-lg
+                text-ink-light/60 dark:text-ink-dark/60 hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+                transition-all duration-200 active:scale-90" aria-label="Close">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="p-5 space-y-4">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-12 h-12 rounded-xl bg-linear-to-br from-neon-400/20 to-neon-700/20 dark:from-neon-400/10 dark:to-neon-700/10 grid place-items-center shrink-0">
+                    <svg class="w-5 h-5 text-neon-600 dark:text-neon-400" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="7" width="18" height="13" rx="2" />
+                        <path d="M8 7V5a4 4 0 0 1 8 0v2" />
+                    </svg>
+                </div>
+                <div class="min-w-0">
+                    <p id="pd-name" class="text-sm font-inter-medium text-ink-light dark:text-ink-dark truncate">
+                    </p>
+                    <p id="pd-sku" class="text-xs text-ink-light/45 dark:text-ink-dark/45"></p>
+                </div>
+            </div>
+
+            <dl class="grid grid-cols-2 gap-3">
+                <div class="rounded-xl bg-surface-light-2 dark:bg-surface-dark p-3">
+                    <dt class="text-[11px] text-ink-light/45 dark:text-ink-dark/45 uppercase tracking-wide mb-1">
+                        Category</dt>
+                    <dd id="pd-category" class="text-sm font-inter-medium text-ink-light dark:text-ink-dark">
+                    </dd>
+                </div>
+                <div class="rounded-xl bg-surface-light-2 dark:bg-surface-dark p-3">
+                    <dt class="text-[11px] text-ink-light/45 dark:text-ink-dark/45 uppercase tracking-wide mb-1">
+                        Price</dt>
+                    <dd id="pd-price" class="text-sm font-inter-medium text-ink-light dark:text-ink-dark tabular">
+                    </dd>
+                </div>
+                <div class="rounded-xl bg-surface-light-2 dark:bg-surface-dark p-3">
+                    <dt class="text-[11px] text-ink-light/45 dark:text-ink-dark/45 uppercase tracking-wide mb-1">
+                        Stock</dt>
+                    <dd id="pd-stock" class="text-sm font-inter-medium text-ink-light dark:text-ink-dark tabular">
+                    </dd>
+                </div>
+                <div class="rounded-xl bg-surface-light-2 dark:bg-surface-dark p-3">
+                    <dt class="text-[11px] text-ink-light/45 dark:text-ink-dark/45 uppercase tracking-wide mb-1">
+                        Status</dt>
+                    <dd id="pd-status" class="text-sm"></dd>
+                </div>
+            </dl>
+        </div>
+
+        <div class="flex items-center gap-3 px-5 py-4 border-t border-neon-500/10 dark:border-neon-400/10">
+            <button type="button" id="pd-edit-btn"
+                class="flex-1 h-10 rounded-xl text-sm font-medium text-white
+                bg-gradient-to-br from-neon-500 to-neon-700 shadow-neon-sm hover:shadow-neon active:scale-[0.98] transition-all duration-200">
+                Edit
+            </button>
+            <button type="button" id="product-details-close-2" class="h-10 px-4 rounded-xl text-sm font-medium
+                text-ink-light/70 dark:text-ink-dark/70 border border-neon-500/10 dark:border-neon-400/10
+                hover:bg-neon-500/5 transition-colors duration-200">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
+
+</html>
