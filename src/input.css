@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
+@custom-variant children (& > *);
+@custom-variant children-hover (& > *:hover);
 
 @theme {
   /* فونت */
@@ -203,5 +205,16 @@
     background: rgba(0, 230, 118, 0.6);
     background-clip: content-box;
     box-shadow: 0 0 10px rgba(0, 230, 118, 0.5); /* افکت درخشش نئونی هنگام هور */
+  }
+}
+
+@layer components {
+  .box-state {
+    perspective: 800px;
+    @apply transition-transform;
+  }
+
+  .box-state:hover {
+    @apply translate-2;
   }
 }
