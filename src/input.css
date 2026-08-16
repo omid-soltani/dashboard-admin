@@ -210,11 +210,29 @@
 
 @layer components {
   .box-state {
-    perspective: 800px;
-    @apply transition-transform;
+    @apply transition-transform duration-400;
+    transform-style: preserve-3d;
+  }
+  .box-state:hover {
+    transform: perspective(800px) rotateX(-10deg) rotateY(10deg)
+      translateZ(10px);
   }
 
-  .box-state:hover {
-    @apply translate-2;
+  .tr-row {
+    @apply transition-transform duration-300;
+    transform-style: preserve-3d;
+  }
+  .tr-row:hover {
+    transform: perspective(800px) translateX(-8px) translateZ(5px);
+
+    box-shadow: 5px 5px 10px rgba(0, 230, 118, 0.5);
+  }
+
+  .li-row {
+    transition: transform 0.3s ease;
+    transform-style: preserve-3d;
+  }
+  .li-row:hover {
+    transform: perspective(800px) translateZ(5px);
   }
 }
