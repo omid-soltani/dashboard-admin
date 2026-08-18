@@ -12,7 +12,7 @@ await connectDB();
 server.use(cors());
 server.use(express.json());
 
-server.use("/users", userRouter);
+server.use("/Users", userRouter);
 server.use("/Comments", commentRouter);
 server.use("/Products", ProductRouter);
 

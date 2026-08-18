@@ -17,5 +17,22 @@ const createUser = async (req, res) => {
 
   res.status(400).json({ message: "User creation failed" });
 };
+const getAllUser = async (req, res) => {
+  try {
+    const allUsers = await userModel.find().lean();
+    return res.status(200).json({ message: "successful", data: allUsers });
+  } catch (e) {
+    return res.status(500).json(e);
+  }
+};
 
-export { createUser };
+const getAllNewUser = async (req, res) => {
+  try {
+    const allNewUsers = await userModel.find().sort({ createdAt: -1 }).lean();
+    return res.status(200).json({ message: "successful", data: allNewUsers });
+  } catch (e) {
+    return res.status(500).json(e);
+  }
+};
+
+export { createUser, getAllUser, getAllNewUser };

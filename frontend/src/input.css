@@ -227,12 +227,16 @@
 
     box-shadow: 5px 5px 10px rgba(0, 230, 118, 0.5);
   }
-
   .li-row {
     transition: transform 0.3s ease;
     transform-style: preserve-3d;
   }
   .li-row:hover {
     transform: perspective(800px) translateZ(5px);
+  }
+  .btn {
+    @apply w-9 h-9 grid place-items-center rounded-lg
+        text-ink-light/60 dark:text-ink-dark/60
+        transition-all duration-200 active:scale-90;
   }
 }
