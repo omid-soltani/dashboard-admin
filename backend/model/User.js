@@ -18,6 +18,11 @@ const model = new mongoose.Schema(
       required: true,
       minlength: 6,
     },
+    ban: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
     role: {
       type: String,
       enum: ["user", "admin"],

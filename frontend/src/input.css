@@ -239,4 +239,44 @@
         text-ink-light/60 dark:text-ink-dark/60
         transition-all duration-200 active:scale-90;
   }
+
+  /* inputs */
+  .new-users-input {
+    @apply w-full h-11 pl-6 sm:pl-7 pr-9 rounded-xl text-sm
+    bg-surface-light-2 dark:bg-surface-dark
+    border border-neon-500/10 dark:border-neon-400/10
+    text-ink-light dark:text-ink-dark
+    outline-none
+    
+    transition-all duration-200;
+  }
+
+  .label-input {
+    @apply absolute z-10
+    top-1/2 -translate-y-1/2 left-4
+    my-auto px-2
+    text-sm font-medium
+    text-ink-light dark:text-ink-dark
+    transition-all duration-200;
+  }
+
+  .label-input::before {
+    content: "";
+    position: absolute;
+    inset: 50% 0;
+    height: 2px;
+    z-index: -1;
+
+    @apply rounded-lg bg-surface-light-2;
+  }
+
+  .dark .label-input::before {
+    @apply bg-surface-dark;
+  }
+
+  .new-users-input:focus + .label-input,
+  .new-users-input:not(:placeholder-shown) + .label-input {
+    top: 0;
+    font-size: 13px;
+  }
 }
