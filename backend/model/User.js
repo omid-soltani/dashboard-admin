@@ -18,7 +18,7 @@ const model = new mongoose.Schema(
       required: true,
       minlength: 6,
     },
-    ban: {
+    isBan: {
       type: Number,
       required: true,
       default: 0,

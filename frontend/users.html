@@ -372,7 +372,7 @@
                         </div>
                     </div>
 
-                    <button type="button" id="open-new-user-modal" class="inline-flex items-center justify-center gap-2 h-10 px-4 rounded-xl text-sm font-medium text-white
+                    <button type="button" id="open-new-user-modal" class=" inline-flex items-center justify-center gap-2 h-10 px-4 rounded-xl text-sm font-medium text-white
                  bg-gradient-to-br from-neon-500 to-neon-700 shadow-neon-sm
                  hover:shadow-neon active:scale-[0.98] transition-all duration-200 shrink-0">
                         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
@@ -642,7 +642,7 @@
                     </div>
                     <h3 class="font-inter-semibold text-[15px] text-ink-light dark:text-ink-dark">New User</h3>
                 </div>
-                <button type="button" id="new-user-close" class="w-9 h-9 grid place-items-center rounded-lg
+                <button type="button" class=" modal-user-close w-9 h-9 grid place-items-center rounded-lg
                 text-ink-light/60 dark:text-ink-dark/60 hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
                 transition-all duration-200 active:scale-90" aria-label="Close">
                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -711,7 +711,7 @@
 
                 <!-- Role -->
                 <div>
-                    <label for="nu-role"
+                    <label for="edit-role-input"
                         class="block text-xs font-medium text-ink-light/60 dark:text-ink-dark/60 mb-1.5">
                         Role
                     </label>
@@ -738,7 +738,140 @@
                 hover:shadow-neon active:scale-[0.98] transition-all duration-200">
                     Add User
                 </button>
-                <button type="button" id="new-user-cancel" class="h-11 px-4 rounded-xl text-sm font-medium
+                <button type="button" class="modal-user-close h-11 px-4 rounded-xl text-sm font-medium
+                text-ink-light/70 dark:text-ink-dark/70
+                border border-neon-500/10 dark:border-neon-400/10
+                hover:bg-neon-500/5 transition-colors duration-200">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- users Edit modal -->
+    <div id="edit-user-modal" class="hidden justify-center items-center fixed inset-0 z-60 p-4">
+        <div id="new-user-backdrop" class="absolute inset-0 bg-ink-light/40 dark:bg-black/60 backdrop-blur-sm"></div>
+
+        <div class="relative w-full max-w-md max-h-[90vh] overflow-y-auto thin-scroll rounded-2xl
+        bg-white dark:bg-surface-dark-2 border border-neon-500/10 dark:border-neon-400/10
+        shadow-2xl shadow-neon-500/10 animate-fade-scale">
+
+            <!-- Header -->
+            <div
+                class="flex items-center justify-between gap-3 px-5 py-4 border-b border-neon-500/10 dark:border-neon-400/10">
+                <div class="flex items-center gap-3 min-w-0">
+                    <div class="relative shrink-0 w-9 h-9 rounded-xl bg-linear-to-br from-neon-400 to-neon-700
+                  shadow-neon-sm grid place-items-center">
+                        <span class="absolute inset-0 rounded-xl bg-neon-500/30 blur-md"></span>
+
+                        <svg class="relative w-4.5 h-4.5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                        </svg>
+
+                    </div>
+                    <h3 class="font-inter-semibold text-[15px] text-ink-light dark:text-ink-dark">edit User</h3>
+                </div>
+                <button type="button" class="modal-user-close w-9 h-9 grid place-items-center rounded-lg
+                text-ink-light/60 dark:text-ink-dark/60 hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+                transition-all duration-200 active:scale-90" aria-label="Close">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 6 6 18M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Form -->
+            <form class="p-5 space-y-6" autocomplete="off">
+                <!-- Name -->
+                <div class="relative">
+
+                    <div class="relative">
+                        <svg class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/35 dark:text-ink-dark/35"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                        </svg>
+
+                        <input id="edit-userName-input" name="edit-name-input" type="text" placeholder=""
+                            class="new-users-input" />
+                        <label for="edit-name-input" class="label-input">
+                            Full name
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="relative">
+
+                    <div class="relative">
+                        <svg class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/35 dark:text-ink-dark/35"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="4" width="20" height="16" rx="2" />
+                            <path d="m22 6-10 7L2 6" />
+                        </svg>
+                        <input id="edit-email-input" name="edit-email-input" type="text" placeholder=""
+                            class="new-users-input" />
+                        <label for="edit-email-input" class="label-input">
+                            Email address
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="relative">
+
+                    <div class="relative">
+                        <svg class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/35 dark:text-ink-dark/35"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" />
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                        </svg>
+                        <input id="edit-password-input" name="edit-password-input" type="password" placeholder=""
+                            class="new-users-input" />
+                        <label for="edit-password-input" class="label-input">
+                            Password
+                        </label>
+
+                    </div>
+                    <p class="mt-1.5 text-[11px] text-ink-light/40 dark:text-ink-dark/40">At least 8 characters</p>
+                </div>
+
+                <!-- Role -->
+                <div>
+                    <label for="nu-role"
+                        class="block text-xs font-medium text-ink-light/60 dark:text-ink-dark/60 mb-1.5">
+                        Role
+                    </label>
+                    <div class="relative">
+                        <select id="edit-role-input" name="edit-role-input" class="new-users-input appearance-none">
+
+                            <option>Admin</option>
+                            <option selected>user</option>
+
+                        </select>
+                        <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/40 dark:text-ink-dark/40"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Footer actions -->
+            <div class="flex items-center gap-3 px-5 py-4 border-t border-neon-500/10 dark:border-neon-400/10">
+                <button type="button" id="edit-user-form" class="flex-1 h-11 rounded-xl text-sm font-medium text-white
+                bg-linear-to-br from-neon-500 to-neon-700 shadow-neon-sm
+                hover:shadow-neon active:scale-[0.98] transition-all duration-200">
+                    edit User
+                </button>
+                <button type="button" class="modal-user-close h-11 px-4 rounded-xl text-sm font-medium
                 text-ink-light/70 dark:text-ink-dark/70
                 border border-neon-500/10 dark:border-neon-400/10
                 hover:bg-neon-500/5 transition-colors duration-200">
@@ -760,7 +893,7 @@
             <div
                 class="flex items-center justify-between gap-3 px-5 py-4 border-b border-neon-500/10 dark:border-neon-400/10">
                 <h3 class="font-inter-semibold text-[15px] text-ink-light dark:text-ink-dark">User Details</h3>
-                <button type="button" id="user-details-close" class="w-9 h-9 grid place-items-center rounded-lg
+                <button type="button" class="modal-user-close w-9 h-9 grid place-items-center rounded-lg
                 text-ink-light/60 dark:text-ink-dark/60 hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
                 transition-all duration-200 active:scale-90" aria-label="Close">
                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -770,9 +903,10 @@
                 </button>
             </div>
 
-            <div class="p-5 space-y-4">
+            <div class=" relative p-5 space-y-4">
                 <div class="flex items-center gap-3">
-                    <img id="ud-avatar" src="" class="w-12 h-12 rounded-full ring-2 ring-neon-500/20" alt="Avatar" />
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Shirin"
+                        class="w-9 h-9 sm:w-10 sm:h-10 rounded-full ring-2 ring-neon-500/20" alt="Avatar">
                     <div class="min-w-0">
                         <p id="ud-name" class="text-sm font-inter-medium text-ink-light dark:text-ink-dark truncate">
                         </p>
@@ -781,43 +915,38 @@
                 </div>
 
                 <dl class="grid grid-cols-2 gap-3">
-                    <div class="rounded-xl bg-surface-light-2 dark:bg-surface-dark p-3">
-                        <dt class="text-[11px] text-ink-light/45 dark:text-ink-dark/45 uppercase tracking-wide mb-1">
+                    <div class=" ">
+                        <span class="mb-1 text-ink-light/45 dark:text-ink-dark/45">Role</span>
+                        <dt id="user-role-detail"
+                            class="text-[11px] mt-1 bg-surface-light-2 dark:bg-surface-dark p-3 rounded-xltext-surface-dark dark:text-white uppercase tracking-wide mb-1">
                             Role</dt>
                         <dd id="ud-role" class="text-sm"></dd>
                     </div>
-                    <div class="rounded-xl bg-surface-light-2 dark:bg-surface-dark p-3">
-                        <dt class="text-[11px] text-ink-light/45 dark:text-ink-dark/45 uppercase tracking-wide mb-1">
+                    <div class="">
+                        <span class="text-ink-light/45 dark:text-ink-dark/45">Status</span>
+                        <dt id="user-status-detail"
+                            class="rounded-xl mt-1  bg-surface-light-2 dark:bg-surface-dark p-3 text-[11px] text-surface-dark dark:text-white  uppercase tracking-wide mb-1">
                             Status</dt>
                         <dd id="ud-status" class="text-sm"></dd>
                     </div>
-                    <div class="rounded-xl bg-surface-light-2 dark:bg-surface-dark p-3">
-                        <dt class="text-[11px] text-ink-light/45 dark:text-ink-dark/45 uppercase tracking-wide mb-1">
-                            Joined</dt>
+                    <div class="">
+                        <span class="text-ink-light/45 dark:text-ink-dark/45">Joined</span>
+                        <dt id="user-joined-detail"
+                            class="text-[11px] mt-1 rounded-xl bg-surface-light-2 dark:bg-surface-dark p-3  text-surface-dark dark:text-white  uppercase tracking-wide mb-1">
+                            Joined
+                        </dt>
                         <dd id="ud-joined" class="text-sm font-inter-medium text-ink-light dark:text-ink-dark tabular">
                         </dd>
                     </div>
-                    <div class="rounded-xl bg-surface-light-2 dark:bg-surface-dark p-3">
-                        <dt class="text-[11px] text-ink-light/45 dark:text-ink-dark/45 uppercase tracking-wide mb-1">
-                            Last Active</dt>
-                        <dd id="ud-last-active"
-                            class="text-sm font-inter-medium text-ink-light dark:text-ink-dark tabular"></dd>
-                    </div>
                 </dl>
-            </div>
-
-            <div class="flex items-center gap-3 px-5 py-4 border-t border-neon-500/10 dark:border-neon-400/10">
-                <button type="button" id="ud-edit-btn"
-                    class="flex-1 h-10 rounded-xl text-sm font-medium text-white
-                bg-gradient-to-br from-neon-500 to-neon-700 shadow-neon-sm hover:shadow-neon active:scale-[0.98] transition-all duration-200">
-                    Edit
-                </button>
-                <button type="button" id="user-details-close-2" class="h-10 px-4 rounded-xl text-sm font-medium
-                text-ink-light/70 dark:text-ink-dark/70 border border-neon-500/10 dark:border-neon-400/10
-                hover:bg-neon-500/5 transition-colors duration-200">
+                <button type="button" class="modal-user-close absolute bg-neon-600 right-18 bottom-10 h-10 px-4 rounded-xl text-sm font-medium
+                text-ink-dark border border-neon-500/10 dark:border-neon-400/10
+                hover:bg-neon-700 transition-colors duration-200">
                     Close
                 </button>
             </div>
+
+
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

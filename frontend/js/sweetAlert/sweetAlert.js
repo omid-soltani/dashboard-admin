@@ -16,7 +16,7 @@ const customClasses = {
     "border border-neon-500/10 dark:border-neon-400/10 " +
     "hover:bg-neon-600 transition-colors duration-200 ",
   cancelButton:
-    "flex-1 h-10 sm:h-11 rounded-xl text-xs sm:text-sm font-medium  dark:text-white/90! text-white! px-2 " +
+    "flex-1 h-10 sm:h-11 rounded-xl text-xs sm:text-sm font-medium  dark:text-white/90! text-white! px-3.5 sm:px-4 " +
     "bg-red-500 hover:bg-red-600 active:scale-[0.98] transition-all duration-200 ",
 };
 

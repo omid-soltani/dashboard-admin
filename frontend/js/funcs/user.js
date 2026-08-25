@@ -1,12 +1,57 @@
-const dateHandler = (createAt) => {
-  const date = new Date(createAt);
-  const daysAgo = Math.floor((new Date() - date) / (1000 * 60 * 60 * 24));
+import { dateHandler } from "../utile/utile.js";
 
-  return `Created ${daysAgo} days ago `;
+const patternOfNewUsers = (user) => {
+  return `<li class="py-2.5 sm:py-3 flex items-center justify-between gap-3 group cursor-pointer">
+                <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                    <div class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full shrink-0">
+                        <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Yasi"
+                            class="w-9 h-9 sm:w-10 sm:h-10 rounded-full ring-2 ring-neon-500/20"
+                            alt="Avatar" />
+                        <span
+                            class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-neon-500 ring-2 ring-white dark:ring-surface-dark-2"></span>
+                    </div>
+                    <div class="min-w-0">
+                        <p
+                            class="font-inter-medium text-xs sm:text-sm text-ink-light dark:text-ink-dark truncate group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
+                            ${user.userName}
+                        </p>
+                        <p
+                            class="font-inter-regular text-[11px] sm:text-xs text-ink-light/45 dark:text-ink-dark/45 truncate">
+                            ${user.email}
+                        </p>
+                    </div>
+                </div>
+                <span
+                    class="font-inter-regular text-[10px] sm:text-xs text-neon-600 dark:text-neon-400 shrink-0 tabular bg-neon-500/10 px-2 py-0.5 rounded-full">
+                    ${dateHandler(user.createdAt)}
+                </span>
+            </li>`;
 };
 
-const patternOfAllPeople = (user) => {
-  console.log(user);
+const patternOfOldUsers = (user) => {
+  return `
+    <li class="py-2.5 sm:py-3 flex items-center justify-between gap-3 group cursor-pointer">
+        <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <div class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full shrink-0">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Shirin" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full ring-2 ring-neon-500/20" alt="Avatar">
+                <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-neon-500 ring-2 ring-white dark:ring-surface-dark-2"></span>
+            </div>
+            <div class="min-w-0">
+                <p class="font-inter-medium text-xs sm:text-sm text-ink-light dark:text-ink-dark truncate group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
+                    ${user.userName}
+                </p>
+                <p class="font-inter-regular text-[11px] sm:text-xs text-ink-light/45 dark:text-ink-dark/45 truncate">
+                    ${user.email}
+                </p>
+            </div>
+        </div>
+        <span  class=" font-inter-regular text-[10px] sm:text-xs text-ink-light/45 dark:text-ink-dark/45 shrink-0 tabular">
+            ${new Date(user.createdAt).toLocaleDateString("en-US")}
+        </span>
+    </li>
+    `;
+};
+const patternOfAllUsers = (user) => {
   return `
         <tr class="tr-row user-row transition-all duration-300 hover:bg-neon-500/5">
             <td class="px-4 sm:px-5 py-3.5" data-cell="user">
@@ -27,7 +72,7 @@ const patternOfAllPeople = (user) => {
             <td class="hidden sm:table-cell px-5 py-3.5" data-cell="status">
                 <span class="inline-flex items-center gap-1.5 text-xs font-medium text-neon-600 dark:text-neon-400 bg-neon-500/10 px-2.5 py-1 rounded-full">
                     <span class="w-1.5 h-1.5 rounded-full bg-neon-500"></span>
-                    Active
+                    ${user.isBan ? "Ban" : "Free"}
                 </span>
             </td>
             <td class="hidden sm:table-cell px-5 py-3.5 text-sm text-ink-light/70 dark:text-ink-dark/70 tabular" data-cell="joined">${new Date(user.createdAt).toLocaleDateString("en-US")}</td>
@@ -35,7 +80,7 @@ const patternOfAllPeople = (user) => {
             <td class="px-4 sm:px-5 py-3.5">
                 <div class="flex items-center justify-end">
                     <div class="actions-default flex items-center gap-1">
-                        <button type="button" data-action="view-details" title="User details" class="sm:hidden btn
+                        <button onclick ="showDetailsUser('${user._id}')" type="button" data-action="view-details" title="User details" class="sm:hidden btn
         hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
         ">
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -43,21 +88,21 @@ const patternOfAllPeople = (user) => {
                                 <circle cx="12" cy="12" r="3"></circle>
                             </svg>
                         </button>
-                        <button type="button" data-action="edit" title="Edit user" class="btn
+                        <button  onclick="editUserModalOpen('${user._id}')" type="button" data-action="edit" title="Edit user" class="btn
          hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400">
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                                 <path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                             </svg>
                         </button>
-                        <button type="button" data-action="request-ban" title="Ban user" class="btn
+                        <button data-id= ${user.isBan} onclick ="banUserHand(event,'${user._id}')" type="button" data-action="request-ban" title="Ban user" class="btn
         hover:bg-amber-500/10 hover:text-amber-500">
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="10"></circle>
                                 <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
                             </svg>
                         </button>
-                        <button type="button" data-action="request-delete" title="Delete user" class="w-9 h-9 grid place-items-center rounded-lg
+                        <button  onclick = removeUser('${user._id}') type="button" data-action="request-delete" title="Delete user" class="w-9 h-9 grid place-items-center rounded-lg
         text-ink-light/60 dark:text-ink-dark/60
         hover:bg-red-500/10 hover:text-red-500
         transition-all duration-200 active:scale-90">
@@ -107,56 +152,5 @@ const patternOfAllPeople = (user) => {
         </tr>
     `;
 };
-const patternOfNewPeople = (user) => {
-  return `<li class="py-2.5 sm:py-3 flex items-center justify-between gap-3 group cursor-pointer">
-                <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
-                    <div class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full shrink-0">
-                        <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Yasi"
-                            class="w-9 h-9 sm:w-10 sm:h-10 rounded-full ring-2 ring-neon-500/20"
-                            alt="Avatar" />
-                        <span
-                            class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-neon-500 ring-2 ring-white dark:ring-surface-dark-2"></span>
-                    </div>
-                    <div class="min-w-0">
-                        <p
-                            class="font-inter-medium text-xs sm:text-sm text-ink-light dark:text-ink-dark truncate group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
-                            ${user.userName}
-                        </p>
-                        <p
-                            class="font-inter-regular text-[11px] sm:text-xs text-ink-light/45 dark:text-ink-dark/45 truncate">
-                            ${user.email}
-                        </p>
-                    </div>
-                </div>
-                <span
-                    class="font-inter-regular text-[10px] sm:text-xs text-neon-600 dark:text-neon-400 shrink-0 tabular bg-neon-500/10 px-2 py-0.5 rounded-full">
-                    ${dateHandler(user.createdAt)}
-                </span>
-            </li>`;
-};
 
-const patternOfOldPeople = (user) => {
-  return `
-    <li class="py-2.5 sm:py-3 flex items-center justify-between gap-3 group cursor-pointer">
-        <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
-            <div class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full shrink-0">
-                <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Shirin" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full ring-2 ring-neon-500/20" alt="Avatar">
-                <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-neon-500 ring-2 ring-white dark:ring-surface-dark-2"></span>
-            </div>
-            <div class="min-w-0">
-                <p class="font-inter-medium text-xs sm:text-sm text-ink-light dark:text-ink-dark truncate group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors">
-                    ${user.userName}
-                </p>
-                <p class="font-inter-regular text-[11px] sm:text-xs text-ink-light/45 dark:text-ink-dark/45 truncate">
-                    ${user.email}
-                </p>
-            </div>
-        </div>
-        <span  class=" font-inter-regular text-[10px] sm:text-xs text-ink-light/45 dark:text-ink-dark/45 shrink-0 tabular">
-            ${new Date(user.createdAt).toLocaleDateString("en-US")}
-        </span>
-    </li>
-    `;
-};
-
-export { patternOfOldPeople, patternOfNewPeople, patternOfAllPeople };
+export { patternOfOldUsers, patternOfNewUsers, patternOfAllUsers };

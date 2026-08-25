@@ -1,5 +1,4 @@
 const ClearInputs = (inputArray) => {
-  console.log(inputArray);
   inputArray.forEach((input) => [(input.value = "")]);
 };
 const openModal = (modal) => {
@@ -12,4 +11,11 @@ const closeModal = (modal) => {
   modal.classList.remove("flex");
 };
 
-export { ClearInputs, openModal, closeModal };
+const dateHandler = (createAt) => {
+  const date = new Date(createAt);
+  const daysAgo = Math.floor((new Date() - date) / (1000 * 60 * 60 * 24));
+
+  return `${daysAgo} days ago `;
+};
+
+export { ClearInputs, openModal, closeModal, dateHandler };

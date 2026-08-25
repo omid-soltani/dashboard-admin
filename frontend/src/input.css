@@ -223,7 +223,7 @@
     transform-style: preserve-3d;
   }
   .tr-row:hover {
-    transform: perspective(800px) translateX(-8px) translateZ(5px);
+    transform: perspective(800px) translateX(-8px);
 
     box-shadow: 5px 5px 10px rgba(0, 230, 118, 0.5);
   }
