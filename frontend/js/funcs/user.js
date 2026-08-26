@@ -78,7 +78,7 @@ const patternOfAllUsers = (user) => {
             <td class="hidden sm:table-cell px-5 py-3.5 text-sm text-ink-light/70 dark:text-ink-dark/70 tabular" data-cell="joined">${new Date(user.createdAt).toLocaleDateString("en-US")}</td>
             <td class="hidden sm:table-cell px-5 py-3.5 text-sm text-ink-light/70 dark:text-ink-dark/70 tabular" data-cell="last-active">${new Date(user.createdAt).toLocaleTimeString("en-US")}</td>
             <td class="px-4 sm:px-5 py-3.5">
-                <div class="flex items-center justify-end">
+                <div class="flex items-center justify-center">
                     <div class="actions-default flex items-center gap-1">
                         <button onclick ="showDetailsUser('${user._id}')" type="button" data-action="view-details" title="User details" class="sm:hidden btn
         hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
@@ -111,40 +111,6 @@ const patternOfAllUsers = (user) => {
                                 <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6"></path>
                                 <path d="M10 11v6M14 11v6"></path>
                             </svg>
-                        </button>
-                    </div>
-
-                    <!-- Confirm-ban state -->
-                    <div class="actions-confirm-ban hidden items-center gap-2 opacity-0 transition-opacity duration-200">
-                        <span class="text-xs text-ink-light/55 dark:text-ink-dark/55 whitespace-nowrap">Ban
-                            user?</span>
-                        <button type="button" data-action="cancel-ban" class="h-8 px-3 rounded-lg text-xs font-medium
-        text-ink-light/70 dark:text-ink-dark/70
-        border border-neon-500/10 dark:border-neon-400/10
-        hover:bg-neon-500/5 transition-colors duration-200">
-                            Cancel
-                        </button>
-                        <button type="button" data-action="confirm-ban" class="h-8 px-3 rounded-lg text-xs font-medium text-white
-        bg-amber-500 hover:bg-amber-600
-        transition-colors duration-200">
-                            Ban
-                        </button>
-                    </div>
-
-                    <!-- Confirm-delete state -->
-                    <div class="actions-confirm-delete hidden items-center gap-2 opacity-0 transition-opacity duration-200">
-                        <span class="text-xs text-ink-light/55 dark:text-ink-dark/55 whitespace-nowrap">Delete
-                            user?</span>
-                        <button type="button" data-action="cancel-delete" class="h-8 px-3 rounded-lg text-xs font-medium
-        text-ink-light/70 dark:text-ink-dark/70
-        border border-neon-500/10 dark:border-neon-400/10
-        hover:bg-neon-500/5 transition-colors duration-200">
-                            Cancel
-                        </button>
-                        <button type="button" data-action="confirm-delete" class="h-8 px-3 rounded-lg text-xs font-medium text-white
-        bg-red-500 hover:bg-red-600
-        transition-colors duration-200">
-                            Delete
                         </button>
                     </div>
                 </div>

@@ -23,6 +23,10 @@ const productSchema = Joi.object({
     "number.base": "قیمت باید عدد باشد",
     "any.required": "قیمت الزامی است",
   }),
+  sale: Joi.number().required().messages({
+    "number.base": "قیمت باید عدد باشد",
+    "any.required": "قیمت الزامی است",
+  }),
 
   category: Joi.string().required().messages({
     "string.empty": "دسته‌بندی نباید خالی باشد",

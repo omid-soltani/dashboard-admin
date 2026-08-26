@@ -52,7 +52,7 @@ const fillEditUsersInput = (object) => {
 const fillUserDetail = (object) => {
   userRoleDetail.textContent = object.role;
   userStatusDetail.textContent = `${object.isBan ? "Ban" : "Free"}`;
-  userJoinedDetail.textContent = `$${new Date(object.createdAt).toLocaleDateString("en-US")}`;
+  userJoinedDetail.textContent = `${new Date(object.createdAt).toLocaleDateString("en-US")}`;
 };
 
 const renderInfo = async () => {
