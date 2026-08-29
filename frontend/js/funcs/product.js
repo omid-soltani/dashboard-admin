@@ -29,7 +29,7 @@ const patternAllProduct = (product) => {
         <td class="px-3 sm:px-5 py-3 md:py-3.5">
             <div class="flex items-center justify-center">
                 <div class="actions-default flex items-center gap-1">
-                    <button type="button" data-action="view-details" title="Product details" class="sm:hidden btn
+                    <button onclick="showDetailProduct('${product._id}')" type="button" data-action="view-details" title="Product details" class="sm:hidden btn
     
     hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
     ">
@@ -38,7 +38,7 @@ const patternAllProduct = (product) => {
                             <circle cx="12" cy="12" r="3"></circle>
                         </svg>
                     </button>
-                    <button type="button" data-action="edit" title="Edit product" class="btn
+                    <button onclick="editModalOpen('${product._id}')" type="button" data-action="edit" title="Edit product" class="btn
     
     hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
     ">
@@ -47,7 +47,7 @@ const patternAllProduct = (product) => {
                             <path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                         </svg>
                     </button>
-                    <button type="button" data-action="request-delete" title="Delete product" class="btn
+                    <button onclick ="removeProductHandler('${product._id}')" type="button" data-action="request-delete" title="Delete product" class="btn
     hover:bg-red-500/10 hover:text-red-500
     ">
                         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

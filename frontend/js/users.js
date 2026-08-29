@@ -239,9 +239,15 @@ editUserFormBtn.addEventListener("click", async (e) => {
     userName: editUserInput.value.trim(),
     role: editRoleInput.value.trim(),
   };
-  const res = await editUser(userEditId, userInfo);
-  if (res.ok) {
+  try {
+    const res = await editUser(userEditId, userInfo);
+    if (!res.ok) {
+      throw new Error(res.message);
+    }
     SweetAlert("User edit was successful.", "success");
     closeModal(editUserModal);
+    renderInfo();
+  } catch (err) {
+    SweetAlert(err.message, "error");
   }
 });

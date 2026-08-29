@@ -2,35 +2,37 @@ import Joi from "joi";
 
 const productSchema = Joi.object({
   title: Joi.string().min(3).max(50).required().messages({
-    "string.empty": "عنوان نباید خالی باشد",
-    "any.required": "عنوان الزامی است",
-    "string.min": "عنوان باید حداقل 3 کاراکتر باشد",
-    "string.max": "عنوان باید حداکثر 50 کاراکتر باشد",
+    "string.empty": "Title cannot be empty",
+    "any.required": "Title is required",
+    "string.min": "Title must be at least 3 characters long",
+    "string.max": "Title must be at most 50 characters long",
   }),
 
   shortID: Joi.string().min(3).max(50).required().messages({
-    "string.empty": "نام کوتاه نباید خالی باشد",
-    "any.required": "نام کوتاه الزامی است",
-    "string.min": "نام کوتاه باید حداقل 3 کاراکتر باشد",
-    "string.max": "نام کوتاه باید حداکثر 50 کاراکتر باشد",
+    "string.empty": "Short name cannot be empty",
+    "any.required": "Short name is required",
+    "string.min": "Short name must be at least 3 characters long",
+    "string.max": "Short name must be at most 50 characters long",
   }),
 
   price: Joi.number().required().messages({
-    "number.base": "قیمت باید عدد باشد",
-    "any.required": "قیمت الزامی است",
+    "number.base": "Price must be a number",
+    "any.required": "Price is required",
   }),
+
   stock: Joi.number().required().messages({
-    "number.base": "قیمت باید عدد باشد",
-    "any.required": "قیمت الزامی است",
+    "number.base": "Stock must be a number",
+    "any.required": "Stock is required",
   }),
-  sale: Joi.number().required().messages({
-    "number.base": "قیمت باید عدد باشد",
-    "any.required": "قیمت الزامی است",
+
+  sale: Joi.number().messages({
+    "number.base": "Sale must be a number",
+    "any.required": "Sale is required",
   }),
 
   category: Joi.string().required().messages({
-    "string.empty": "دسته‌بندی نباید خالی باشد",
-    "any.required": "دسته‌بندی الزامی است",
+    "string.empty": "Category cannot be empty",
+    "any.required": "Category is required",
   }),
 });
 

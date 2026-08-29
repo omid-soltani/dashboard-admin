@@ -206,6 +206,16 @@
     background-clip: content-box;
     box-shadow: 0 0 10px rgba(0, 230, 118, 0.5); /* افکت درخشش نئونی هنگام هور */
   }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
 }
 
 @layer components {
@@ -241,7 +251,7 @@
   }
 
   /* inputs */
-  .new-users-input {
+  .input-modal {
     @apply w-full h-11 pl-6 sm:pl-7 pr-9 rounded-xl text-sm
     bg-surface-light-2 dark:bg-surface-dark
     border border-neon-500/10 dark:border-neon-400/10
@@ -274,8 +284,8 @@
     @apply bg-surface-dark;
   }
 
-  .new-users-input:focus + .label-input,
-  .new-users-input:not(:placeholder-shown) + .label-input {
+  .input-modal:focus + .label-input,
+  .input-modal:not(:placeholder-shown) + .label-input {
     top: 0;
     font-size: 13px;
   }

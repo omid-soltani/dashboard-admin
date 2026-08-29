@@ -329,11 +329,10 @@
              text-ink-light dark:text-ink-dark
              outline-none focus:border-neon-500/40 dark:focus:border-neon-400/40 focus:shadow-neon-ring
              transition-all duration-200">
-                                <option value="">All categories</option>
-                                <option>Electronics</option>
+                                <option>uniform</option>
+                                <option>shoes</option>
+                                <option>Equipment</option>
                                 <option>Accessories</option>
-                                <option>Home &amp; Living</option>
-                                <option>Apparel</option>
                             </select>
                             <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/40 dark:text-ink-dark/40"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -581,7 +580,7 @@
     </footer>
 
     <!-- new product Modal -->
-    <div id="new-product-modal" class="hidden justify-center items-center fixed inset-0 z-60  p-4">
+    <div id="new-product-modal" class="hidden justify-center items-center fixed inset-0 z-60 p-4">
         <div id="new-product-backdrop" class="absolute inset-0 bg-ink-light/40 dark:bg-black/60 backdrop-blur-sm"></div>
 
         <div class="relative w-full max-w-md max-h-[90vh] overflow-y-auto thin-scroll rounded-2xl
@@ -603,7 +602,7 @@
                     </div>
                     <h3 class="font-inter-semibold text-[15px] text-ink-light dark:text-ink-dark">New Product</h3>
                 </div>
-                <button type="button" id="new-product-close" class="w-9 h-9 grid place-items-center rounded-lg
+                <button type="button" class=" modal-close-btn w-9 h-9 grid place-items-center rounded-lg
                 text-ink-light/60 dark:text-ink-dark/60 hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
                 transition-all duration-200 active:scale-90" aria-label="Close">
                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -614,113 +613,272 @@
             </div>
 
             <!-- Form -->
-            <form id="new-product-form" class="p-5 space-y-4">
+            <form class="p-5 space-y-6" autocomplete="off">
+                <!-- Product name -->
+                <div class="relative">
 
-                <!-- Image dropzone -->
-                <div>
-                    <label class="block text-xs font-medium text-ink-light/60 dark:text-ink-dark/60 mb-1.5">
-                        Product image
-                    </label>
-                    <button type="button" id="np-dropzone" class="w-full rounded-xl border-2 border-dashed border-neon-500/20 dark:border-neon-400/20
-                 hover:border-neon-500/50 dark:hover:border-neon-400/50 hover:bg-neon-500/5
-                 transition-all duration-200 py-5 flex flex-col items-center justify-center gap-2 group">
-                        <img id="np-dropzone-preview" class="hidden w-14 h-14 rounded-lg object-cover" alt="" />
-                        <svg id="np-dropzone-icon"
-                            class="w-6 h-6 text-ink-light/30 dark:text-ink-dark/30 group-hover:text-neon-600 dark:group-hover:text-neon-400 transition-colors duration-200"
+                    <div class="relative">
+                        <svg class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/35 dark:text-ink-dark/35"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
+                        </svg>
+
+                        <input id="np-name" name="np-name" type="text" placeholder="" class="input-modal" />
+                        <label for="np-name" class="label-input">
+                            Product name
+                        </label>
+                    </div>
+                </div>
+
+                <!-- SKU / ID -->
+                <div class="relative">
+
+                    <div class="relative">
+                        <svg class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/35 dark:text-ink-dark/35"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 16V4M12 4 7 9M12 4l5 5" />
-                            <path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" />
+                            <line x1="4" y1="9" x2="20" y2="9" />
+                            <line x1="4" y1="15" x2="20" y2="15" />
+                            <line x1="10" y1="3" x2="8" y2="21" />
+                            <line x1="16" y1="3" x2="14" y2="21" />
                         </svg>
-                        <span id="np-dropzone-label" class="text-xs text-ink-light/45 dark:text-ink-dark/45">
-                            Click to upload, or drag and drop
-                        </span>
-                    </button>
-                    <input type="file" id="np-dropzone-input" accept="image/*" class="hidden" />
-                </div>
-
-                <!-- Product name -->
-                <div>
-                    <label for="np-name"
-                        class="block text-xs font-medium text-ink-light/60 dark:text-ink-dark/60 mb-1.5">
-                        Product name
-                    </label>
-                    <input id="np-name" name="np-name" type="text" placeholder="e.g. Wireless Mouse" class="w-full h-11 px-3.5 rounded-xl text-sm
-                 bg-surface-light-2 dark:bg-surface-dark
-                 border border-neon-500/10 dark:border-neon-400/10
-                 text-ink-light dark:text-ink-dark placeholder:text-ink-light/35 dark:placeholder:text-ink-dark/35
-                 outline-none focus:border-neon-500/40 dark:focus:border-neon-400/40 focus:shadow-neon-ring
-                 transition-all duration-200" />
-                </div>
-
-                <!-- Category + Price -->
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label for="np-category"
-                            class="block text-xs font-medium text-ink-light/60 dark:text-ink-dark/60 mb-1.5">
-                            Category
+                        <input id="np-sku" name="np-sku" type="text" placeholder="" class="input-modal" />
+                        <label for="np-sku" class="label-input">
+                            SKU / Product ID
                         </label>
-                        <div class="relative">
-                            <select id="np-category" name="np-category" class="w-full h-11 pl-3.5 pr-9 rounded-xl text-sm appearance-none
-                     bg-surface-light-2 dark:bg-surface-dark
-                     border border-neon-500/10 dark:border-neon-400/10
-                     text-ink-light dark:text-ink-dark
-                     outline-none focus:border-neon-500/40 dark:focus:border-neon-400/40 focus:shadow-neon-ring
-                     transition-all duration-200">
-                                <option>Electronics</option>
-                                <option>Accessories</option>
-                                <option>Home &amp; Living</option>
-                                <option>Apparel</option>
-                            </select>
-                            <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/40 dark:text-ink-dark/40"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path d="m6 9 6 6 6-6" />
-                            </svg>
-                        </div>
                     </div>
-                    <div>
-                        <label for="np-price"
-                            class="block text-xs font-medium text-ink-light/60 dark:text-ink-dark/60 mb-1.5">
+                </div>
+
+                <!-- Price -->
+                <div class="relative">
+
+                    <div class="relative">
+                        <svg class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/35 dark:text-ink-dark/35"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="1" x2="12" y2="23" />
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                        </svg>
+                        <input id="np-price" name="np-price" type="number" min="0" step="0.01" placeholder=""
+                            class="input-modal" />
+                        <label for="np-price" class="label-input">
                             Price
                         </label>
-                        <div class="relative">
-                            <span
-                                class="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-ink-light/40 dark:text-ink-dark/40">$</span>
-                            <input id="np-price" name="np-price" type="number" min="0" step="0.01" placeholder="0.00"
-                                class="w-full h-11 pl-7 pr-3.5 rounded-xl text-sm tabular
-                     bg-surface-light-2 dark:bg-surface-dark
-                     border border-neon-500/10 dark:border-neon-400/10
-                     text-ink-light dark:text-ink-dark placeholder:text-ink-light/35 dark:placeholder:text-ink-dark/35
-                     outline-none focus:border-neon-500/40 dark:focus:border-neon-400/40 focus:shadow-neon-ring
-                     transition-all duration-200" />
-                        </div>
                     </div>
                 </div>
 
-                <!-- Stock quantity -->
+                <!-- Stock -->
+                <div class="relative">
+
+                    <div class="relative">
+                        <svg class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/35 dark:text-ink-dark/35"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+                            <polyline points="3.29 7 12 12 20.71 7" />
+                            <line x1="12" y1="22" x2="12" y2="12" />
+                        </svg>
+                        <input id="np-stock" name="np-stock" type="number" min="0" placeholder="" class="input-modal" />
+                        <label for="np-stock" class="label-input">
+                            Stock quantity
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Category -->
                 <div>
-                    <label for="np-stock"
+                    <label for="np-category"
                         class="block text-xs font-medium text-ink-light/60 dark:text-ink-dark/60 mb-1.5">
-                        Stock quantity
+                        Category
                     </label>
-                    <input id="np-stock" name="np-stock" type="number" min="0" placeholder="0" class="w-full h-11 px-3.5 rounded-xl text-sm tabular
-                 bg-surface-light-2 dark:bg-surface-dark
-                 border border-neon-500/10 dark:border-neon-400/10
-                 text-ink-light dark:text-ink-dark placeholder:text-ink-light/35 dark:placeholder:text-ink-dark/35
-                 outline-none focus:border-neon-500/40 dark:focus:border-neon-400/40 focus:shadow-neon-ring
-                 transition-all duration-200" />
+                    <div class="relative">
+                        <select id="np-category" name="np-category" class="input-modal appearance-none">
+
+                            <option>Uniform</option>
+                            <option>Accessories</option>
+                            <option>Shoes</option>
+                            <option>Equipment</option>
+
+                        </select>
+                        <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/40 dark:text-ink-dark/40"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </div>
                 </div>
             </form>
 
             <!-- Footer actions -->
             <div class="flex items-center gap-3 px-5 py-4 border-t border-neon-500/10 dark:border-neon-400/10">
-                <button type="submit" form="new-product-form" class="flex-1 h-11 rounded-xl text-sm font-medium text-white
+                <button type="button" id="new-product-form" class="flex-1 h-11 rounded-xl text-sm font-medium text-white
                 bg-linear-to-br from-neon-500 to-neon-700 shadow-neon-sm
                 hover:shadow-neon active:scale-[0.98] transition-all duration-200">
                     Add Product
                 </button>
-                <button type="button" id="new-product-cancel" class="h-11 px-4 rounded-xl text-sm font-medium
+                <button type="button" class="modal-close-btn h-11 px-4 rounded-xl text-sm font-medium
+                text-ink-light/70 dark:text-ink-dark/70
+                border border-neon-500/10 dark:border-neon-400/10
+                hover:bg-neon-500/5 transition-colors duration-200">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit product modal -->
+    <div id="edit-product-modal" class="hidden justify-center items-center fixed inset-0 z-60 p-4 ">
+        <div id="edit-product-backdrop" class="absolute inset-0 bg-ink-light/40 dark:bg-black/60 backdrop-blur-sm">
+        </div>
+
+        <div class="relative w-full max-w-md max-h-[90vh] overflow-y-auto thin-scroll rounded-2xl
+        bg-white dark:bg-surface-dark-2 border border-neon-500/10 dark:border-neon-400/10
+        shadow-2xl shadow-neon-500/10 animate-fade-scale">
+
+            <!-- Header -->
+            <div
+                class="flex items-center justify-between gap-3 px-5 py-4 border-b border-neon-500/10 dark:border-neon-400/10">
+                <div class="flex items-center gap-3 min-w-0">
+                    <div class="relative shrink-0 w-9 h-9 rounded-xl bg-linear-to-br from-neon-400 to-neon-700
+                  shadow-neon-sm grid place-items-center">
+                        <span class="absolute inset-0 rounded-xl bg-neon-500/30 blur-md"></span>
+
+                        <svg class="relative w-4.5 h-4.5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+
+                    </div>
+                    <h3 class="font-inter-semibold text-[15px] text-ink-light dark:text-ink-dark">Edit Product</h3>
+                </div>
+                <button type="button" class="modal-close-btn w-9 h-9 grid place-items-center rounded-lg
+                text-ink-light/60 dark:text-ink-dark/60 hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+                transition-all duration-200 active:scale-90" aria-label="Close">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 6 6 18M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Form -->
+            <form class="p-5 space-y-6" autocomplete="off">
+                <!-- Product name -->
+                <div class="relative">
+
+                    <div class="relative">
+                        <svg class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/35 dark:text-ink-dark/35"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z"></path>
+                        </svg>
+
+                        <input id="edit-productName-input" name="edit-productName-input" type="text" placeholder=""
+                            class="input-modal">
+                        <label for="edit-productName-input" class="label-input">
+                            Product name
+                        </label>
+                    </div>
+                </div>
+
+                <!-- SKU / ID -->
+                <div class="relative">
+
+                    <div class="relative">
+                        <svg class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/35 dark:text-ink-dark/35"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="4" y1="9" x2="20" y2="9"></line>
+                            <line x1="4" y1="15" x2="20" y2="15"></line>
+                            <line x1="10" y1="3" x2="8" y2="21"></line>
+                            <line x1="16" y1="3" x2="14" y2="21"></line>
+                        </svg>
+                        <input id="edit-sku-input" name="edit-sku-input" type="text" placeholder="" class="input-modal">
+                        <label for="edit-sku-input" class="label-input">
+                            SKU / Product ID
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Price -->
+                <div class="relative">
+
+                    <div class="relative">
+                        <svg class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/35 dark:text-ink-dark/35"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                        <input id="edit-price-input" type="number" placeholder="" class="input-modal">
+                        <label for="edit-price-input" class="label-input">
+                            Price
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Stock -->
+                <div class="relative">
+
+                    <div class="relative">
+                        <svg class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/35 dark:text-ink-dark/35"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z">
+                            </path>
+                            <polyline points="3.29 7 12 12 20.71 7"></polyline>
+                            <line x1="12" y1="22" x2="12" y2="12"></line>
+                        </svg>
+                        <input id="edit-stock-input" name="edit-stock-input" type="number" min="0" placeholder=""
+                            class="input-modal">
+                        <label for="edit-stock-input" class="label-input">
+                            Stock quantity
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Category -->
+                <div>
+                    <label for="edit-category-input"
+                        class="block text-xs font-medium text-ink-light/60 dark:text-ink-dark/60 mb-1.5">
+                        Category
+                    </label>
+                    <div class="relative">
+                        <select id="edit-category-input" name="edit-category-input" class="input-modal appearance-none">
+
+                            <option>Equipment</option>
+                            <option>shoes</option>
+                            <option>uniform</option>
+
+                        </select>
+                        <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-light/40 dark:text-ink-dark/40"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Footer actions -->
+            <div class="flex items-center gap-3 px-5 py-4 border-t border-neon-500/10 dark:border-neon-400/10">
+                <button type="button" id="edit-product-form" class="flex-1 h-11 rounded-xl text-sm font-medium text-white
+                bg-linear-to-br from-neon-500 to-neon-700 shadow-neon-sm
+                hover:shadow-neon active:scale-[0.98] transition-all duration-200">
+                    Save Changes
+                </button>
+                <button type="button" class="modal-close-btn h-11 px-4 rounded-xl text-sm font-medium
                 text-ink-light/70 dark:text-ink-dark/70
                 border border-neon-500/10 dark:border-neon-400/10
                 hover:bg-neon-500/5 transition-colors duration-200">
@@ -731,80 +889,75 @@
     </div>
 
     <!-- Mobile-only: shared product details modal -->
-    <div id="product-details-modal" class="hidden fixed inset-0 z-60 items-center justify-center">
+    <div id="product-details-modal" class="hidden justify-center items-center fixed inset-0 z-60 sm:items-center ">
         <div id="product-details-backdrop" class="absolute inset-0 bg-ink-light/40 dark:bg-black/60 backdrop-blur-sm">
         </div>
-
-        <div class="relative w-full m-4 sm:max-w-sm rounded-2xl overflow-hidden
+        <div class="relative w-full sm:max-w-sm rounded-t-2xl sm:rounded-2xl overflow-hidden
         bg-white dark:bg-surface-dark-2 border border-neon-500/10 dark:border-neon-400/10
         shadow-2xl shadow-neon-500/10 animate-fade-scale">
-
             <div
                 class="flex items-center justify-between gap-3 px-5 py-4 border-b border-neon-500/10 dark:border-neon-400/10">
                 <h3 class="font-inter-semibold text-[15px] text-ink-light dark:text-ink-dark">Product Details</h3>
-                <button type="button" id="product-details-close" class="w-9 h-9 grid place-items-center rounded-lg
+                <button type="button" class="modal-close-btn w-9 h-9 grid place-items-center rounded-lg
                 text-ink-light/60 dark:text-ink-dark/60 hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
                 transition-all duration-200 active:scale-90" aria-label="Close">
                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M18 6 6 18M6 6l12 12" />
+                        <path d="M18 6 6 18M6 6l12 12"></path>
                     </svg>
                 </button>
             </div>
-
-            <div class="p-5 space-y-4">
+            <div class=" relative p-5 space-y-4">
                 <div class="flex items-center gap-3">
                     <div
-                        class="w-12 h-12 rounded-xl bg-linear-to-br from-neon-400/20 to-neon-700/20 dark:from-neon-400/10 dark:to-neon-700/10 grid place-items-center shrink-0">
-                        <svg class="w-5 h-5 text-neon-600 dark:text-neon-400" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="7" width="18" height="13" rx="2" />
-                            <path d="M8 7V5a4 4 0 0 1 8 0v2" />
+                        class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-linear-to-br from-neon-400/20 to-neon-700/20 dark:from-neon-400/10 dark:to-neon-700/10 grid place-items-center shrink-0">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-neon-600 dark:text-neon-400" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <rect x="3" y="7" width="18" height="13" rx="2"></rect>
+                            <path d="M8 7V5a4 4 0 0 1 8 0v2"></path>
                         </svg>
                     </div>
                     <div class="min-w-0">
                         <p id="pd-name" class="text-sm font-inter-medium text-ink-light dark:text-ink-dark truncate">
                         </p>
-                        <p id="pd-sku" class="text-xs text-ink-light/45 dark:text-ink-dark/45"></p>
+                        <p id="pd-sku" class="text-xs text-ink-light/45 dark:text-ink-dark/45 truncate"></p>
                     </div>
                 </div>
-
                 <dl class="grid grid-cols-2 gap-3">
-                    <div class="rounded-xl bg-surface-light-2 dark:bg-surface-dark p-3">
-                        <dt class="text-[11px] text-ink-light/45 dark:text-ink-dark/45 uppercase tracking-wide mb-1">
-                            Category</dt>
-                        <dd id="pd-category" class="text-sm font-inter-medium text-ink-light dark:text-ink-dark">
-                        </dd>
+                    <div class=" ">
+                        <span class="mb-1 text-ink-light/45 dark:text-ink-dark/45">Category</span>
+                        <dt id="pd-category"
+                            class="rounded-xl mt-1  bg-surface-light-2 dark:bg-surface-dark p-3 text-[11px] text-surface-dark dark:text-white  uppercase tracking-wide mb-1">
+                            <!-- load from js -->
+                        </dt>
                     </div>
-                    <div class="rounded-xl bg-surface-light-2 dark:bg-surface-dark p-3">
-                        <dt class="text-[11px] text-ink-light/45 dark:text-ink-dark/45 uppercase tracking-wide mb-1">
-                            Price</dt>
-                        <dd id="pd-price" class="text-sm font-inter-medium text-ink-light dark:text-ink-dark tabular">
-                        </dd>
+                    <div class="">
+                        <span class="text-ink-light/45 dark:text-ink-dark/45">Price</span>
+                        <dt id="pd-price"
+                            class="rounded-xl mt-1  bg-surface-light-2 dark:bg-surface-dark p-3 text-[11px] text-surface-dark dark:text-white  uppercase tracking-wide mb-1 tabular">
+                            <!-- load from js-->
+                        </dt>
+
                     </div>
-                    <div class="rounded-xl bg-surface-light-2 dark:bg-surface-dark p-3">
-                        <dt class="text-[11px] text-ink-light/45 dark:text-ink-dark/45 uppercase tracking-wide mb-1">
-                            Stock</dt>
-                        <dd id="pd-stock" class="text-sm font-inter-medium text-ink-light dark:text-ink-dark tabular">
-                        </dd>
+                    <div class="">
+                        <span class="text-ink-light/45 dark:text-ink-dark/45">Stock</span>
+                        <dt id="pd-stock"
+                            class="text-[11px] mt-1 rounded-xl bg-surface-light-2 dark:bg-surface-dark p-3  text-surface-dark dark:text-white  uppercase tracking-wide mb-1 tabular">
+                            <!-- load from js-->
+                        </dt>
                     </div>
-                    <div class="rounded-xl bg-surface-light-2 dark:bg-surface-dark p-3">
-                        <dt class="text-[11px] text-ink-light/45 dark:text-ink-dark/45 uppercase tracking-wide mb-1">
-                            Status</dt>
-                        <dd id="pd-status" class="text-sm"></dd>
+                    <div class="">
+                        <span class="text-ink-light/45 dark:text-ink-dark/45">Status</span>
+                        <dt id="pd-status"
+                            class="text-[11px] mt-1 rounded-xl bg-surface-light-2 dark:bg-surface-dark p-3  text-surface-dark dark:text-white  uppercase tracking-wide mb-1">
+                            <!-- load from js-->
+                        </dt>
                     </div>
                 </dl>
-            </div>
-
-            <div class="flex items-center gap-3 px-5 py-4 border-t border-neon-500/10 dark:border-neon-400/10">
-                <button type="button" id="pd-edit-btn"
-                    class="flex-1 h-10 rounded-xl text-sm font-medium text-white
-                bg-gradient-to-br from-neon-500 to-neon-700 shadow-neon-sm hover:shadow-neon active:scale-[0.98] transition-all duration-200">
-                    Edit
-                </button>
-                <button type="button" id="product-details-close-2" class="h-10 px-4 rounded-xl text-sm font-medium
-                text-ink-light/70 dark:text-ink-dark/70 border border-neon-500/10 dark:border-neon-400/10
-                hover:bg-neon-500/5 transition-colors duration-200">
+                <button type="button" class="modal-close-btn  bg-neon-600 mr-auto h-10 px-4 rounded-xl text-sm font-medium
+                text-ink-dark border border-neon-500/10 dark:border-neon-400/10
+                hover:bg-neon-700 transition-colors duration-200">
                     Close
                 </button>
             </div>
