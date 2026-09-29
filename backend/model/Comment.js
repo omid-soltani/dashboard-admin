@@ -4,7 +4,7 @@ const model = new mongoose.Schema(
   {
     status: {
       type: String,
-      enum: ["Approved", "Pending"],
+      enum: ["Approved", "Pending", "Banned"],
       required: true,
       default: "Pending",
     },
@@ -18,6 +18,15 @@ const model = new mongoose.Schema(
       type: String,
       required: true,
     },
+    replyText: {
+      type: String,
+      default: "",
+    },
+    ban: {
+      type: Number,
+      enum: [0, 1],
+      default: 0,
+    },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -27,6 +36,10 @@ const model = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Product",
       required: true,
+    },
+    replyComment: {
+      type: String,
+      default: "",
     },
   },
   { timestamps: true },

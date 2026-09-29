@@ -396,7 +396,7 @@
 
             <!-- Table -->
             <div class="thin-scroll overflow-x-auto border-t border-neon-500/10 dark:border-neon-400/10">
-                <table class="w-full sm:min-w-[880px] border-collapse">
+                <table class="w-full sm:min-w-220 border-collapse">
                     <thead>
                         <tr class="border-b border-neon-500/10 dark:border-neon-400/10">
                             <th
@@ -421,249 +421,7 @@
                     </thead>
                     <tbody id="comments-tbody" class="divide-y divide-neon-500/5 dark:divide-neon-400/5">
 
-                        <!-- Row 1 -->
-                        <tr class="tr-row comment-row transition-all duration-300 hover:bg-neon-500/5">
-                            <td class="px-4 sm:px-5 py-3.5" data-cell="user">
-                                <div class="flex items-center gap-3 min-w-0">
-                                    <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Nima"
-                                        class="w-9 h-9 rounded-full ring-2 ring-neon-500/20 shrink-0" alt="Avatar" />
-                                    <div class="min-w-0">
-                                        <p class="text-xs md:text-sm font-inter-medium text-ink-light dark:text-ink-dark truncate"
-                                            data-cell="name">Nima Karimi</p>
-                                        <p class="text-[10px] md:text-xs text-ink-light/45 dark:text-ink-dark/45 truncate"
-                                            data-cell="product">On: Wireless Mouse Pro</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="hidden sm:table-cell px-5 py-3.5 max-w-[280px]" data-cell="comment">
-                                <p class="text-sm text-ink-light/70 dark:text-ink-dark/70 truncate">
-                                    Great build quality, battery lasts way longer than I expected.
-                                </p>
-                            </td>
-                            <td class="px-4 sm:px-5 py-3.5" data-cell="status">
-                                <span
-                                    class="inline-flex items-center gap-1.5 text-xs font-medium text-neon-600 dark:text-neon-400 bg-neon-500/10 px-2.5 py-1 rounded-full">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-neon-500"></span>
-                                    Approved
-                                </span>
-                            </td>
-                            <td class="hidden sm:table-cell px-5 py-3.5" data-cell="replied">
-                                <span
-                                    class="inline-flex items-center gap-1.5 text-xs font-medium text-neon-600 dark:text-neon-400 bg-neon-500/10 px-2.5 py-1 rounded-full">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-neon-500"></span>
-                                    Replied
-                                </span>
-                            </td>
-                            <td class="hidden sm:table-cell px-5 py-3.5 text-sm text-ink-light/70 dark:text-ink-dark/70 tabular"
-                                data-cell="date">2 Aug 2026</td>
-                            <td class="px-4 sm:px-5 py-3.5">
-                                <div class="flex items-center justify-end">
-                                    <div class="actions-default flex items-center gap-1">
-                                        <button type="button" data-action="view-details" title="Comment details" class="sm:hidden w-9 h-9 grid place-items-center rounded-lg
-                     text-ink-light/60 dark:text-ink-dark/60
-                     hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
-                     transition-all duration-200 active:scale-90">
-                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
-                                                <circle cx="12" cy="12" r="3" />
-                                            </svg>
-                                        </button>
-                                        <button type="button" data-action="reply" title="Reply to comment" class="w-9 h-9 grid place-items-center rounded-lg
-                     text-ink-light/60 dark:text-ink-dark/60
-                     hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
-                     transition-all duration-200 active:scale-90">
-                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path
-                                                    d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                                            </svg>
-                                        </button>
-                                        <button type="button" data-action="request-ban" title="Ban comment" class="w-9 h-9 grid place-items-center rounded-lg
-                     text-ink-light/60 dark:text-ink-dark/60
-                     hover:bg-amber-500/10 hover:text-amber-500
-                     transition-all duration-200 active:scale-90">
-                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <circle cx="12" cy="12" r="10" />
-                                                <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
-                                            </svg>
-                                        </button>
-                                        <button type="button" data-action="request-delete" title="Delete comment" class="w-9 h-9 grid place-items-center rounded-lg
-                     text-ink-light/60 dark:text-ink-dark/60
-                     hover:bg-red-500/10 hover:text-red-500
-                     transition-all duration-200 active:scale-90">
-                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M3 6h18" />
-                                                <path
-                                                    d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6" />
-                                                <path d="M10 11v6M14 11v6" />
-                                            </svg>
-                                        </button>
-                                    </div>
-
-                                    <!-- Confirm-ban state -->
-                                    <div
-                                        class="actions-confirm-ban hidden items-center gap-2 opacity-0 transition-opacity duration-200">
-                                        <span
-                                            class="text-xs text-ink-light/55 dark:text-ink-dark/55 whitespace-nowrap">Ban
-                                            comment?</span>
-                                        <button type="button" data-action="cancel-ban" class="h-8 px-3 rounded-lg text-xs font-medium
-                     text-ink-light/70 dark:text-ink-dark/70
-                     border border-neon-500/10 dark:border-neon-400/10
-                     hover:bg-neon-500/5 transition-colors duration-200">
-                                            Cancel
-                                        </button>
-                                        <button type="button" data-action="confirm-ban" class="h-8 px-3 rounded-lg text-xs font-medium text-white
-                     bg-amber-500 hover:bg-amber-600
-                     transition-colors duration-200">
-                                            Ban
-                                        </button>
-                                    </div>
-
-                                    <!-- Confirm-delete state -->
-                                    <div
-                                        class="actions-confirm-delete hidden items-center gap-2 opacity-0 transition-opacity duration-200">
-                                        <span
-                                            class="text-xs text-ink-light/55 dark:text-ink-dark/55 whitespace-nowrap">Delete
-                                            comment?</span>
-                                        <button type="button" data-action="cancel-delete" class="h-8 px-3 rounded-lg text-xs font-medium
-                     text-ink-light/70 dark:text-ink-dark/70
-                     border border-neon-500/10 dark:border-neon-400/10
-                     hover:bg-neon-500/5 transition-colors duration-200">
-                                            Cancel
-                                        </button>
-                                        <button type="button" data-action="confirm-delete" class="h-8 px-3 rounded-lg text-xs font-medium text-white
-                     bg-red-500 hover:bg-red-600
-                     transition-colors duration-200">
-                                            Delete
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <!-- Row 2 -->
-                        <tr class="tr-row comment-row transition-all duration-300 hover:bg-neon-500/5">
-                            <td class="px-4 sm:px-5 py-3.5" data-cell="user">
-                                <div class="flex items-center gap-3 min-w-0">
-                                    <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Setareh"
-                                        class="w-9 h-9 rounded-full ring-2 ring-neon-500/20 shrink-0" alt="Avatar" />
-                                    <div class="min-w-0">
-                                        <p class="text-xs md:text-sm font-inter-medium text-ink-light dark:text-ink-dark truncate"
-                                            data-cell="name">Setareh Jafari</p>
-                                        <p class="text-[10px] md:text-xs text-ink-light/45 dark:text-ink-dark/45 truncate"
-                                            data-cell="product">On: Ceramic Desk Lamp</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="hidden sm:table-cell px-5 py-3.5 max-w-[280px]" data-cell="comment">
-                                <p class="text-sm text-ink-light/70 dark:text-ink-dark/70 truncate">
-                                    Shipping took longer than expected, still waiting on a response.
-                                </p>
-                            </td>
-                            <td class="px-4 sm:px-5 py-3.5" data-cell="status">
-                                <span
-                                    class="inline-flex items-center gap-1.5 text-xs font-medium text-amber-500 bg-amber-500/10 px-2.5 py-1 rounded-full">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                                    Pending
-                                </span>
-                            </td>
-                            <td class="hidden sm:table-cell px-5 py-3.5" data-cell="replied">
-                                <span
-                                    class="inline-flex items-center gap-1.5 text-xs font-medium text-ink-light/50 dark:text-ink-dark/50 bg-ink-light/5 dark:bg-ink-dark/5 px-2.5 py-1 rounded-full">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-ink-light/30 dark:bg-ink-dark/30"></span>
-                                    Not Replied
-                                </span>
-                            </td>
-                            <td class="hidden sm:table-cell px-5 py-3.5 text-sm text-ink-light/70 dark:text-ink-dark/70 tabular"
-                                data-cell="date">6 Aug 2026</td>
-                            <td class="px-4 sm:px-5 py-3.5">
-                                <div class="flex items-center justify-end">
-                                    <div class="actions-default flex items-center gap-1">
-                                        <button type="button" data-action="view-details" title="Comment details" class="sm:hidden w-9 h-9 grid place-items-center rounded-lg
-                     text-ink-light/60 dark:text-ink-dark/60
-                     hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
-                     transition-all duration-200 active:scale-90">
-                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
-                                                <circle cx="12" cy="12" r="3" />
-                                            </svg>
-                                        </button>
-                                        <button type="button" data-action="reply" title="Reply to comment" class="w-9 h-9 grid place-items-center rounded-lg
-                     text-ink-light/60 dark:text-ink-dark/60
-                     hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
-                     transition-all duration-200 active:scale-90">
-                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path
-                                                    d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                                            </svg>
-                                        </button>
-                                        <button type="button" data-action="request-ban" title="Ban comment" class="w-9 h-9 grid place-items-center rounded-lg
-                     text-ink-light/60 dark:text-ink-dark/60
-                     hover:bg-amber-500/10 hover:text-amber-500
-                     transition-all duration-200 active:scale-90">
-                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <circle cx="12" cy="12" r="10" />
-                                                <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
-                                            </svg>
-                                        </button>
-                                        <button type="button" data-action="request-delete" title="Delete comment" class="w-9 h-9 grid place-items-center rounded-lg
-                     text-ink-light/60 dark:text-ink-dark/60
-                     hover:bg-red-500/10 hover:text-red-500
-                     transition-all duration-200 active:scale-90">
-                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M3 6h18" />
-                                                <path
-                                                    d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6" />
-                                                <path d="M10 11v6M14 11v6" />
-                                            </svg>
-                                        </button>
-                                    </div>
-
-                                    <div
-                                        class="actions-confirm-ban hidden items-center gap-2 opacity-0 transition-opacity duration-200">
-                                        <span
-                                            class="text-xs text-ink-light/55 dark:text-ink-dark/55 whitespace-nowrap">Ban
-                                            comment?</span>
-                                        <button type="button" data-action="cancel-ban" class="h-8 px-3 rounded-lg text-xs font-medium
-                     text-ink-light/70 dark:text-ink-dark/70
-                     border border-neon-500/10 dark:border-neon-400/10
-                     hover:bg-neon-500/5 transition-colors duration-200">
-                                            Cancel
-                                        </button>
-                                        <button type="button" data-action="confirm-ban" class="h-8 px-3 rounded-lg text-xs font-medium text-white
-                     bg-amber-500 hover:bg-amber-600
-                     transition-colors duration-200">
-                                            Ban
-                                        </button>
-                                    </div>
-
-                                    <div
-                                        class="actions-confirm-delete hidden items-center gap-2 opacity-0 transition-opacity duration-200">
-                                        <span
-                                            class="text-xs text-ink-light/55 dark:text-ink-dark/55 whitespace-nowrap">Delete
-                                            comment?</span>
-                                        <button type="button" data-action="cancel-delete" class="h-8 px-3 rounded-lg text-xs font-medium
-                     text-ink-light/70 dark:text-ink-dark/70
-                     border border-neon-500/10 dark:border-neon-400/10
-                     hover:bg-neon-500/5 transition-colors duration-200">
-                                            Cancel
-                                        </button>
-                                        <button type="button" data-action="confirm-delete" class="h-8 px-3 rounded-lg text-xs font-medium text-white
-                     bg-red-500 hover:bg-red-600
-                     transition-colors duration-200">
-                                            Delete
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                        <!-- load fro js -->
 
                     </tbody>
                 </table>
@@ -737,7 +495,8 @@
                     </div>
 
                     <!-- List -->
-                    <ul class="mt-3 sm:mt-4 divide-y divide-neon-500/5 dark:divide-neon-400/5">
+                    <ul id="recent-comment-wrapper"
+                        class="mt-3 sm:mt-4 divide-y divide-neon-500/5 dark:divide-neon-400/5">
                         <li class="py-2.5 sm:py-3 flex items-center justify-between gap-3 group cursor-pointer">
                             <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
                                 <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Nima"
@@ -836,7 +595,7 @@
             </div>
 
             <!-- ============================================
-       2) FLAGGED COMMENTS
+       2) ban COMMENTS
     ============================================= -->
             <div class="rounded-2xl border border-neon-500/10 dark:border-neon-400/10
               bg-white dark:bg-surface-dark-2 shadow-lg shadow-neon-500/5
@@ -848,7 +607,7 @@
                         class="flex items-center justify-between pb-3 sm:pb-4 border-b border-neon-500/10 dark:border-neon-400/10">
                         <div class="min-w-0">
                             <h3 class="font-inter-semibold text-sm sm:text-base text-ink-light dark:text-ink-dark">
-                                Flagged Comments
+                                Baned Comments
                             </h3>
                             <p
                                 class="font-inter-regular text-[11px] sm:text-xs text-ink-light/45 dark:text-ink-dark/45 mt-0.5">
@@ -867,7 +626,7 @@
                     </div>
 
                     <!-- List -->
-                    <ul class="mt-3 sm:mt-4 divide-y divide-neon-500/5 dark:divide-neon-400/5">
+                    <ul id="ban-comment-wrapper" class="mt-3 sm:mt-4 divide-y divide-neon-500/5 dark:divide-neon-400/5">
                         <li class="li-row py-2.5 sm:py-3 flex items-center justify-between gap-3 group cursor-pointer">
                             <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
                                 <div
@@ -1039,6 +798,98 @@
             </div>
         </div>
     </footer>
+
+    <!-- ============================================================
+   SECTION: REPLY TO COMMENT MODAL (prefix: rc-)
+   Left: user's comment | Right: reply textarea
+============================================================= -->
+    <div id="reply-comment-modal" class="hidden justify-center items-center fixed inset-0 z-60 p-4">
+        <div id="rc-backdrop" class="absolute inset-0 bg-ink-light/40 dark:bg-black/60 backdrop-blur-sm"></div>
+
+        <div class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto thin-scroll rounded-2xl
+        bg-white dark:bg-surface-dark-2 border border-neon-500/10 dark:border-neon-400/10
+        shadow-2xl shadow-neon-500/10 animate-fade-scale">
+
+            <!-- Header -->
+            <div class="flex items-center justify-between gap-3 px-4 sm:px-5 py-3 sm:py-4
+            border-b border-neon-500/10 dark:border-neon-400/10">
+                <div class="flex items-center gap-3 min-w-0">
+                    <div class="relative shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-linear-to-br from-neon-400 to-neon-700
+                    shadow-neon-sm grid place-items-center">
+                        <span class="absolute inset-0 rounded-xl bg-neon-500/30 blur-md"></span>
+                        <svg class="relative w-4 h-4 sm:w-4.5 sm:h-4.5 text-white" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 14 4 9l5-5" />
+                            <path d="M20 20v-7a4 4 0 0 0-4-4H4" />
+                        </svg>
+                    </div>
+                    <h3 class="font-inter-semibold text-sm sm:text-[15px] text-ink-light dark:text-ink-dark truncate">
+                        Reply to Comment
+                    </h3>
+                </div>
+                <button type="button" class="modal-close-btn w-9 h-9 grid place-items-center rounded-lg
+                text-ink-light/60 dark:text-ink-dark/60 hover:bg-neon-500/10 hover:text-neon-600 dark:hover:text-neon-400
+                transition-all duration-200 active:scale-90" aria-label="Close">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 6 6 18M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Body: two columns on md+, stacked on mobile -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 p-4 sm:p-5">
+
+                <!-- LEFT: User's comment -->
+                <div class="flex flex-col gap-3 sm:gap-4 rounded-2xl bg-surface-light-2 dark:bg-surface-dark
+                border border-neon-500/10 dark:border-neon-400/10 p-3.5 sm:p-4 md:p-5">
+                    <div class="flex items-center gap-2">
+                        <span
+                            class="text-[10px] sm:text-xs font-medium uppercase tracking-wide text-ink-light/40 dark:text-ink-dark/40">
+                            writer :
+                        </span>
+                        <span id="rc-date" class="text-xs sm:text-sm text-ink-light dark:text-ink-dark tabular">omid
+                            soltani</span>
+                    </div>
+
+                    <p id="rc-text" class="thin-scroll max-h-40 md:max-h-56 overflow-y-auto text-xs sm:text-sm leading-relaxed
+                    text-ink-light/80 dark:text-ink-dark/80 border-l-2 border-neon-500/40 pl-3">
+                    </p>
+                </div>
+
+                <!-- RIGHT: Reply form -->
+                <form id="rc-form" class="flex flex-col gap-2">
+
+                    <textarea id="rc-textarea" name="rc-textarea" rows="7" maxlength="500"
+                        placeholder="Write your reply…"
+                        class="input-modal flex-1 min-h-40 md:min-h-56 resize-none py-3 thin-scroll"></textarea>
+                    <div class="flex items-center justify-between">
+                        <p id="rc-error" class="hidden text-[11px] sm:text-xs text-red-500">Reply can't be empty</p>
+                        <p class="ml-auto text-[11px] sm:text-xs text-ink-light/45 dark:text-ink-dark/45 tabular">
+                            <span id="rc-count">0</span>/500
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Footer -->
+            <div
+                class="flex items-center gap-3 px-4 sm:px-5 py-3 sm:py-4 border-t border-neon-500/10 dark:border-neon-400/10">
+                <button id="reply-comment-btn" type="button" form="rc-form" class="flex-1 h-10 sm:h-11 rounded-xl text-xs sm:text-sm font-medium text-white
+                bg-linear-to-br from-neon-500 to-neon-700 shadow-neon-sm
+                hover:shadow-neon active:scale-[0.98] transition-all duration-200">
+                    Send Reply
+                </button>
+                <button type="button" class="modal-close-btn h-10 sm:h-11 px-4 rounded-xl text-xs sm:text-sm font-medium
+                text-ink-light/70 dark:text-ink-dark/70
+                border border-neon-500/10 dark:border-neon-400/10
+                hover:bg-neon-500/5 transition-colors duration-200">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Mobile-only: shared comment details modal -->
     <div id="comment-details-modal" class="hidden justify-center items-center fixed inset-0 z-60">
         <div id="comment-details-backdrop" class="absolute inset-0 bg-ink-light/40 dark:bg-black/60 backdrop-blur-sm">
@@ -1110,7 +961,9 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/shared.js/header.js"></script>
+    <script src="./js/comments.js" type="module"></script>
 </body>
 
 </html>
