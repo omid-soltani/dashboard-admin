@@ -4,7 +4,7 @@ const model = new mongoose.Schema(
   {
     status: {
       type: String,
-      enum: ["Approved", "Pending", "Banned"],
+      enum: ["Approved", "Banned"],
       required: true,
       default: "Pending",
     },

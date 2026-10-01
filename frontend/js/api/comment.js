@@ -43,10 +43,22 @@ const createComment = (data) => {
   return res;
 };
 
+const banCommentApi = (id, data) => {
+  const res = fetch(`${baseUrl}/Comments/ban/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ isBan: data }),
+  });
+  return res;
+};
+
 export {
   getComments,
   getBanComment,
   getNewComment,
   replyCommentApi,
   getOneCommentApi,
+  banCommentApi,
 };

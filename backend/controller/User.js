@@ -18,6 +18,12 @@ const createUser = async (req, res) => {
 
     res.status(400).json({ message: "User creation failed" });
   } catch (err) {
+    if (err.code === 11000) {
+      return res.status(409).json({
+        message: "This email already exists.",
+      });
+    }
+
     return res.status(500).json({ message: "server error" });
   }
 };

@@ -139,11 +139,14 @@ const banComment = async (req, res) => {
   try {
     const { id } = req.params;
     const { isBan } = req.body;
+
+    console.log(req.body);
     if (!isValidObjectId(id)) {
       return res.status(400).json({ message: "Invalid comment id" });
     }
     const comment = await commentModel.findByIdAndUpdate(id, {
-      $set: { status: isBan ? "Approved" : "Banned" },
+      $set: { status: +isBan ? "Approved" : "Banned" },
+      ban: +isBan,
     });
     return res.status(200).json({ data: comment, message: "Comment banned" });
   } catch (err) {
@@ -157,4 +160,5 @@ export {
   getNewComment,
   replyComment,
   getOneComment,
+  banComment,
 };

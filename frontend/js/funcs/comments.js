@@ -50,7 +50,7 @@ const patternOfAllComments = (comment) => {
                             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                         </svg>
                     </button>
-                    <button onclick = "banCommentUser('${comment._id}')" type="button" data-action="request-ban" title="Ban comment" class="w-9 h-9 grid place-items-center rounded-lg
+                    <button data-isBan = ${comment.ban ? 0 : 1} onclick = "banCommentUser(event,'${comment._id}')" type="button" data-action="request-ban" title="Ban comment" class="w-9 h-9 grid place-items-center rounded-lg
     text-ink-light/60 dark:text-ink-dark/60
     hover:bg-amber-500/10 hover:text-amber-500
     transition-all duration-200 active:scale-90">

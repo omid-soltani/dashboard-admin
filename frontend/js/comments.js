@@ -4,6 +4,7 @@ import {
   getNewComment,
   getOneCommentApi,
   replyCommentApi,
+  banCommentApi,
 } from "./api/comment.js";
 import { openModal, closeModal } from "./utile/utile.js";
 import { SweetAlert } from "./sweetAlert/sweetAlert.js";
@@ -46,8 +47,6 @@ const renderComments = async () => {
     const comments = await resComment.json();
     const newComment = await resNewComment.json();
 
-    console.log(newComment);
-
     commentsAllWrapper.innerHTML = "";
     comments.data.forEach((comment) => {
       commentsAllWrapper.insertAdjacentHTML(
@@ -87,7 +86,36 @@ const openReplyCommentModal = async (id) => {
 };
 window.openReplyCommentModal = openReplyCommentModal;
 
-const banCommentUser = (id) => {};
+const banCommentUser = (event, id) => {
+  let isBan = +event.currentTarget.dataset.isban;
+  SweetAlert(
+    isBan
+      ? "Are you sure about the comment UnBan?"
+      : "Are you sure about the comment Ban?",
+    "warning",
+    true,
+    true,
+    "ok",
+    "not Sure",
+    async (res) => {
+      if (res.isConfirmed) {
+        const res = await banCommentApi(id, isBan);
+        const result = await res.json();
+        console.log(result);
+        if (!res.ok) {
+          throw new Error(result.message);
+        }
+        SweetAlert(
+          isBan ? "Comment unBan was successful" : "Comment ban was successful",
+          "success",
+        );
+
+        renderComments();
+      }
+    },
+  );
+  event.currentTarget.dataset.isban = !isBan;
+};
 window.banCommentUser = banCommentUser;
 
 const replyCommentHandler = async () => {

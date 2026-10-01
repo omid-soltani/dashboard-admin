@@ -1,16 +1,16 @@
-const baseUrl = "http://localhost:4000";
+import { baseUrl } from "../constant/constant.js";
 
-const getAllUser = async () => {
+const getAllUserApi = async () => {
   const res = await fetch(`${baseUrl}/Users`);
 
   return res;
 };
-const getAllNewUser = async () => {
+const getAllNewUserApi = async () => {
   const res = await fetch(`${baseUrl}/Users/new`);
 
   return res;
 };
-const createUser = async (data) => {
+const createUserApi = async (data) => {
   const res = await fetch(`${baseUrl}/Users/create`, {
     method: "POST",
     headers: {
@@ -22,13 +22,13 @@ const createUser = async (data) => {
   return res;
 };
 
-const deleteUser = async (id) => {
+const deleteUserApi = async (id) => {
   const res = await fetch(`${baseUrl}/Users/delete/${id}`, {
     method: "DELETE",
   });
   return res;
 };
-const editUser = async (id, data) => {
+const editUserApi = async (id, data) => {
   const res = fetch(`${baseUrl}/Users/edit/${id}`, {
     method: "PATCH",
     headers: {
@@ -38,23 +38,23 @@ const editUser = async (id, data) => {
   });
   return res;
 };
-const banUser = async (id, data) => {
+const banUserApi = async (id, data) => {
   const res = fetch(`${baseUrl}/Users/ban/${id}`, {
     method: "PATCH",
   });
   return res;
 };
 
-const getOneUser = async (id) => {
+const getOneUserApi = async (id) => {
   const res = await fetch(`${baseUrl}/Users/one/${id}`);
   return res;
 };
 export {
-  getAllUser,
-  getAllNewUser,
-  createUser,
-  deleteUser,
-  editUser,
-  getOneUser,
-  banUser,
+  getAllUserApi,
+  getAllNewUserApi,
+  createUserApi,
+  deleteUserApi,
+  editUserApi,
+  getOneUserApi,
+  banUserApi,
 };
