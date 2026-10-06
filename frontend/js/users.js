@@ -1,4 +1,3 @@
-import { getAllUserApi } from "./api/user.js";
 import {
   renderInfo,
   banUsersFunc,
@@ -12,10 +11,24 @@ import {
   getUserInfoFunc,
   userEditId,
   showDetailsFunc,
+  allUsers,
 } from "./funcs/user.js";
-import { closeModal, openModal, debounce, searchHand } from "./utile/utile.js";
+import {
+  closeModal,
+  openModal,
+  debounce,
+  searchHand,
+  setUrlSearchParam,
+  changePagination,
+  paginationNextAndPrevHandler,
+} from "./utile/utile.js";
 import { SweetAlert } from "./sweetAlert/sweetAlert.js";
 import { d } from "./constant/constant.js";
+
+let searchValue = "";
+
+const paginationWrapper = document.getElementById("pagination-wrapper");
+const pageBtns = d.querySelectorAll(".page-btn");
 
 // create new user Modal
 const openNewUserModal = d.getElementById("open-new-user-modal");
@@ -25,6 +38,7 @@ const newUserFormBtn = d.getElementById("new-user-form");
 const editUserFormBtn = d.getElementById("edit-user-form");
 // search Input
 const userSearchInput = d.getElementById("user-search");
+// pagination buttons
 
 const banUserHand = async (event, id) => {
   const isBan = +event.currentTarget.dataset.id;
@@ -42,6 +56,8 @@ const banUserHand = async (event, id) => {
     "no",
     async (res) => {
       if (res.isConfirmed) {
+        searchValue = "";
+        userSearchInput.value = "";
         await banUsersFunc(id);
       }
     },
@@ -59,6 +75,8 @@ const removeUserHand = async (id) => {
     "no",
     async (res) => {
       if (res.isConfirmed) {
+        searchValue = "";
+        userSearchInput.value = "";
         await removeUserFunc(id);
       }
     },
@@ -68,6 +86,8 @@ window.removeUserHand = removeUserHand;
 
 const editUserHand = async (id) => {
   getUserInfoFunc(id);
+  searchValue = "";
+  userSearchInput.value = "";
 };
 window.editUserHand = editUserHand;
 
@@ -77,6 +97,7 @@ const showDetailsUser = async (id) => {
 window.showDetailsUser = showDetailsUser;
 
 window.addEventListener("load", async () => {
+  setUrlSearchParam("page", 1);
   renderInfo();
 });
 openNewUserModal.addEventListener("click", () => {
@@ -84,16 +105,14 @@ openNewUserModal.addEventListener("click", () => {
 });
 
 closeUserModal.forEach((modal) => {
-  modal.addEventListener("click", (e) => {
-    e.preventDefault();
-    const modal = e.currentTarget.dataset.display;
-    closeModal(d.getElementById(`${modal}`));
+  modal.addEventListener("click", (event) => {
+    closeModal(event);
   });
 });
 
 newUserFormBtn.addEventListener("click", async (e) => {
   e.preventDefault();
-  await createNewUserFunc();
+  await createNewUserFunc(e);
 });
 
 editUserFormBtn.addEventListener("click", async (e) => {
@@ -102,12 +121,44 @@ editUserFormBtn.addEventListener("click", async (e) => {
 });
 
 userSearchInput.addEventListener("keyup", (e) => {
-  const searchValue = e.currentTarget.value;
-  debounce(async () => {
-    const res = await getAllUserApi();
-    const users = await res.json();
-    const searchUsers = searchHand(users.data, "userName", searchValue);
+  searchValue = e.currentTarget.value;
+  setUrlSearchParam("page", 1);
 
-    addItemsInfoToDom(searchUsers, usersWrapperBody, patternOfAllUsers);
+  debounce(async () => {
+    const searchUsers = searchHand(
+      allUsers.data.slice(),
+      "userName",
+      searchValue,
+    );
+
+    addItemsInfoToDom(searchUsers, usersWrapperBody, patternOfAllUsers, true);
   })();
+});
+
+paginationWrapper.addEventListener("click", (e) => {
+  if (e.target.classList.contains("page-link-btn")) {
+    const page = +e.target.dataset.page;
+    changePagination(
+      page,
+      allUsers.data.slice(),
+      "userName",
+      searchValue,
+      usersWrapperBody,
+      patternOfAllUsers,
+    );
+  }
+});
+
+pageBtns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const type = e.currentTarget.dataset.type;
+    paginationNextAndPrevHandler(
+      type,
+      allUsers.data,
+      "userName",
+      searchValue,
+      usersWrapperBody,
+      patternOfAllUsers,
+    );
+  });
 });

@@ -1,11 +1,11 @@
 const baseUrl = "http://localhost:4000";
 
-const getAllProduct = async () => {
+const getAllProductApi = async () => {
   const res = await fetch(`${baseUrl}/Products`);
   return res;
 };
 
-const createProduct = (data) => {
+const createProductApi = (data) => {
   const res = fetch(`${baseUrl}/Products/create`, {
     method: "POST",
     headers: {
@@ -15,21 +15,21 @@ const createProduct = (data) => {
   });
   return res;
 };
-const getLowStockProducts = async () => {
+const getLowStockProductsApi = async () => {
   const res = await fetch(`${baseUrl}/Products/lowStock`);
   return res;
 };
-const getMostSaleProducts = async () => {
+const getMostSaleProductsApi = async () => {
   const res = await fetch(`${baseUrl}/Products/mostSale`);
   return res;
 };
 
-const getOneProduct = async (id) => {
+const getOneProductApi = async (id) => {
   const res = await fetch(`${baseUrl}/Products/one/${id}`);
   return res;
 };
 
-const editProduct = (id, product) => {
+const editProductApi = (id, product) => {
   const res = fetch(`${baseUrl}/Products/edit/${id}`, {
     method: "PATCH",
     headers: {
@@ -40,7 +40,7 @@ const editProduct = (id, product) => {
   return res;
 };
 
-const deleteProduct = async (id) => {
+const deleteProductApi = async (id) => {
   const res = await fetch(`${baseUrl}/Products/delete/${id}`, {
     method: "DELETE",
   });
@@ -48,11 +48,11 @@ const deleteProduct = async (id) => {
 };
 
 export {
-  createProduct,
-  editProduct,
-  getAllProduct,
-  getLowStockProducts,
-  getMostSaleProducts,
-  getOneProduct,
-  deleteProduct,
+  createProductApi,
+  editProductApi,
+  getAllProductApi,
+  getLowStockProductsApi,
+  getMostSaleProductsApi,
+  getOneProductApi,
+  deleteProductApi,
 };

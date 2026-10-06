@@ -1,16 +1,16 @@
-const baseUrl = "http://localhost:4000";
+import { baseUrl } from "../constant/constant.js";
 
-const getComments = async () => {
+const getCommentsApi = async () => {
   const res = await fetch(`${baseUrl}/Comments`);
   return res;
 };
 
-const getBanComment = async () => {
+const getBanCommentApi = async () => {
   const res = await fetch(`${baseUrl}/Comments/banned`);
   return res;
 };
 
-const getNewComment = async () => {
+const getNewCommentApi = async () => {
   const res = await fetch(`${baseUrl}/Comments/new`);
   return res;
 };
@@ -32,7 +32,7 @@ const replyCommentApi = async (id, data) => {
   return res;
 };
 
-const createComment = (data) => {
+const createCommentApi = (data) => {
   const res = fetch(`${baseUrl}/Comments/create`, {
     method: "POST",
     headers: {
@@ -55,9 +55,10 @@ const banCommentApi = (id, data) => {
 };
 
 export {
-  getComments,
-  getBanComment,
-  getNewComment,
+  createCommentApi,
+  getCommentsApi,
+  getBanCommentApi,
+  getNewCommentApi,
   replyCommentApi,
   getOneCommentApi,
   banCommentApi,

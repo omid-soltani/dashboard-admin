@@ -1,12 +1,19 @@
 import {
-  getBanComment,
-  getComments,
-  getNewComment,
+  getBanCommentApi,
+  getCommentsApi,
+  getNewCommentApi,
   getOneCommentApi,
   replyCommentApi,
   banCommentApi,
 } from "./api/comment.js";
-import { openModal, closeModal } from "./utile/utile.js";
+import {
+  openModal,
+  closeModal,
+  addItemsInfoToDom,
+  changePagination,
+  setUrlSearchParam,
+  paginationNextAndPrevHandler,
+} from "./utile/utile.js";
 import { SweetAlert } from "./sweetAlert/sweetAlert.js";
 import {
   patternOfAllComments,
@@ -17,9 +24,10 @@ import {
 const d = document;
 
 let commentId = null;
-
+let comments = [];
+let searchValue = "";
 // wrapper for comments
-const commentsAllWrapper = d.getElementById("comments-tbody");
+const allCommentsWrapper = d.getElementById("comments-tbody");
 const recentCommentWrapper = d.getElementById("recent-comment-wrapper");
 const banCommentWrapper = d.getElementById("ban-comment-wrapper");
 
@@ -32,44 +40,38 @@ const commentReplyText = d.getElementById("rc-textarea");
 const replyBtn = d.getElementById("reply-comment-btn");
 const replyTextCount = d.getElementById("rc-count");
 
+// pagination tag
+const paginationWrapper = document.getElementById("pagination-wrapper");
+const pageBtns = d.querySelectorAll(".page-btn");
+
 const renderComments = async () => {
   try {
     const [resBanComment, resComment, resNewComment] = await Promise.all([
-      getBanComment(),
-      getComments(),
-      getNewComment(),
+      getBanCommentApi(),
+      getCommentsApi(),
+      getNewCommentApi(),
     ]);
     if (!resBanComment.ok || !resComment.ok || !resNewComment.ok) {
       throw new Error("Failed to fetch Comments");
     }
 
     const banComment = await resBanComment.json();
-    const comments = await resComment.json();
+    comments = await resComment.json();
     const newComment = await resNewComment.json();
+    setUrlSearchParam("page", 1);
 
-    commentsAllWrapper.innerHTML = "";
-    comments.data.forEach((comment) => {
-      commentsAllWrapper.insertAdjacentHTML(
-        "beforeend",
-        patternOfAllComments(comment),
-      );
-    });
-
-    banCommentWrapper.innerHTML = "";
-    banComment.data.forEach((comment) => {
-      banCommentWrapper.insertAdjacentHTML(
-        "beforeend",
-        patternOfBanComments(comment),
-      );
-    });
-
-    recentCommentWrapper.innerHTML = "";
-    newComment.data.forEach((comment) => {
-      recentCommentWrapper.insertAdjacentHTML(
-        "beforeend",
-        patternOfRecentComment(comment),
-      );
-    });
+    addItemsInfoToDom(
+      comments.data,
+      allCommentsWrapper,
+      patternOfAllComments,
+      true,
+    );
+    addItemsInfoToDom(
+      newComment.data,
+      recentCommentWrapper,
+      patternOfRecentComment,
+    );
+    addItemsInfoToDom(banComment.data, banCommentWrapper, patternOfBanComments);
   } catch (err) {
     SweetAlert(err.message, "error");
   }
@@ -136,8 +138,8 @@ const replyCommentHandler = async () => {
   }
 };
 
-const countTextAreaHand = (targe) => {
-  replyTextCount.textContent = targe.length;
+const countTextAreaHand = (target) => {
+  replyTextCount.textContent = target.length;
 };
 
 window.addEventListener("load", () => {
@@ -145,8 +147,8 @@ window.addEventListener("load", () => {
 });
 
 modalCloseBtn.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    closeModal(replyCommentModal);
+  btn.addEventListener("click", (e) => {
+    closeModal(e);
   });
 });
 
@@ -157,4 +159,32 @@ replyBtn.addEventListener("click", async (e) => {
 
 commentReplyText.addEventListener("keyup", (e) => {
   countTextAreaHand(e.target.value);
+});
+
+paginationWrapper.addEventListener("click", (e) => {
+  if (e.target.classList.contains("page-link-btn")) {
+    const page = +e.target.dataset.page;
+    changePagination(
+      page,
+      comments.data.slice(),
+      "text",
+      searchValue,
+      allCommentsWrapper,
+      patternOfAllComments,
+    );
+  }
+});
+
+pageBtns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const type = e.currentTarget.dataset.type;
+    paginationNextAndPrevHandler(
+      type,
+      comments.data,
+      "text",
+      searchValue,
+      allCommentsWrapper,
+      patternOfAllComments,
+    );
+  });
 });

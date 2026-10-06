@@ -1,22 +1,38 @@
 import {
-  getAllProduct,
-  getLowStockProducts,
-  getMostSaleProducts,
-  getOneProduct,
-  editProduct,
-  createProduct,
-  deleteProduct,
+  getAllProductApi,
+  getLowStockProductsApi,
+  getMostSaleProductsApi,
+  getOneProductApi,
+  editProductApi,
+  createProductApi,
+  deleteProductApi,
 } from "./api/product.js";
 import {
   patternAllProduct,
   patternLowStockProducts,
   patternTopSellerProducts,
 } from "./funcs/product.js";
-import { openModal, closeModal } from "./utile/utile.js";
+import {
+  openModal,
+  closeModal,
+  addItemsInfoToDom,
+  setUrlSearchParam,
+  changePagination,
+  searchHand,
+  debounce,
+  getUrlSearchParam,
+  perPage,
+  paginationNextAndPrevHandler,
+  hideModal,
+} from "./utile/utile.js";
 import { SweetAlert } from "./sweetAlert/sweetAlert.js";
+import { d } from "./constant/constant.js";
 
-const d = document;
 let productEditId = null;
+let allProduct = [];
+let searchValue = "";
+
+const allProductNum = d.querySelectorAll(".all-product-num");
 
 // modal edit products
 const editProductModal = d.getElementById("edit-product-modal");
@@ -44,8 +60,20 @@ const stockDetailProduct = d.getElementById("pd-stock");
 const catDetailProduct = d.getElementById("pd-category");
 const statusDetailProduct = d.getElementById("pd-status");
 
+// wrappers
+const allProductsWrapper = d.getElementById("products-tbody");
+const lowStockProductsWrapper = d.getElementById("low-stock-wrapper");
+const topSaleProductsWrapper = d.getElementById("top-Sale-products-wrapper");
+
 // close Btn
 const modalCloseBtn = d.querySelectorAll(".modal-close-btn");
+
+// page buttons
+const paginationWrapper = d.getElementById("pagination-wrapper");
+const pageBtns = d.querySelectorAll(".page-btn");
+
+// search input
+const productSearchInput = d.getElementById("product-search");
 
 const fillEditProductInputs = (product) => {
   editCategoryInput.value = product.category;
@@ -60,11 +88,12 @@ const fillProductDetail = (product) => {
   catDetailProduct.textContent = product.category;
   statusDetailProduct.textContent = "in stock";
 };
+
 const editModalOpen = async (id) => {
   try {
     openModal(editProductModal);
     productEditId = id;
-    const res = await getOneProduct(id);
+    const res = await getOneProductApi(id);
     const product = await res.json();
     console.log(product);
     if (!res.ok) {
@@ -77,7 +106,20 @@ const editModalOpen = async (id) => {
 };
 window.editModalOpen = editModalOpen;
 
-const removeProductHandler = (id) => {
+const removeProductsHandler = async (id) => {
+  try {
+    const result = await deleteProductApi(id);
+    const data = await result.json();
+    if (!result.ok) {
+      throw new Error(data.message);
+    }
+    SweetAlert("Product deletion was successful.", "success", false);
+    renderProducts();
+  } catch (err) {
+    SweetAlert(err.message, "error");
+  }
+};
+const removeProduct = (id) => {
   SweetAlert(
     "Are you sure you want to delete the product?",
     "warning",
@@ -87,26 +129,18 @@ const removeProductHandler = (id) => {
     "no",
     async (res) => {
       if (res.isConfirmed) {
-        try {
-          const result = await deleteProduct(id);
-          const data = await result.json();
-          if (!result.ok) {
-            throw new Error(data.message);
-          }
-          SweetAlert("Product deletion was successful.", "success", false);
-          renderProducts();
-        } catch (err) {
-          SweetAlert(err.message, "error");
-        }
+        removeProductsHandler(id);
+        searchValue = "";
+        productSearchInput.value = "";
       }
     },
   );
 };
-window.removeProductHandler = removeProductHandler;
+window.removeProduct = removeProduct;
 
-const showDetailProduct = async (id) => {
+const showDetailProductHandler = async (id) => {
   try {
-    const res = await getOneProduct(id);
+    const res = await getOneProductApi(id);
     const product = await res.json();
     if (!res.ok) {
       throw new Error(product.message);
@@ -118,21 +152,38 @@ const showDetailProduct = async (id) => {
     SweetAlert(err.message, "error");
   }
 };
+const showDetailProduct = async (id) => {
+  showDetailProductHandler(id);
+};
 window.showDetailProduct = showDetailProduct;
 
-const renderProducts = async () => {
-  const allProductsWrapper = d.getElementById("products-tbody");
-  const lowStockProductsWrapper = d.getElementById("low-stock-wrapper");
-  const topSaleProductsWrapper = d.getElementById("top-Sale-products-wrapper");
+const editProductsHandler = async (object) => {
+  try {
+    const res = await editProductApi(productEditId, object);
+    const data = await res.json();
 
+    if (!res.ok) {
+      throw new Error(data.message);
+    }
+    SweetAlert("Product edit was successful.", "success");
+    hideModal(editProductModal);
+    renderProducts();
+    searchValue = "";
+    productSearchInput.value = "";
+  } catch (err) {
+    SweetAlert(err.message, "error");
+  }
+};
+
+const renderProducts = async () => {
   try {
     const [resAllProduct, resLowStockProducts, resMostSaleProducts] =
       await Promise.all([
-        getAllProduct(),
-        getLowStockProducts(),
-        getMostSaleProducts(),
+        getAllProductApi(),
+        getLowStockProductsApi(),
+        getMostSaleProductsApi(),
       ]);
-    const allProduct = await resAllProduct.json();
+    allProduct = await resAllProduct.json();
     const lowStockProducts = await resLowStockProducts.json();
     const mostSaleProducts = await resMostSaleProducts.json();
 
@@ -143,33 +194,29 @@ const renderProducts = async () => {
     ) {
       throw new Error("Failed to fetch Products");
     }
-    allProductsWrapper.innerHTML = "";
-    allProduct.data.forEach((product) => {
-      allProductsWrapper.insertAdjacentHTML(
-        "beforeend",
-        patternAllProduct(product),
-      );
-    });
+    setUrlSearchParam("page", 1);
 
-    lowStockProductsWrapper.innerHTML = "";
-
-    lowStockProducts.data.forEach((product) => {
-      lowStockProductsWrapper.insertAdjacentHTML(
-        "beforeend",
-        patternLowStockProducts(product),
-      );
+    allProductNum.forEach((productNum) => {
+      productNum.textContent = allProduct.data.length;
     });
-
-    topSaleProductsWrapper.innerHTML = "";
-    mostSaleProducts.data.forEach((product) => {
-      topSaleProductsWrapper.insertAdjacentHTML(
-        "beforeend",
-        patternTopSellerProducts(product),
-      );
-    });
+    addItemsInfoToDom(
+      allProduct.data,
+      allProductsWrapper,
+      patternAllProduct,
+      true,
+    );
+    addItemsInfoToDom(
+      lowStockProducts.data,
+      lowStockProductsWrapper,
+      patternLowStockProducts,
+    );
+    addItemsInfoToDom(
+      mostSaleProducts.data,
+      topSaleProductsWrapper,
+      patternTopSellerProducts,
+    );
   } catch (err) {
-    console.log(err.message);
-    // SweetAlert(err.message, "error");
+    SweetAlert(err.message, "error");
   }
 };
 
@@ -178,10 +225,8 @@ window.addEventListener("load", async () => {
 });
 
 modalCloseBtn.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    closeModal(editProductModal);
-    closeModal(newProductModal);
-    closeModal(productDetailsModal);
+  btn.addEventListener("click", (event) => {
+    closeModal(event);
   });
 });
 
@@ -194,19 +239,7 @@ editProductFormBtn.addEventListener("click", async (e) => {
     shortID: editIdInput.value.trim(),
     title: editNameInput.value.trim(),
   };
-  try {
-    const res = await editProduct(productEditId, productInfo);
-    const data = await res.json();
-
-    if (!res.ok) {
-      throw new Error(data.message);
-    }
-    SweetAlert("Product edit was successful.", "success");
-    closeModal(editProductModal);
-    renderProducts();
-  } catch (err) {
-    SweetAlert(err.message, "error");
-  }
+  editProductsHandler(productInfo);
 });
 
 newProductFormBtn.addEventListener("click", async (e) => {
@@ -219,15 +252,17 @@ newProductFormBtn.addEventListener("click", async (e) => {
     title: nameInputEdit.value.trim(),
   };
   try {
-    const res = await createProduct(newUser);
+    const res = await createProductApi(newUser);
     const data = await res.json();
 
     if (!res.ok) {
       throw new Error(data.message);
     }
     SweetAlert("Product create was successful.", "success");
-    closeModal(newProductModal);
+    hideModal(newProductModal);
     renderProducts();
+    searchValue = "";
+    productSearchInput.value = "";
   } catch (err) {
     SweetAlert(err.message, "error");
   }
@@ -235,4 +270,52 @@ newProductFormBtn.addEventListener("click", async (e) => {
 
 openNewProductModalBtn.addEventListener("click", () => {
   openModal(newProductModal);
+});
+
+paginationWrapper.addEventListener("click", (e) => {
+  if (e.target.classList.contains("page-link-btn")) {
+    const page = e.target.dataset.page;
+    changePagination(
+      page,
+      allProduct.data.slice(),
+      "title",
+      searchValue,
+      allProductsWrapper,
+      patternAllProduct,
+    );
+  }
+});
+
+productSearchInput.addEventListener("keyup", (e) => {
+  searchValue = e.currentTarget.value;
+  setUrlSearchParam("page", 1);
+
+  debounce(async () => {
+    const searchProducts = searchHand(
+      allProduct.data.slice(),
+      "title",
+      searchValue,
+    );
+
+    addItemsInfoToDom(
+      searchProducts,
+      allProductsWrapper,
+      patternAllProduct,
+      true,
+    );
+  })();
+});
+
+pageBtns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const type = e.currentTarget.dataset.type;
+    paginationNextAndPrevHandler(
+      type,
+      allProduct.data,
+      "title",
+      searchValue,
+      allProductsWrapper,
+      patternAllProduct,
+    );
+  });
 });

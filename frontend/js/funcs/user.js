@@ -4,6 +4,9 @@ import {
   addItemsInfoToDom,
   closeModal,
   openModal,
+  pagination,
+  setUrlSearchParam,
+  hideModal,
 } from "../utile/utile.js";
 import { d } from "../constant/constant.js";
 import { SweetAlert } from "../sweetAlert/sweetAlert.js";
@@ -38,12 +41,55 @@ export const usersWrapperBody = d.getElementById("users-tbody");
 const newUsersWrapper = d.getElementById("new-users");
 const oldUsersWrapper = d.getElementById("old-users");
 
+const numOfUsersTag = d.querySelectorAll(".num-numbers");
+
 // modals
 const newUserModal = d.getElementById("new-user-modal");
 const editUserModal = d.getElementById("edit-user-modal");
 const userDetailsModal = d.getElementById("user-details-modal");
 
 export let userEditId = null;
+export let allUsers = [];
+
+const patternOfEmptyUsers = () => {
+  return `<tr id="users-empty-row" >
+            <td colspan="6" class="px-5 py-12 sm:py-16">
+                <div class="flex flex-col items-center justify-center text-center animate-fade-in">
+
+                    <!-- Icon -->
+                    <div class="relative mb-4 sm:mb-5">
+                        <span class="absolute inset-0 rounded-2xl bg-neon-500/20 blur-xl animate-pulse-dot"></span>
+                        <div class="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-2xl
+                            bg-linear-to-br from-neon-400/20 to-neon-700/20 dark:from-neon-400/10 dark:to-neon-700/10
+                            border border-neon-500/20 dark:border-neon-400/20 grid place-items-center shadow-neon-sm">
+                            <svg class="w-6 h-6 sm:w-7 sm:h-7 md:w-9 md:h-9 text-neon-600 dark:text-neon-400"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Text -->
+                    <h3 class="font-inter-semibold text-sm sm:text-base md:text-lg text-ink-light dark:text-ink-dark">
+                        No users found
+                    </h3>
+                    <p class="mt-1 sm:mt-1.5 max-w-xs sm:max-w-sm text-[11px] sm:text-xs md:text-sm text-ink-light/45 dark:text-ink-dark/45">
+                        There are no users matching your search or filter. Try adjusting them, or add a new user to get started.
+                    </p>
+
+                    <!-- Actions -->
+                    <div class="mt-4 sm:mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
+                        
+                        
+                    </div>
+                </div>
+            </td>
+        </tr>`;
+};
 const patternOfNewUsers = (user) => {
   return `<li class="py-2.5 sm:py-3 flex items-center justify-between gap-3 group cursor-pointer">
                 <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
@@ -169,22 +215,36 @@ const renderInfo = async () => {
       getAllUserApi(),
       getAllNewUserApi(),
     ]);
-    const allUsers = await allUsersRes.json();
+    allUsers = await allUsersRes.json();
     const allNewUsers = await allNewUsersRes.json();
 
     if (!allUsersRes.ok || !allNewUsersRes.ok) {
       throw new Error("Failed to fetch users");
     }
-    addItemsInfoToDom(allUsers.data, usersWrapperBody, patternOfAllUsers);
-    addItemsInfoToDom(allNewUsers.data, newUsersWrapper, patternOfNewUsers);
-    addItemsInfoToDom(allUsers.data, oldUsersWrapper, patternOfOldUsers);
+
+    setUrlSearchParam("page", 1);
+
+    numOfUsersTag.forEach((tag) => {
+      tag.textContent = allUsers.data.length;
+    });
+
+    addItemsInfoToDom(
+      allNewUsers.data.slice(0, 5),
+      newUsersWrapper,
+      patternOfNewUsers,
+    );
+    addItemsInfoToDom(allUsers.data, usersWrapperBody, patternOfAllUsers, true);
+    addItemsInfoToDom(
+      allUsers.data.slice(0, 5),
+      oldUsersWrapper,
+      patternOfOldUsers,
+    );
   } catch (error) {
-    SweetAlert("Unable to connect to the server.", "error");
+    SweetAlert(error, "error");
   }
 };
 
 const banUsersFunc = async (id) => {
-  console.log(id);
   try {
     const response = await banUserApi(id);
     const data = await response.json();
@@ -212,7 +272,7 @@ const removeUserFunc = async (id) => {
   }
 };
 
-const createNewUserFunc = async () => {
+const createNewUserFunc = async (e) => {
   const newUser = {
     email: EmailInput.value.trim(),
     userName: NameInput.value.trim(),
@@ -227,7 +287,7 @@ const createNewUserFunc = async () => {
       throw new Error(data.message);
     }
     SweetAlert("User creation was successful.", "success", false, true);
-    closeModal(newUserModal);
+    hideModal(newUserModal);
     ClearInputs([EmailInput, NameInput, PasswordInput]);
     renderInfo();
   } catch (err) {
@@ -311,5 +371,6 @@ export {
   getUserInfoFunc,
   fillUserDetail,
   showDetailsFunc,
+  patternOfEmptyUsers,
   newUserModal,
 };
