@@ -1,5 +1,5 @@
 import { patternOfEmptyUsers } from "../funcs/user.js";
-export const perPage = 1;
+export const perPage = 5;
 
 const paginationNextAndPrevHandler = (
   type,

@@ -13,6 +13,8 @@ import {
   changePagination,
   setUrlSearchParam,
   paginationNextAndPrevHandler,
+  searchHand,
+  debounce,
 } from "./utile/utile.js";
 import { SweetAlert } from "./sweetAlert/sweetAlert.js";
 import {
@@ -33,6 +35,8 @@ const banCommentWrapper = d.getElementById("ban-comment-wrapper");
 
 const modalCloseBtn = d.querySelectorAll(".modal-close-btn");
 
+const allCommentsNum = d.querySelectorAll(".all-comments-num");
+
 // reply comment modal
 const replyCommentModal = d.getElementById("reply-comment-modal");
 const commentText = d.getElementById("rc-text");
@@ -41,7 +45,17 @@ const replyBtn = d.getElementById("reply-comment-btn");
 const replyTextCount = d.getElementById("rc-count");
 
 // pagination tag
-const paginationWrapper = document.getElementById("pagination-wrapper");
+const paginationWrapper = d.getElementById("pagination-wrapper");
+
+// searchInput
+const commentSearchInput = d.getElementById("comment-search");
+
+const allCommentsNumHandler = (value) => {
+  allCommentsNum.forEach((commentNum) => {
+    commentNum.textContent = value;
+  });
+};
+
 const pageBtns = d.querySelectorAll(".page-btn");
 
 const renderComments = async () => {
@@ -59,6 +73,7 @@ const renderComments = async () => {
     comments = await resComment.json();
     const newComment = await resNewComment.json();
     setUrlSearchParam("page", 1);
+    allCommentsNumHandler(comments.data.length);
 
     addItemsInfoToDom(
       comments.data,
@@ -187,4 +202,24 @@ pageBtns.forEach((btn) => {
       patternOfAllComments,
     );
   });
+});
+
+commentSearchInput.addEventListener("keyup", (e) => {
+  searchValue = e.currentTarget.value;
+  setUrlSearchParam("page", 1);
+
+  debounce(async () => {
+    const searchComments = searchHand(
+      comments.data.slice(),
+      "text",
+      searchValue,
+    );
+
+    addItemsInfoToDom(
+      searchComments,
+      allCommentsWrapper,
+      patternOfAllComments,
+      true,
+    );
+  })();
 });
